@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/tool_video"
+        layout="@layout/toolbar_layout" />
+
+    <RelativeLayout
+        android:layout_below="@+id/tool_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<android.opengl.GLSurfaceView-->
+            <!--android:id="@+id/chat_surface_call"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <Button
+            android:id="@+id/line_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="连接视频服务器" />
+
+        <Button
+            android:id="@+id/close_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/line_service"
+            android:text="断开视频服务器" />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line_service"
+            android:text="视频通话" />
+
+        <TextView
+            android:id="@+id/line_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/send"
+            android:text="未连接视频服务器"
+            android:textColor="@color/colorAccent" />
+
+
+        <Button
+            android:id="@+id/accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="接受"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/hang_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="挂断" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

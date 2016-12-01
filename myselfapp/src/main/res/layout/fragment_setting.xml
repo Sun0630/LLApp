@@ -1,0 +1,217 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <!--content-->
+    <com.example.myselfapp.custom.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.myselfapp.custom.TextDrawable
+                android:id="@+id/rl_language"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:text="@string/language"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/language"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableWidth="8dp"
+                app:rightDrawableHeight="12dp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text"
+                android:visibility="invisible"/>
+
+            <com.example.myselfapp.custom.TextDrawable
+                android:id="@+id/rl_app_update"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:text="@string/update"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/update"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableWidth="8dp"
+                app:rightDrawableHeight="12dp"/>
+
+            <com.example.myselfapp.custom.TextDrawable
+                android:id="@+id/rl_clock"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:text="@string/clock"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/clock"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableWidth="8dp"
+                app:rightDrawableHeight="12dp"/>
+
+            <com.example.myselfapp.custom.TextDrawable
+                android:id="@+id/rl_about"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:text="@string/about"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/about"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableWidth="8dp"
+                app:rightDrawableHeight="12dp"/>
+
+            <com.example.myselfapp.custom.TextDrawable
+                android:id="@+id/rl_help"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:text="@string/help"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/help"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableWidth="8dp"
+                app:rightDrawableHeight="12dp"/>
+
+            <com.example.myselfapp.custom.TextDrawable
+                android:id="@+id/text_type"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:text="切换字体"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/help"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableWidth="8dp"
+                app:rightDrawableHeight="12dp"/>
+
+            <com.example.myselfapp.custom.TextDrawable
+                android:id="@+id/add_psw"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:text="加密图案"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/help"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableWidth="8dp"
+                app:rightDrawableHeight="12dp"/>
+
+            <com.example.myselfapp.custom.TextDrawable
+                android:id="@+id/switch_theme"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:text="切换主题"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/help"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableWidth="8dp"
+                app:rightDrawableHeight="12dp"/>
+
+            <!--<com.example.myselfapp.custom.TextDrawable-->
+                <!--android:id="@+id/clear_cache"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:clickable="true"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:text="清除缓存"-->
+                <!--android:textColor="@color/text"-->
+                <!--android:textSize="16sp"-->
+                <!--app:leftDrawable="@mipmap/help"-->
+                <!--app:rightDrawable="@mipmap/coming"-->
+                <!--app:rightDrawableWidth="8dp"-->
+                <!--app:rightDrawableHeight="12dp"/>-->
+
+            <RelativeLayout
+                android:id="@+id/clear_cache"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@mipmap/help" />
+
+                <TextView
+                    android:id="@+id/cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:text="0 M"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:text="清除缓存"
+                    android:textColor="@color/text"
+                    android:textSize="16sp"  />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </com.example.myselfapp.custom.MyScrollView>
+
+
+</LinearLayout>

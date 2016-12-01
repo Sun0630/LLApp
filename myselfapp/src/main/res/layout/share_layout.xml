@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/abc_white">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:text="@string/share_to"
+        android:textColor="@color/text"
+        android:textSize="15sp"
+        android:id="@+id/sl_title" />
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:text="@string/cancel"-->
+        <!--android:textColor="@color/text"-->
+        <!--android:textSize="17sp"-->
+        <!--android:id="@+id/sl_cancel"/>-->
+</RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:baselineAligned="false">
+
+        <RelativeLayout
+            android:id="@+id/sl_weixin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/wechat_img"
+                android:src="@mipmap/wechat"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/wechat_img"
+                android:gravity="center_horizontal"
+                android:text="@string/wechat_friends"
+                android:padding="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/text"
+                android:id="@+id/textView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sl_weixin_space"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/wechat_circle"
+                android:id="@+id/wechat_space_img" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:gravity="center_horizontal"
+                android:text="@string/wechat_circle"
+                android:padding="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/text"
+                android:layout_below="@+id/wechat_space_img"
+                android:id="@+id/textView2" />
+        </RelativeLayout>
+
+      <!--  <RelativeLayout
+            android:id="@+id/sl_weibo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/weibo_img"
+                android:src="@mipmap/weibo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/weibo_img"
+                android:singleLine="true"
+                android:gravity="center_horizontal"
+                android:text="微博"
+                android:padding="5dp"
+                android:textSize="11sp"
+                android:textColor="@color/text"
+                android:id="@+id/textView3" />
+        </RelativeLayout>-->
+
+        <RelativeLayout
+            android:id="@+id/sl_qq"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/qq_img"
+                android:src="@mipmap/qq"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qq_img"
+                android:singleLine="true"
+                android:gravity="center_horizontal"
+                android:text="@string/QQ_text"
+                android:padding="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/text"
+                android:id="@+id/textView4" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/sl_qq_space"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/qq_space_img"
+                android:src="@mipmap/qq_space"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qq_space_img"
+                android:gravity="center_horizontal"
+                android:text="@string/QQ_space"
+                android:padding="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/text"
+                android:id="@+id/qq_space_text" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/sl_sms"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/sms_img"
+                android:src="@mipmap/sms"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sms_img"
+                android:gravity="center_horizontal"
+                android:text="@string/sms"
+                android:padding="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/text"
+                android:id="@+id/sms_text" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

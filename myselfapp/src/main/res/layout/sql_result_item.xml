@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <com.heaton.liulei.utils.custom.CircleImageView
+        android:id="@+id/header"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+    <TextView
+        android:id="@+id/result_name"
+        android:layout_toRightOf="@id/header"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/num"
+        android:layout_toRightOf="@id/header"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/result_name"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/call"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="呼叫"/>
+
+
+
+</RelativeLayout>

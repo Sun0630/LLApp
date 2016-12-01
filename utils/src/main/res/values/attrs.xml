@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--自定义圆行图片-->
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="border_overlay" format="boolean"/>
+    </declare-styleable>
+
+    <!--自定义带白色边框的圆形图片-->
+    <!--
+           border_thickness         设置边框的宽度
+           border_inside_color     设置内边框的颜色
+           border_outside_color     设置外边框的颜色
+           内外边框如果只设置一个的话，则认为只显示一个边框。
+        -->
+    <declare-styleable name="RoundImageView">
+        <attr name="border_thickness" format="dimension" />
+        <attr name="border_inside_color" format="color" />
+        <attr name="border_outside_color" format="color" />
+    </declare-styleable>
+</resources>

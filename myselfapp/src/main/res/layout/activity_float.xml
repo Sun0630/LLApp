@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true">
+
+    <include
+        layout="@layout/toolbar_layout"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.myselfapp.custom.StateButton
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/abc_white"
+            app:normalBackgroundColor="@color/username6"
+            app:pressedBackgroundColor="@color/username4"
+            app:pressedTextColor="@color/abc_tab_text_normal"
+            app:animationDuration="200"
+            app:radius="5dp"
+            app:normalStrokeColor="@color/abc_white"
+            app:normalStrokeWidth="1dp"
+            android:text="开启悬浮窗"/>
+
+        <com.example.myselfapp.custom.StateButton
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/abc_white"
+            app:normalBackgroundColor="@color/username7"
+            app:pressedBackgroundColor="@color/username4"
+            app:pressedTextColor="@color/abc_tab_text_normal"
+            app:animationDuration="500"
+            app:radius="5dp"
+            app:normalStrokeColor="@color/abc_white"
+            app:normalStrokeWidth="1dp"
+            android:text="关闭悬浮窗"/>
+
+    </LinearLayout>
+
+</LinearLayout>

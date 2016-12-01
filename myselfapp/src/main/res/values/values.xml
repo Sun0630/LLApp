@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<attr format="color" name="border_color"/>-->
+    <!--<attr format="dimension" name="border_width"/>-->
+    <attr format="dimension" name="dialogButtonMinHeight"/>
+    <attr format="reference" name="dialogCenterButtonStyle"/>
+    <attr format="dimension" name="dialogIconPaddingBottom"/>
+    <attr format="dimension" name="dialogIconPaddingLeft"/>
+    <attr format="dimension" name="dialogIconPaddingRight"/>
+    <attr format="dimension" name="dialogIconPaddingTop"/>
+    <attr format="reference" name="dialogLeftButtonStyle"/>
+    <attr format="reference" name="dialogMessageAppearance"/>
+    <attr format="dimension" name="dialogMessagePadding"/>
+    <attr format="reference" name="dialogParent"/>
+    <attr format="reference" name="dialogRightButtonStyle"/>
+    <attr format="dimension" name="dialogScrollPaddingBottom"/>
+    <attr format="dimension" name="dialogScrollPaddingLeft"/>
+    <attr format="dimension" name="dialogScrollPaddingRight"/>
+    <attr format="dimension" name="dialogScrollPaddingTop"/>
+    <attr format="reference" name="dialogTitleAppearance"/>
+    <attr format="dimension" name="dialogTitleDividerHeight"/>
+    <attr format="dimension" name="dialogTopMarginBottom"/>
+    <attr format="dimension" name="dialogTopMarginLeft"/>
+    <attr format="dimension" name="dialogTopMarginRight"/>
+    <attr format="dimension" name="dialogTopMarginTop"/>
+    <attr format="dimension" name="dialogTopMinHeight"/>
+    <attr format="reference" name="dialogUpdateAppearance"/>
+    <attr format="reference" name="dialogUpdateProgressBar"/>
+    <attr format="dimension" name="round_radius"/>
+    <declare-styleable name="CheckableItemView"><attr format="reference" name="check_id"/></declare-styleable>
+    <declare-styleable name="CircleImageView"><attr name="border_width"/><attr name="border_color"/></declare-styleable>
+    <declare-styleable name="DataView"><attr format="boolean" name="state_first"/><attr format="boolean" name="state_last"/></declare-styleable>
+    <declare-styleable name="RoundImageView"><attr name="border_width"/><attr name="border_color"/><attr name="round_radius"/></declare-styleable>
+    <item name="data_holder_tag" type="id"/>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_sure">确定</string>
+    <string name="download_error">安装包下载失败，请检查网络</string>
+    <string name="download_url_invalid">下载地址不正确</string>
+    <string name="downloading">请稍后，正在下载。。。</string>
+    <string name="need_write_permission">更新需要写入权限</string>
+    <string name="no_permission">没有权限</string>
+    <string name="not_mount">未插入sd卡</string>
+    <string name="ota_error">更新设备%1$s失败，请检查蓝牙连接</string>
+    <string name="ota_title">硬件更新</string>
+    <string name="total_size">文件大小：%1$.2fMB</string>
+    <string name="update_after">稍后提醒</string>
+    <string name="update_cancel">取消</string>
+    <string name="update_retry">重试</string>
+    <string name="update_sure">立即更新</string>
+    <string name="update_title">应用更新</string>
+    <string name="updating">请稍后，正在更新。。。</string>
+    <style name="AppSuperTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:dialogTheme">@style/DialogTheme.Default</item>
+        <item name="android:alertDialogTheme">@style/DialogTheme.Default</item>
+        <item name="alertDialogTheme">@style/DialogTheme.Default</item>
+        <item name="dialogTheme">@style/DialogTheme.Default</item>
+    </style>
+    <style name="DialogButton" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+    <style name="DialogStyle">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <style name="DialogStyle.Parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingTop">9dip</item>
+        <item name="android:paddingBottom">3dip</item>
+        <item name="android:paddingRight">1dip</item>
+        <item name="android:paddingLeft">3dip</item>
+    </style>
+    <style name="DialogTheme.Default" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:background">@null</item>
+        <item name="dialogTopMinHeight">54dip</item>
+        <item name="dialogButtonMinHeight">54dip</item>
+        <item name="dialogTopMarginTop">6dip</item>
+        <item name="dialogTopMarginBottom">9dip</item>
+        <item name="dialogTopMarginLeft">10dip</item>
+        <item name="dialogTopMarginRight">10dip</item>
+        <item name="dialogIconPaddingTop">6dip</item>
+        <item name="dialogIconPaddingBottom">0dip</item>
+        <item name="dialogIconPaddingRight">10dip</item>
+        <item name="dialogIconPaddingLeft">0dip</item>
+        <item name="dialogTitleDividerHeight">1dip</item>
+        <item name="dialogScrollPaddingTop">2dip</item>
+        <item name="dialogScrollPaddingBottom">2dip</item>
+        <item name="dialogScrollPaddingRight">10dip</item>
+        <item name="dialogScrollPaddingLeft">14dip</item>
+        <item name="dialogMessagePadding">5dip</item>
+        <item name="dialogTitleAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="dialogMessageAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="dialogLeftButtonStyle">@style/DialogButton</item>
+        <item name="dialogCenterButtonStyle">@style/DialogButton</item>
+        <item name="dialogRightButtonStyle">@style/DialogButton</item>
+        <item name="dialogParent">@style/DialogStyle.Parent</item>
+        <item name="dialogUpdateAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="dialogUpdateProgressBar">?android:attr/progressBarStyleHorizontal</item>
+    </style>
+</resources>

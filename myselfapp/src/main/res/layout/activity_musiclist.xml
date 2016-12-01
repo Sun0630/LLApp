@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
+
+    <ListView
+        android:id="@+id/music_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/abc_white"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:cacheColorHint="@android:color/transparent"
+        android:headerDividersEnabled="false"/>
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recycle_listview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:cacheColorHint="@android:color/transparent"-->
+        <!--android:scrollbars="vertical"/>-->
+
+    <FrameLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height">
+
+        <com.example.myselfapp.custom.KenBurnsView
+            android:id="@+id/header_picture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ai1" />
+
+        <ImageView
+            android:id="@+id/header_logo"
+            android:layout_width="@dimen/header_logo_size"
+            android:layout_height="@dimen/header_logo_size"
+            android:layout_gravity="center"
+            android:src="@mipmap/touxiang" />
+
+    </FrameLayout>
+
+    <!--<Button-->
+        <!--android:id="@+id/return_top"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="end|bottom"-->
+        <!--android:background="@android:drawable/ic_btn_speak_now"/>-->
+    <com.example.myselfapp.custom.floatView.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_add_white_24dp"
+        fab:fab_colorNormal="@color/colorAccent"
+        fab:fab_colorPressed="@color/username0"
+        fab:fab_colorRipple="@color/username3"/>
+
+</FrameLayout >

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true">
+
+    <include android:id="@+id/tool_add"
+        layout="@layout/toolbar_layout"/>
+
+    <SurfaceView
+        android:id="@+id/surfaceview"
+        android:layout_below="@id/tool_add"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </SurfaceView>
+
+    <com.example.myselfapp.qrView.ViewfinderView
+        android:id="@+id/viewfinderview"
+        android:layout_below="@id/tool_add"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000" >
+    </com.example.myselfapp.qrView.ViewfinderView>
+
+
+</RelativeLayout>

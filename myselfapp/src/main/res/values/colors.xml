@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="text_regist">#3b9cd4</color>
+    <color name="menu_text">#124562</color>
+    <color name="transparent">#00000000</color>
+    <color name="material_blue_500">#5677fc</color>
+    <color name="material_blue_600">#4e6cef</color>
+
+    <color name="blue_user">#0071BC</color><!--主色蓝 -->
+    <color name="blue_touch_user">#B3B3B3</color><!--主色 按住蓝 -->
+    <color name="background_user">#F2F2F2</color><!--主色 按住蓝 -->
+    <color name="black_user">#333333</color><!--主色  -->
+    <color name="text">#565656</color>
+    <color name="darkgray">#cccc</color>
+
+
+    <color name="username0">#e21400</color>
+    <color name="username1">#91580f</color>
+    <color name="username2">#f8a700</color>
+    <color name="username3">#f78b00</color>
+    <color name="username4">#58dc00</color>
+    <color name="username5">#287b00</color>
+    <color name="username6">#a8f07a</color>
+    <color name="username7">#4ae8c4</color>
+    <color name="username8">#3b88eb</color>
+    <color name="username9">#3824aa</color>
+    <color name="username10">#a700ff</color>
+    <color name="username11">#d300e7</color>
+    <color name="divider_color">#D8D8D8</color>
+
+    <!--视频播放-->
+    <color name="uvv_gray">#969696</color>
+    <color name="uvv_black">#ff000000</color>
+    <color name="uvv_light_gray">#ffF0F0F0</color>
+    <color name="uvv_titlebar_bg">#7f000000</color>
+</resources>

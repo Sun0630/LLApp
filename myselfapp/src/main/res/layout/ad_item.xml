@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:pv="http://schemas.android.com/apk/res-auto">
+
+    <!--<ImageView-->
+        <!--android:id="@+id/ad_image"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:scaleType="centerCrop" />-->
+    <com.heaton.liulei.utils.custom.RoundWhiteImageView
+        android:id="@+id/ad_image"
+        android:layout_centerHorizontal="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        pv:border_inside_color="@color/abc_white"
+        pv:border_thickness="1dp" />
+
+    <TextView
+        android:id="@+id/ad_name"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ad_image"
+        android:layout_centerHorizontal="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:scrollHorizontally="true"
+        android:ellipsize="marquee"
+        android:textColor="@color/abc_white"
+        android:textSize="9dp" />
+
+</RelativeLayout>

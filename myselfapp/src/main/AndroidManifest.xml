@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myselfapp">
+
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--往sdcard中写入数据的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.hardware.sensor.accelerometer"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!-- 悬浮窗(FloatingService) permission -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:name=".AndroidApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DesignDemo">
+
+        <activity android:name=".activity.SplashActivity"
+            android:theme="@style/Theme.DesignDemo.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.MusicActivity" />
+        <activity android:name=".activity.ChatActivity"/>
+        <activity android:name=".activity.MediaPlayerActivtiy"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".activity.VideoChatActivity"/>
+        <activity android:name=".activity.QrViewActivity"/>
+        <activity android:name=".activity.BigPhotoActivity"/>
+        <activity android:name=".activity.DownloadManagerDemo"/>
+        <activity android:name=".activity.SwipBackActivity"
+            android:theme="@style/Transparent"/>
+        <activity android:name=".activity.PersonActivity"/>
+        <activity android:name=".activity.BloggerActivity"/>
+        <activity android:name=".music.MusicListActivity"
+            android:theme="@style/TransparentTheme"/>
+        <activity android:name=".music.MusicModeActivity"/>
+        <activity android:name=".activity.FloatViewActivity"/>
+        <activity android:name=".activity.ShareActivity"/>
+        <activity android:name=".activity.SetPatternActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name=".activity.AlbumAty"/>
+        <activity android:name=".activity.AlbumItemAty"/>
+        <activity android:name=".activity.CameraAty"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.ScreenCopyActivity"
+            android:theme="@style/translate_dialog" />
+        <activity android:name=".activity.SQLActivity"/>
+        <activity android:name=".activity.NotifyActivity"/>
+        <!-- 分享 -->
+        <activity
+            android:name=".custom.ToShare"
+            android:screenOrientation="portrait"
+            android:theme="@style/translate_dialog" />
+
+        <!--友盟分享-->
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.UMDefault" />
+
+        <!--<activity-->
+            <!--android:name=".apshare.ShareEntryActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:exported="true"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
+
+        <!--微信平台-->
+        <activity
+            android:name=".apshare.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!--&lt;!&ndash;新浪微博&ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name=".WBShareActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:screenOrientation="portrait">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:exported="false"-->
+            <!--android:windowSoftInputMode="adjustResize"></activity>-->
+        <!-- tencent -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105331365" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5743c828e0f55a7e9b000e51"></meta-data>
+        <service
+            android:name="com.sina.weibo.sdk.net.DownloadService"
+            android:exported="false"></service>
+        <!--友盟分享-->
+
+        <service android:name=".music.MusicService" />
+        <service android:name=".floatView.FloatViewService"/>
+
+        <service android:name="com.example.myselfapp.service.AidlService"
+            android:exported="true">
+            <intent-filter >
+                <action android:name="com.example.myselfapp.service.AidlService"/>
+            </intent-filter>
+
+        </service>
+
+    </application>
+
+</manifest>
