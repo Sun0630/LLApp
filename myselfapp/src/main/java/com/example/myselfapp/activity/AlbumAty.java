@@ -34,7 +34,9 @@ import java.util.Set;
 *
 */
 public class AlbumAty extends Activity implements View.OnClickListener,AlbumGridView.OnCheckedChangeListener{
+
 	public final static String TAG="AlbumAty";
+
 	/**
 	 * 显示相册的View
 	 */
