@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.myselfapp.photoview.PhotoView
+        <com.umeng.soexample.photoview.PhotoView
             android:id="@+id/aviter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

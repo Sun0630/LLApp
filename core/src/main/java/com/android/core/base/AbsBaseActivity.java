@@ -51,6 +51,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
     private TextView abTitle;
     public String TAG;
     private boolean isShowTool = true;//设置是否显示toolbar  默认显示
+    private boolean isTransparent = false;//设置状态是否透明   默认不透明
     private AlertDialog mAlertDialog;
 
     @Override
@@ -61,9 +62,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
         Logcat.d("Activity Location (%s.java:0)", getClass().getSimpleName());
         mContext = this;
         TAG = getClass().getSimpleName();
-        //自己新添加的
-//        setTranslucent();//沉浸式  这个对api<=19的适合
-        Help.initSystemBar(this, StaticValue.color);//这个对所有的都适合
+
         setContentView(getLayoutResource());
         ButterKnife.bind(this);
         onInitView();
@@ -74,10 +73,22 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
         this.isShowTool = isShowTool;
     }
 
+    //设置状态栏是否透明
+    public void isTransparentSystem(boolean isTransparent){
+        this.isTransparent = isTransparent;
+    }
+
     //自己新添加的
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        if(isTransparent){
+            //自己新添加的
+//        setTranslucent();//沉浸式  这个对api<=19的适合
+            Help.initSystemBar(this, R.color.transparent);//这个对所有的都适合
+        }else {
+            Help.initSystemBar(this, StaticValue.color);
+        }
         if(isShowTool){
             initToolBar();
         }

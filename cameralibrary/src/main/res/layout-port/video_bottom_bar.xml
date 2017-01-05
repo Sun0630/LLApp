@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.example.cameraliarary.view.VideoPlayerView
+    <com.umeng.cameraliarary.view.VideoPlayerView
         android:id="@+id/videoPlayerView"
         android:layout_width="match_parent"
         android:layout_height="0dip"

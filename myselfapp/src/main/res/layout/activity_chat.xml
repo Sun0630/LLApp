@@ -11,7 +11,7 @@
     <include layout="@layout/toolbar_layout" />
 
     <fragment
-        class="com.example.myselfapp.fragment.ChatFragment"
+        class="com.umeng.soexample.fragment.ChatFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

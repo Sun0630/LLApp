@@ -15,13 +15,13 @@
         android:layout_height="match_parent" >
     </SurfaceView>
 
-    <com.example.myselfapp.qrView.ViewfinderView
+    <com.umeng.soexample.qrView.ViewfinderView
         android:id="@+id/viewfinderview"
         android:layout_below="@id/tool_add"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#00000000" >
-    </com.example.myselfapp.qrView.ViewfinderView>
+    </com.umeng.soexample.qrView.ViewfinderView>
 
 
 </RelativeLayout>

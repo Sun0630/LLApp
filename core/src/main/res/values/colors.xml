@@ -8,5 +8,6 @@
     <color name="bg_color">#f7f5f5</color>
     <color name="line">#dfdfdf</color>
     <color name="menu_text">#124562</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

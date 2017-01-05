@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.myselfapp.custom.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.umeng.soexample.custom.design.SlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:sliding_mode="top"
+    app:background_view="@layout/view_bg"
+    app:top_max="200dp">
 
     <RelativeLayout
+        android:background="@color/abc_white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -159,12 +164,19 @@
             android:layout_toRightOf="@id/sql"
             android:text="通知栏界面" />
 
+        <Button
+            android:id="@+id/popwindow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shot_screen"
+            android:text="弹出窗界面" />
+
 
         <TextView
             android:id="@+id/jni"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sql"
+            android:layout_below="@id/popwindow"
             android:typeface="serif" />
 
         <TextView
@@ -176,4 +188,4 @@
 
     </RelativeLayout>
 
-</com.example.myselfapp.custom.MyScrollView>
+</com.umeng.soexample.custom.design.SlidingLayout>

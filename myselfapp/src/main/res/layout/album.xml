@@ -27,7 +27,7 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="18sp" />
 
-    <com.example.cameraliarary.aibum.AlbumGridView
+    <com.umeng.cameraliarary.aibum.AlbumGridView
         android:id="@+id/albumview"
         android:layout_width="fill_parent"
         android:layout_height="0dip"

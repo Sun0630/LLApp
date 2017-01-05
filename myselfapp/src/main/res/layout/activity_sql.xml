@@ -6,11 +6,11 @@
     android:fitsSystemWindows="true"
     android:clipToPadding="true">
 
-   <com.example.myselfapp.custom.SearchView
+   <com.umeng.soexample.custom.SearchView
        android:id="@+id/search_view"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
-    </com.example.myselfapp.custom.SearchView>
+    </com.umeng.soexample.custom.SearchView>
 
     <ListView
         android:id="@+id/listView"

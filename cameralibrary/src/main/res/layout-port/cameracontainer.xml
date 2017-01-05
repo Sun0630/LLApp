@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.example.cameraliarary.camera.CameraView
+    <com.umeng.cameraliarary.camera.CameraView
         android:id="@+id/cameraView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.example.cameraliarary.camera.TempImageView
+    <com.umeng.cameraliarary.camera.TempImageView
         android:id="@+id/tempImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.example.cameraliarary.camera.FocusImageView
+    <com.umeng.cameraliarary.camera.FocusImageView
         android:id="@+id/focusImageView"
         android:layout_width="75dip"
         android:layout_height="75dip"

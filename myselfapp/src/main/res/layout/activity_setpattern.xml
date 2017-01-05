@@ -8,7 +8,7 @@
 
     <include layout="@layout/toolbar_layout"/>
     
-    <com.example.myselfapp.custom.LockView
+    <com.umeng.soexample.custom.LockView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/LockView"

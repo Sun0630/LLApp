@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.myselfapp.video.UniversalVideoView
+        <com.umeng.soexample.video.UniversalVideoView
             android:id="@+id/videoView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -20,7 +20,7 @@
             app:uvv_autoRotation="true"
             app:uvv_fitXY="false" />
 
-        <com.example.myselfapp.video.UniversalMediaController
+        <com.umeng.soexample.video.UniversalMediaController
             android:id="@+id/media_controller"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

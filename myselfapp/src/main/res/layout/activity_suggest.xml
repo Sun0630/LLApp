@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/suggest_toolbar"
+        layout="@layout/toolbar_layout"/>
+
+    <EditText
+        android:id="@+id/suggest_edit"
+        android:layout_below="@id/suggest_toolbar"
+        android:background="@drawable/btn_search_bg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="left|top"
+        android:hint="@string/put_suggest"/>
+
+    <Button
+        android:id="@+id/commit"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/commit"/>
+</RelativeLayout>

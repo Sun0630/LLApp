@@ -185,7 +185,7 @@
         <!--android:text="登录"-->
         <!--android:textColor="@color/abc_white"-->
         <!--android:textSize="21sp" />-->
-        <com.example.myselfapp.custom.StateButton
+        <com.umeng.soexample.custom.StateButton
             android:id="@+id/loginButton"
             android:layout_width="160dp"
             android:layout_height="40dp"
@@ -203,8 +203,8 @@
 
         <RelativeLayout
             android:id="@+id/relativeLayoutaotu"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/loginButton"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
@@ -215,8 +215,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="10dp"
                 android:text="游客登录" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/qq"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_below="@id/wechat"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:text="qq登录" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/sina"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_below="@id/qq"-->
+                <!--android:text="微博登录" />-->
 
         </RelativeLayout>
 

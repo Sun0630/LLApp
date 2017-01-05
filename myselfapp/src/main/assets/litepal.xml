@@ -5,11 +5,11 @@
     <version value="1" ></version>
 
     <list>
-        <mapping class="com.example.myselfapp.music.Playlist"></mapping>
+        <mapping class="com.umeng.soexample.music.Playlist"></mapping>
     </list>
 
     <list>
-        <mapping class="com.example.myselfapp.bean.UserVO"></mapping>
+        <mapping class="com.umeng.soexample.bean.UserVO"></mapping>
     </list>
 
   </litepal>

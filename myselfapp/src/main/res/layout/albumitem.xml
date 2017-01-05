@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <com.example.cameraliarary.aibum.AlbumViewPager
+        <com.umeng.cameraliarary.aibum.AlbumViewPager
             android:id="@+id/albumviewpager"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -31,7 +31,7 @@
             layout="@layout/album_item_bottom_bar" />
     </FrameLayout>
 
-    <com.example.cameraliarary.view.VideoPlayerContainer
+    <com.umeng.cameraliarary.view.VideoPlayerContainer
         android:id="@+id/videoview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

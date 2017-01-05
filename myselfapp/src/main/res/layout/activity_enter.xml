@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_logo"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true">
+
+    <Button
+        android:id="@+id/wechat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="微信登录"/>
+
+    <Button
+        android:id="@+id/sina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wechat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="微博登录"/>
+
+    <Button
+        android:id="@+id/qq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sina"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="QQ登录"/>
+
+    <TextView
+        android:id="@+id/number_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机号登录"
+        android:layout_below="@+id/qq"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/number_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="注册"/>
+
+
+</RelativeLayout>
