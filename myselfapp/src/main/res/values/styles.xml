@@ -5,13 +5,13 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/main_color</item>
     </style>
 
     <!-- 解决app启动时短暂黑屏 -->
     <style name="Theme.DesignDemo.NoTitleBar.Fullscreen" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@mipmap/ic_launcher</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@mipmap/b_1</item>
     </style>
 
     <!--透明背景-->

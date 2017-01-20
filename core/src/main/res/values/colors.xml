@@ -9,5 +9,6 @@
     <color name="line">#dfdfdf</color>
     <color name="menu_text">#124562</color>
     <color name="transparent">#00000000</color>
+    <color name="main_color">#ffce3d3a</color>
 
 </resources>

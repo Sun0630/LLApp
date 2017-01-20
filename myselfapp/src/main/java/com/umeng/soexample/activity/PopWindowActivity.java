@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.android.core.base.AbsBaseActivity;
 import com.umeng.soexample.R;
 import com.umeng.soexample.adapter.PopWindowAdapter;
 import com.umeng.soexample.custom.CustomPopWindow;
+import com.umeng.soexample.custom.popAnima.PublishPopWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class PopWindowActivity extends AbsBaseActivity implements View.OnClickLi
     private TextView mButton1,mButton2,mButton3,mButton4;
     private CustomPopWindow mCustomPopWindow;
     private CustomPopWindow mListPopWindow;
+    private ImageView imageView;
 
     @Override
     protected int getLayoutResource() {
@@ -51,6 +54,8 @@ public class PopWindowActivity extends AbsBaseActivity implements View.OnClickLi
         mButton3.setOnClickListener(this);
         mButton4 = (TextView) findViewById(R.id.button4);
         mButton4.setOnClickListener(this);
+        imageView = (ImageView) findViewById(R.id.iv_start);
+        imageView.setOnClickListener(this);
     }
 
     @Override
@@ -67,6 +72,10 @@ public class PopWindowActivity extends AbsBaseActivity implements View.OnClickLi
                 break;
             case R.id.button4:
                 showPopListView();
+                break;
+            case R.id.iv_start:
+                PublishPopWindow popWindow = new PublishPopWindow(PopWindowActivity.this);
+                popWindow.showMoreWindow(v);
                 break;
         }
     }

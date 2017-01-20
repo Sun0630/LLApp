@@ -4,12 +4,18 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.core.base.AbsBaseActivity;
 import com.bumptech.glide.Glide;
@@ -18,6 +24,9 @@ import com.umeng.soexample.custom.AppSelectPicsDialog;
 import com.heaton.liulei.utils.custom.RoundImageView;
 import com.heaton.liulei.utils.utils.SPUtils;
 import com.heaton.liulei.utils.utils.ToastUtil;
+import com.umeng.soexample.custom.DampView;
+import com.umeng.soexample.custom.MyScrollView;
+import com.umeng.soexample.custom.ObservableScrollView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,10 +40,18 @@ import butterknife.OnClick;
 /**
  * Created by liulei on 2016/5/31.
  */
-public class PersonActivity extends AbsBaseActivity {
+public class PersonActivity extends AbsBaseActivity implements DampView.ScrollViewListener {
 
+    @Bind(R.id.person_toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.person_title)
+    TextView title;
     @Bind(R.id.aviter)
     RoundImageView aviter;
+    @Bind(R.id.top_img)
+    ImageView topImg;
+    @Bind(R.id.scrollview)
+    DampView scrollView;
 
     public static final String PHOTO_PATH = Environment.getExternalStorageDirectory() + "/heaton_";
     private static final int CAMERA_REQUEST_CODE = 1;
@@ -46,16 +63,21 @@ public class PersonActivity extends AbsBaseActivity {
     private Bitmap bm;
     private Uri uri;
     private String localHeader;
+    private int height ;
 //    private String path;
 
     @Override
     protected int getLayoutResource() {
+        isShowTool(false);
+        isTransparentSystem(true);
         return R.layout.activity_person;
     }
 
     @Override
     protected void onInitView() {
-        setTitle("个人中心");
+
+        toolbar.setBackgroundColor(Color.argb(0, 0xfd, 0x91, 0x5b));
+        title.setText("个人中心");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +89,22 @@ public class PersonActivity extends AbsBaseActivity {
         if(!getHeader().equals("")){
             Glide.with(this).load(getHeader()).into(aviter);
         }
+
+
+        //获取顶部图片高度后，设置滚动监听
+        ViewTreeObserver vto = topImg.getViewTreeObserver();
+        scrollView.setImageView(topImg);//这里必须要把图片设置进去  不然会报null
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                topImg.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                height = topImg.getHeight();
+                topImg.getWidth();
+
+                scrollView.setScrollViewListener(PersonActivity.this);
+            }
+        });
+
     }
 
     @OnClick(R.id.aviter)
@@ -218,5 +256,21 @@ public class PersonActivity extends AbsBaseActivity {
         }
     }
 
+
+    @Override
+    public void onScrollChanged(DampView scrollView, int x, int y, int oldx, int oldy) {
+        Log.i("TAG","y--->"+y+"    height-->"+height);
+        if(y<=height){
+            float scale =(float) y /height;
+            float alpha =  (255 * scale);
+//			Log.i("TAG","alpha--->"+alpha);
+
+            //layout全部透明
+//			layoutHead.setAlpha(scale);
+
+            //只是layout背景透明(仿知乎滑动效果)
+            toolbar.setBackgroundColor(Color.argb((int) alpha, 255, 0, 0));
+        }
+    }
 
 }

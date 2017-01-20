@@ -18,21 +18,52 @@ public class BlurUtils {
     /**
      * 水平方向模糊度
      */
-    private static float hRadius = 10;
+    private static float hRadius = 5;
     /**
      * 竖直方向模糊度
      */
-    private static float vRadius = 10;
+    private static float vRadius = 5;
     /**
      * 模糊迭代度
      */
-    private static int iterations = 7;
+    private static int iterations = 2;
 
     /**
      * 高斯模糊
      */
     public static Drawable BoxBlurFilter(Bitmap sentBitmap) {
         //先处理原图，根据ImageView的大小进行压缩一下
+        if(sentBitmap.getWidth()>1000||sentBitmap.getHeight()>1000){
+            sentBitmap = Bitmap.createScaledBitmap(sentBitmap, sentBitmap.getWidth()/3, sentBitmap.getHeight()/3, false);
+            sentBitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
+        }
+        int width = sentBitmap.getWidth();
+        int height = sentBitmap.getHeight();
+        int[] inPixels = new int[width * height];
+        int[] outPixels = new int[width * height];
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        sentBitmap.getPixels(inPixels, 0, width, 0, 0, width, height);
+        for (int i = 0;
+             i < iterations; i++) {
+            blur(inPixels, outPixels, width, height, hRadius);
+            blur(outPixels, inPixels, height, width, vRadius);
+        }
+        blurFractional(inPixels, outPixels, width, height, hRadius);
+        blurFractional(outPixels, inPixels, height, width, vRadius);
+        bitmap.setPixels(inPixels, 0, width, 0, 0, width, height);
+        Drawable drawable = new BitmapDrawable(bitmap);
+        return drawable;
+    }
+
+    /**
+     *
+     * @param sentBitmap  位图对象
+     * @param radius  模糊度
+     * @return  drawable
+     */
+    public static Drawable BoxBlurFilter(Bitmap sentBitmap,float radius) {
+        //先处理原图，根据ImageView的大小进行压缩一下
+        hRadius = vRadius = radius;
         if(sentBitmap.getWidth()>1000||sentBitmap.getHeight()>1000){
             sentBitmap = Bitmap.createScaledBitmap(sentBitmap, sentBitmap.getWidth()/3, sentBitmap.getHeight()/3, false);
             sentBitmap = sentBitmap.copy(sentBitmap.getConfig(), true);

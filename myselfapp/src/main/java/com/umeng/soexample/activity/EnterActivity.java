@@ -1,6 +1,10 @@
 package com.umeng.soexample.activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.core.base.AbsBaseActivity;
@@ -10,8 +14,12 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.soexample.MainActivity;
 import com.umeng.soexample.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
@@ -19,6 +27,11 @@ import butterknife.OnClick;
  */
 
 public class EnterActivity extends AbsBaseActivity {
+
+    @Bind(R.id.enter_bg)
+    RelativeLayout bg;
+    private List<Integer> list = new ArrayList<>();
+    private Integer i;
 
     @Override
     protected int getLayoutResource() {
@@ -29,7 +42,16 @@ public class EnterActivity extends AbsBaseActivity {
 
     @Override
     protected void onInitView() {
+        bg.setBackgroundResource(getRes());
+    }
 
+    private Integer getRes() {
+        list.add(R.mipmap.b_1);
+        list.add(R.mipmap.b_2);
+        list.add(R.mipmap.b_3);
+        list.add(R.mipmap.b_4);
+        i = list.get(new Random().nextInt(4));
+        return i;
     }
 
     @OnClick(R.id.wechat)
@@ -54,6 +76,7 @@ public class EnterActivity extends AbsBaseActivity {
     @OnClick(R.id.number_login)
     void num(){
         startActivity(LoginActivity.class);
+        finish();
     }
 
     UMAuthListener authListener = new UMAuthListener() {

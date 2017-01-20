@@ -89,5 +89,9 @@
     <string name="umeng_socialize_sms">短信</string>
     <string name="umeng_socialize_sina">新浪</string>
     <string name="action_enter_app">进入LLAPP1.0</string>
+    <string name="login_help_information">登录账号为18682176281,密码为123</string>
+    <string name="coverview_tip">上滑关闭该界面</string>
+    <string name="all_rights_reserved">Copyright © 2016-2017 way. All Rights Reserved.</string>
+    <string name="setting_about_description">弹指间 心无间</string>
     <!--友盟-->
 </resources>

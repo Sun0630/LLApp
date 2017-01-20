@@ -107,23 +107,6 @@
             app:rightDrawableWidth="8dp" />
 
         <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/text_type"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="切换字体"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:leftDrawable="@mipmap/help"
-            app:rightDrawable="@mipmap/coming"
-            app:rightDrawableHeight="12dp"
-            app:rightDrawableWidth="8dp" />
-
-        <com.umeng.soexample.custom.TextDrawable
             android:id="@+id/add_psw"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -207,5 +190,20 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <com.umeng.soexample.custom.TextDrawable
+        android:id="@+id/text_exit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:clickable="true"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:text="退出登录"
+        android:background="@color/bg_color"
+        android:textColor="@color/main_color"
+        android:textSize="16sp"
+        app:rightDrawableHeight="12dp"
+        app:rightDrawableWidth="8dp" />
 
 </com.umeng.soexample.custom.design.SlidingLayout>

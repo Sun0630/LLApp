@@ -14,8 +14,8 @@
     <color name="blue_user">#0071BC</color><!--主色蓝 -->
     <color name="blue_touch_user">#B3B3B3</color><!--主色 按住蓝 -->
     <color name="background_user">#F2F2F2</color><!--主色 按住蓝 -->
-    <color name="black_user">#333333</color><!--主色  -->
-    <color name="text">#565656</color>
+    <color name="black">#000000</color><!--黑色  -->
+    <color name="text">#333333</color>
     <color name="darkgray">#cccc</color>
 
 

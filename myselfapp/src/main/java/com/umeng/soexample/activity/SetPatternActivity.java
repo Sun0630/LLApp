@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
+import com.umeng.soexample.MainActivity;
 import com.umeng.soexample.R;
 import com.umeng.soexample.custom.LockView;
 import com.heaton.liulei.utils.utils.SPUtils;
@@ -61,7 +62,7 @@ public class SetPatternActivity extends AbsBaseActivity {
                         sb.append(i);
                     }
                     if (sb.toString().equals(password)) {
-                        startActivity(LoginActivity.class);
+                        startActivity(MainActivity.class);
                         finish();
                         return true;
                     } else {
@@ -84,6 +85,7 @@ public class SetPatternActivity extends AbsBaseActivity {
     @OnClick(R.id.btn_reset)
     void reset() {
         lockView.resetPoints();
+        SPUtils.remove(getBaseContext(),StaticValue.IS_PSW_OPEN);
     }
 
     @OnClick(R.id.btn_save)

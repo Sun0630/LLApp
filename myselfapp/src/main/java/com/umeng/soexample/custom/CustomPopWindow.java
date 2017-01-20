@@ -13,7 +13,6 @@ import android.widget.PopupWindow;
 /**
  *
  * 自定义PopWindow类，封装了PopWindow的一些常用属性，用Builder模式支持链式调用
- * Created by zhouwei on 16/11/28.
  */
 
 public class CustomPopWindow {

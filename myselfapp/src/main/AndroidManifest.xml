@@ -72,7 +72,7 @@
         <activity android:name="com.umeng.soexample.activity.DownloadManagerDemo"/>
         <activity android:name="com.umeng.soexample.activity.SwipBackActivity"
             android:theme="@style/Transparent"/>
-        <activity android:name="com.umeng.soexample.activity.PersonActivity"/>
+        <activity android:name="com.umeng.soexample.activity.PersonActivity" />
         <activity android:name="com.umeng.soexample.activity.BloggerActivity"/>
         <activity android:name="com.umeng.soexample.music.MusicListActivity"
             android:theme="@style/TransparentTheme"/>

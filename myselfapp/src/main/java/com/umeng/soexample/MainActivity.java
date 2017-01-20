@@ -1,5 +1,6 @@
 package com.umeng.soexample;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.android.core.base.AbsBaseActivity;
@@ -25,7 +26,7 @@ public class MainActivity extends AbsBaseActivity {
         //对应xml中的navigateTabTextColor
         navigateTabBar.setTabTextColor(getResources().getColor(R.color.abc_tab_text_normal));
         //对应xml中的navigateTabSelectedTextColor
-        navigateTabBar.setSelectedTabTextColor(getResources().getColor(R.color.colorPrimary));
+        navigateTabBar.setSelectedTabTextColor(getResources().getColor(R.color.main_color));
 
         //恢复选项状态
         navigateTabBar.onRestoreInstanceState(savedInstanceState);
@@ -58,6 +59,7 @@ public class MainActivity extends AbsBaseActivity {
 
     @Override
     protected void onInitView() {
+
 
     }
 

@@ -22,7 +22,7 @@
         <item name="colorPrimary">#00000000</item>
         <item name="colorPrimaryDark">#00000000</item>
         <item name="android:textColorPrimary">@color/text_color</item>
-        <item name="colorAccent">@color/text_regist</item>
+        <item name="colorAccent">@color/main_color</item>
         <item name="actionMenuTextColor">@color/menu_text</item>
         <item name="actionMenuTextAppearance">@style/MenuTextStyle</item>
         <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>

@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="160dp">
+    android:layout_height="200dp">
 
     <com.android.core.widget.CustomViewpager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="200dp"
         android:background="@color/abc_tab_text_normal" />
 
 </LinearLayout>

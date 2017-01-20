@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/music_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clipToPadding="true"
-    android:background="@color/success_stroke_color"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -15,7 +15,8 @@
         <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
         <!--app:layout_scrollFlags="scroll|enterAlways">-->
     <!--</android.support.v7.widget.Toolbar>-->
-    <include layout="@layout/toolbar_layout"/>
+    <include
+        layout="@layout/toolbar_layout"/>
 
 
     <TextView

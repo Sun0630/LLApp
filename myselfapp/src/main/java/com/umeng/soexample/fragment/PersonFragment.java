@@ -67,7 +67,7 @@ public class PersonFragment extends AbsBaseFragment {
             @Override
             public void onResult(boolean granted) {
                 if(granted){
-
+//                    ToastUtil.showToast("已打开位置权限");
                 }else {
                     ToastUtil.showToast("请打开位置权限");
                 }
@@ -89,8 +89,8 @@ public class PersonFragment extends AbsBaseFragment {
 //        mSensor = new SensonListener(getContext());
 //        mSensor.setOnSensonChangeListener(this);
 
-//        JniUtils helper = new JniUtils();
-//        jni.setText("自定义jni："+"\n"+helper.getMyName());
+        JniUtils helper = new JniUtils();
+        jni.setText("自定义jni："+"\n"+helper.getMyName());
 
         mSocket.on("login", onLogin);
 
@@ -137,20 +137,19 @@ public class PersonFragment extends AbsBaseFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        if(which == 0){
-                            StaticValue.color = R.color.username0;
-                        }else if(which == 1){
-                            StaticValue.color = R.color.username3;
-                        }else if(which == 2){
-                            StaticValue.color = R.color.username8;
-                        }else if(which == 3){
-                            StaticValue.color = R.color.username5;
-                        }else if(which == 4){
-                            StaticValue.color = R.color.username6;
-                        }
-//                        StaticValue.color = com.android.core.R.color.red_btn_bg_color;
-                        Help.initSystemBar(getActivity(), StaticValue.color);
-                        ((AbsBaseActivity)getActivity()).toolbar.setBackgroundColor(getActivity().getResources().getColor(StaticValue.color));
+//                        if(which == 0){
+//                            StaticValue.color = R.color.username0;
+//                        }else if(which == 1){
+//                            StaticValue.color = R.color.username3;
+//                        }else if(which == 2){
+//                            StaticValue.color = R.color.username8;
+//                        }else if(which == 3){
+//                            StaticValue.color = R.color.username5;
+//                        }else if(which == 4){
+//                            StaticValue.color = R.color.username6;
+//                        }
+//                        Help.initSystemBar(getActivity(), StaticValue.color);
+//                        ((AbsBaseActivity)getActivity()).toolbar.setBackgroundColor(getActivity().getResources().getColor(StaticValue.color));
                     }
                 }).setNegativeButton("取消",null).show();
     }

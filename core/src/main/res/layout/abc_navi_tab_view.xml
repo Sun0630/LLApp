@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dip"
         android:textColor="@color/abc_tab_text_normal"
-        android:textSize="9.0sp" />
+        android:textSize="14.0sp" />
 
 </LinearLayout>

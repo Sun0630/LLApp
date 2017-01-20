@@ -11,6 +11,8 @@ import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.android.core.base.AbsBaseFragment;
 import com.android.core.widget.dialog.DialogManager;
+import com.heaton.liulei.utils.utils.SPUtils;
+import com.umeng.soexample.Constants;
 import com.umeng.soexample.R;
 import com.umeng.soexample.activity.SetPatternActivity;
 import com.umeng.soexample.activity.SuggestActivity;
@@ -127,21 +129,18 @@ public class SetFragment extends AbsBaseFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        if(which == 0){
-                            StaticValue.color = com.android.core.R.color.success_stroke_color;
-//                            SPUtils.put(getContext(),StaticValue.TOOL_COLOR,StaticValue.color);
-//                            SPUtils.put(getContext(), StaticValue.KEY_THEME,StaticValue.DEFAULT_THEME);
-                            //主题色  白黑 夜间模式
-                            StaticValue.THEME_MODE = 0;
-                            getActivity().recreate();
-                        }else {
-                            StaticValue.color = R.color.background_material_dark;
-//                            SPUtils.put(getContext(),StaticValue.TOOL_COLOR,StaticValue.black_color);
-//                            SPUtils.put(getContext(), StaticValue.KEY_THEME,which+"");
-                            Log.e(TAG,"切换到了深色主题"+which);
-                            StaticValue.THEME_MODE = 1;
-                            getActivity().recreate();
-                        }
+                        //暂时注释
+//                        if(which == 0){
+//                            StaticValue.color = com.android.core.R.color.success_stroke_color;
+//                            //主题色  白黑 夜间模式
+//                            StaticValue.THEME_MODE = 0;
+//                            getActivity().recreate();
+//                        }else {
+//                            StaticValue.color = R.color.background_material_dark;
+//                            Log.e(TAG,"切换到了深色主题"+which);
+//                            StaticValue.THEME_MODE = 1;
+//                            getActivity().recreate();
+//                        }
                     }
                 }).setNegativeButton("取消",null).show();
     }
@@ -157,12 +156,7 @@ public class SetFragment extends AbsBaseFragment {
                         dialog.dismiss();
                         DataCleanManager.deletePhotoCache(getContext());
                         showProgress("清除中,请稍后...");
-                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                hideProgress();
-                            }
-                        },2000);
+                        new Handler(Looper.getMainLooper()).postDelayed(()->hideProgress(),2000);
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -176,6 +170,14 @@ public class SetFragment extends AbsBaseFragment {
     @OnClick(R.id.rl_suggest)
     void suggest(){
         startActivity(SuggestActivity.class);
+    }
+
+    @OnClick(R.id.text_exit)
+    void exit(){
+        SPUtils.remove(getContext(), Constants.APP_PSW);
+        SPUtils.remove(getContext(), Constants.APP_COUNT);
+        SPUtils.remove(getContext(),StaticValue.IS_PSW_OPEN);
+        getActivity().finish();
     }
 
 }

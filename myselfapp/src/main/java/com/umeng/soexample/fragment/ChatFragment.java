@@ -158,12 +158,7 @@ public class ChatFragment extends Fragment {
         });
 
         ImageButton sendButton = (ImageButton) view.findViewById(R.id.send_button);
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                attemptSend();
-            }
-        });
+        sendButton.setOnClickListener(v ->attemptSend());
     }
 
     @Override

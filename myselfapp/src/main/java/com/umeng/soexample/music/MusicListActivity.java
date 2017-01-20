@@ -126,12 +126,7 @@ public class MusicListActivity extends Activity implements OnItemClickListener {
 //
 //            }
 //        });
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListView.smoothScrollToPosition(0);
-            }
-        });
+        fab.setOnClickListener(view -> mListView.smoothScrollToPosition(0));
 //        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.music_fab);
 //        fab.setOnClickListener(new View.OnClickListener(){
 //            @Override

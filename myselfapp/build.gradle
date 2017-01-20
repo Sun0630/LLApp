@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -21,7 +28,7 @@ android {
 
     defaultConfig {
         applicationId "com.umeng.soexample"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -118,7 +125,8 @@ dependencies {
     compile 'org.apache.httpcomponents:httpcore:4.4.4'
     compile 'org.apache.httpcomponents:httpmime:4.5.2'
     //    compile 'org.apache.httpcomponents:httpmime:4.5.2'
-//    compile 'org.apache.httpcomponents:httpcore:4.4.4'
+
+    //    compile 'org.apache.httpcomponents:httpcore:4.4.4'
     compile files('libs/umeng_social_net.jar')
     compile files('libs/umeng_social_api.jar')
     compile files('libs/umeng_social_tool.jar')
@@ -135,6 +143,11 @@ dependencies {
     compile files('libs/umeng_social_shareview.jar')
     compile project(':library')
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.2'
+    compile 'io.reactivex:rxandroid:0.24.0'
+
 }
 
+tasks.withType(JavaCompile){
+    options.encoding="utf-8"
+}
 

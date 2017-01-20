@@ -1,5 +1,7 @@
 package com.android.core.api;
 
+import android.os.Handler;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -8,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @公司：希顿科技
  */
 public class HttpClient {
-
     private static HttpClient mInstance;
     private Retrofit singleton;
 

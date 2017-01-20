@@ -26,7 +26,7 @@ public class StaticValue {
 	/**
 	 * 应用默认的颜色主题
 	 */
-	public static int color = R.color.success_stroke_color;
+	public static int color = R.color.main_color;
 
 	//夜间模式颜色
 	public static int black_color = R.color.background_material_dark;

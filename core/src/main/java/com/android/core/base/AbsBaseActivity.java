@@ -83,8 +83,6 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         if(isTransparent){
-            //自己新添加的
-//        setTranslucent();//沉浸式  这个对api<=19的适合
             Help.initSystemBar(this, R.color.transparent);//这个对所有的都适合
         }else {
             Help.initSystemBar(this, StaticValue.color);

@@ -3,6 +3,7 @@ package com.umeng.soexample.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -63,27 +64,14 @@ public class MusicActivity extends AppCompatActivity{
         tabLayout.setupWithViewPager(mViewPager);
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-//                Snackbar.make(view,"敬请期待",Snackbar.LENGTH_LONG)
-//                        .setAction("Action",null).show();
-
-            }
-        });
-
+        fab.setOnClickListener(view -> Snackbar.make(view,"敬请期待", Snackbar.LENGTH_LONG)
+                        .setAction("Action",null).show());
     }
 
     /**
      * 返回按钮的监听事件
      */
-    View.OnClickListener back_btn = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            //localBroadcastManager.unregisterReceiver(ui_receiver);
-            finish();//结束这个活动
-        }
-    };
+    View.OnClickListener back_btn = (view -> finish());//结束这个活动}
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

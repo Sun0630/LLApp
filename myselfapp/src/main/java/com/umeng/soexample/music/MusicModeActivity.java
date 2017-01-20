@@ -21,6 +21,7 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -39,12 +40,17 @@ import com.heaton.liulei.utils.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import butterknife.Bind;
 
 /**
  * 音乐模式
  */
 public class MusicModeActivity extends AbsBaseActivity implements OnClickListener {
 
+    @Bind(R.id.music_bg)
+    LinearLayout bg;
     private CircleImageView iv_album; //
     public ImageView next_img; //
     private SeekBar cb_progress; //
@@ -58,67 +64,8 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
     //	public static  PlayFlashView flashView;
     private App mApp;
     private Bitmap bmp;
-    private BtManager    mBtManager;// SPP蓝牙管理器
-
-    /**
-     * 蓝牙设备监听器
-     */
-    private BtManager.BtDeviceListener mBtListener = new BtManager.BtDeviceListener() {
-        @Override
-        public void onStateChanged(int state, BtDevice btDevice) {
-            if (state == BtDevice.STATE_CONNECTED) {
-                ToastUtil.showToast("设备连接成功");
-            } else if (state == BtDevice.STATE_IDLE) {
-                ToastUtil.showToast("设备连接断开");
-            }
-        }
-
-        @Override
-        public void onDevicesChanged() {
-        }
-
-        @Override
-        public void onError(int errorCode, BtDevice btDevice) {
-
-        }
-
-        @Override
-        public void onRead(byte[] buffer, BtDevice btDevice) {
-            if (buffer == null || buffer.length == 0) {
-                return;
-            }
-            if (btDevice != null && buffer.length >= 2) {
-                if (buffer[0] == 0x3A && buffer[1] == 0x00) {
-                    btDevice.notifyWrite(true);
-                } else if (buffer[0] == 0x3B && buffer[1] == 0x00) {
-                    btDevice.notifyWrite();
-                }
-            }
-        }
-
-        @Override
-        public void onWrite(byte[] buffer, BtDevice btDevice) {
-
-        }
-
-        @Override
-        public void onFound(BtDevice btDevice) {
-            if (AppConfig.DEBUG) {
-                Log.d(TAG, "onFound:name=" + btDevice.getName() + ",address=" + btDevice.getAddress());
-            }
-            if(btDevice.getName().equals("BK8002")){
-                mBtManager.connect(btDevice);
-            }
-
-        }
-
-        @Override
-        public void onStartScan() {
-        }
-
-        @Override
-        public void onStopScan() {}
-    };
+    private List<Integer> list = new ArrayList<>();
+    private Integer i;
 
 
     private Handler handler = new Handler() {
@@ -148,13 +95,16 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
 
     @Override
     protected int getLayoutResource() {
+        isTransparentSystem(true);
         return R.layout.activity_music_mode;
     }
 
     @Override
     protected void onInitView() {
+        bg.setBackgroundResource(getRes());
         setTitle(R.string.music_song);
         Help.initSystemBar(this, R.color.transparent);//这个对所有的都适合
+        toolbar.setBackgroundColor(getColor(R.color.transparent));
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);//必须放在setSupportActionBar后才有用，否则没有，设置返回图标
 
         mApp = App.getInstance();
@@ -163,13 +113,15 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
 
         init();
         initAnim();
-        mBtManager = new BtManager(this, mBtListener);
-        mBtManager.setSecure(true);
-        if (mBtManager.getAdapter() != null && mBtManager.getAdapter().isEnabled()) {
-            mBtManager.startDiscovery();
-        } else {
-            ToastUtil.showToast("请打开蓝牙");
-        }
+    }
+
+    private Integer getRes() {
+        list.add(R.mipmap.b_1);
+        list.add(R.mipmap.b_2);
+        list.add(R.mipmap.b_3);
+        list.add(R.mipmap.b_4);
+        i = list.get(new Random().nextInt(4));
+        return i;
     }
 
     /**
