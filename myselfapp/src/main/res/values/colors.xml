@@ -3,21 +3,21 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="text_regist">#3b9cd4</color>
-    <color name="menu_text">#124562</color>
-    <color name="transparent">#00000000</color>
+
+
+    <color name="bg_color">#f7f5f5</color>
     <color name="gray">#C4C4C4</color>
     <color name="black_overlay">#66000000</color>
     <color name="material_blue_500">#5677fc</color>
     <color name="material_blue_600">#4e6cef</color>
 
-    <color name="blue_user">#0071BC</color><!--主色蓝 -->
+    <color name="colorTextBlack">#4B4B4B</color>
     <color name="blue_touch_user">#B3B3B3</color><!--主色 按住蓝 -->
     <color name="background_user">#F2F2F2</color><!--主色 按住蓝 -->
     <color name="black">#000000</color><!--黑色  -->
     <color name="text">#333333</color>
-    <color name="darkgray">#cccc</color>
-
+    <color name="white">#FFFFFF</color>
+    <color name="line">#dfdfdf</color>
 
     <color name="username0">#e21400</color>
     <color name="username1">#91580f</color>

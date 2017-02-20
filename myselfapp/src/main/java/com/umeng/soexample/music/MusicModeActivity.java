@@ -29,9 +29,6 @@ import android.widget.Toast;
 
 import com.android.core.Help;
 import com.android.core.base.AbsBaseActivity;
-import com.cdbwsoft.library.AppConfig;
-import com.cdbwsoft.library.bluetooth.BtDevice;
-import com.cdbwsoft.library.bluetooth.BtManager;
 import com.umeng.soexample.App;
 import com.umeng.soexample.R;
 import com.heaton.liulei.utils.custom.CircleImageView;
@@ -117,8 +114,8 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
 
     private Integer getRes() {
         list.add(R.mipmap.b_1);
-        list.add(R.mipmap.b_2);
-        list.add(R.mipmap.b_3);
+        list.add(R.mipmap.b_4);
+        list.add(R.mipmap.b_1);
         list.add(R.mipmap.b_4);
         i = list.get(new Random().nextInt(4));
         return i;

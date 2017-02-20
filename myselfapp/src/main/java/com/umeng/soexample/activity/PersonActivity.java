@@ -17,6 +17,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.bumptech.glide.Glide;
 import com.umeng.soexample.R;
@@ -25,8 +26,6 @@ import com.heaton.liulei.utils.custom.RoundImageView;
 import com.heaton.liulei.utils.utils.SPUtils;
 import com.heaton.liulei.utils.utils.ToastUtil;
 import com.umeng.soexample.custom.DampView;
-import com.umeng.soexample.custom.MyScrollView;
-import com.umeng.soexample.custom.ObservableScrollView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -75,7 +74,6 @@ public class PersonActivity extends AbsBaseActivity implements DampView.ScrollVi
 
     @Override
     protected void onInitView() {
-
         toolbar.setBackgroundColor(Color.argb(0, 0xfd, 0x91, 0x5b));
         title.setText("个人中心");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
@@ -269,7 +267,7 @@ public class PersonActivity extends AbsBaseActivity implements DampView.ScrollVi
 //			layoutHead.setAlpha(scale);
 
             //只是layout背景透明(仿知乎滑动效果)
-            toolbar.setBackgroundColor(Color.argb((int) alpha, 255, 0, 0));
+            toolbar.setBackgroundColor(Color.argb((int) alpha,Color.red(StaticValue.color), Color.green(StaticValue.color), Color.blue(StaticValue.color)));
         }
     }
 

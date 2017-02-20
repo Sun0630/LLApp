@@ -11,10 +11,12 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.umeng.soexample.R;
 import com.umeng.soexample.adapter.ResultAdapter;
 import com.umeng.soexample.bean.UserVO;
+import com.umeng.soexample.custom.MDTintUtil;
 import com.umeng.soexample.custom.SearchView;
 import com.heaton.liulei.utils.utils.SPUtils;
 import com.heaton.liulei.utils.utils.ToastUtil;
@@ -68,6 +70,7 @@ public class SQLActivity extends AbsBaseActivity implements SearchView.SearchVie
     @Override
     protected void onInitView() {
         initData();
+        MDTintUtil.setTint(searchView,StaticValue.color);
         searchView.setSearchViewListener(this);
 //        searchView.setAutoCompleteAdapter();
         hintAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, hotDatas);

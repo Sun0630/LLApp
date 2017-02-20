@@ -22,6 +22,7 @@ import android.view.Window;
 import com.android.core.Help;
 import com.android.core.StaticValue;
 import com.umeng.soexample.R;
+import com.umeng.soexample.custom.MDTintUtil;
 import com.umeng.soexample.fragment.LoginFragment;
 
 import java.lang.reflect.Method;
@@ -48,7 +49,7 @@ public class MusicActivity extends AppCompatActivity{
         setTitle("登录");
         Help.initSystemBar(this, StaticValue.color);//这个对所有的都适合
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar1);
-        toolbar.setBackgroundColor(getResources().getColor(StaticValue.color));
+        toolbar.setBackgroundColor(StaticValue.color);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的titl颜色
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);//必须放在setSupportActionBar后才有用，否则没有，设置返回图标
@@ -61,9 +62,12 @@ public class MusicActivity extends AppCompatActivity{
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
+        tabLayout.setTabTextColors(R.color.black,StaticValue.color);
+        tabLayout.setSelectedTabIndicatorColor(StaticValue.color);
         tabLayout.setupWithViewPager(mViewPager);
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        MDTintUtil.setTint(fab, StaticValue.color);
         fab.setOnClickListener(view -> Snackbar.make(view,"敬请期待", Snackbar.LENGTH_LONG)
                         .setAction("Action",null).show());
     }

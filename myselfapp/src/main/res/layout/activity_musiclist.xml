@@ -55,7 +55,7 @@
         android:layout_margin="16dp"
         android:src="@mipmap/ic_add_white_24dp"
         fab:fab_colorNormal="@color/colorAccent"
-        fab:fab_colorPressed="@color/username0"
-        fab:fab_colorRipple="@color/username3"/>
+        fab:fab_colorPressed="@color/colorPrimary"
+        fab:fab_colorRipple="@color/colorPrimaryDark"/>
 
 </FrameLayout >

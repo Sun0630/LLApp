@@ -1,6 +1,7 @@
 package com.android.core;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 
 import com.android.core.base.AbsBaseActivity;
@@ -19,14 +20,14 @@ public class StaticValue {
 
 	//主题色  白天和夜间模式
 	public static final String KEY_THEME = "pref_key_theme";
-	//状态栏和toolbar的颜色
-	public static final String TOOL_COLOR = "tool_color";
+	//主题颜色的key
+	public static final String THEME_COLOR = "theme_color";
 	public static int THEME_MODE = 0;//主题模式   默认是正常   1为夜间模式
 
 	/**
 	 * 应用默认的颜色主题
 	 */
-	public static int color = R.color.main_color;
+	public static int color = Color.parseColor("#B24242");//R.color.main_color
 
 	//夜间模式颜色
 	public static int black_color = R.color.background_material_dark;

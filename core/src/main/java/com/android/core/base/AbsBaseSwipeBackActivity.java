@@ -55,7 +55,7 @@ public abstract class AbsBaseSwipeBackActivity extends AppCompatActivity impleme
     //自己新添加的
     private void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(StaticValue.color));
+        toolbar.setBackgroundColor(StaticValue.color);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             abTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);

@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.umeng.soexample.R;
 import com.heaton.liulei.utils.utils.ToastUtil;
@@ -33,9 +34,9 @@ public class SuggestActivity extends AbsBaseActivity {
     @Override
     protected void onInitView() {
         setTitle("意见");
+        suggest_edit.setBackgroundColor(StaticValue.color);
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(v -> finish());
-
 
     }
 

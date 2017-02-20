@@ -1,16 +1,18 @@
 package com.umeng.soexample;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
+import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
+import com.android.core.control.ToastUtil;
+import com.android.core.listener.ThemeChangeListener;
 import com.android.core.widget.TabStripView;
 import com.umeng.soexample.fragment.DiscoveryFragment;
 import com.umeng.soexample.fragment.HomeFragment;
 import com.umeng.soexample.fragment.PersonFragment;
 import com.umeng.soexample.fragment.SetFragment;
 
-public class MainActivity extends AbsBaseActivity {
+public class MainActivity extends AbsBaseActivity implements ThemeChangeListener {
 
     private TabStripView navigateTabBar;
 
@@ -26,7 +28,7 @@ public class MainActivity extends AbsBaseActivity {
         //对应xml中的navigateTabTextColor
         navigateTabBar.setTabTextColor(getResources().getColor(R.color.abc_tab_text_normal));
         //对应xml中的navigateTabSelectedTextColor
-        navigateTabBar.setSelectedTabTextColor(getResources().getColor(R.color.main_color));
+        navigateTabBar.setSelectedTabTextColor(StaticValue.color);
 
         //恢复选项状态
         navigateTabBar.onRestoreInstanceState(savedInstanceState);
@@ -71,4 +73,14 @@ public class MainActivity extends AbsBaseActivity {
         navigateTabBar.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void onThemeChanged() {
+        ToastUtil.show("更换主题色了");
+//        navigateTabBar.setSelectedTabTextColor(StaticValue.color);
+        recreate();
+//        if(toolbar != null){
+//            toolbar.setBackgroundColor(StaticValue.color);
+//        }
+//        Help.initSystemBar(this, StaticValue.color);
+    }
 }

@@ -32,11 +32,10 @@
             app:rightDrawableHeight="12dp"
             app:rightDrawableWidth="8dp" />
 
-        <Space
+        <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/text"
-            android:visibility="invisible" />
+            android:layout_height="0.1dp"
+            android:background="@color/line" />
 
         <com.umeng.soexample.custom.TextDrawable
             android:id="@+id/rl_app_update"
@@ -55,8 +54,13 @@
             app:rightDrawableHeight="12dp"
             app:rightDrawableWidth="8dp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/line" />
+
         <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/rl_clock"
+            android:id="@+id/rl_theme"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
@@ -64,13 +68,18 @@
             android:clickable="true"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:text="@string/clock"
+            android:text="@string/theme_color"
             android:textColor="@color/text"
             android:textSize="16sp"
             app:leftDrawable="@mipmap/clock"
             app:rightDrawable="@mipmap/coming"
             app:rightDrawableHeight="12dp"
             app:rightDrawableWidth="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/line" />
 
         <com.umeng.soexample.custom.TextDrawable
             android:id="@+id/rl_about"
@@ -89,6 +98,11 @@
             app:rightDrawableHeight="12dp"
             app:rightDrawableWidth="8dp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/line" />
+
         <com.umeng.soexample.custom.TextDrawable
             android:id="@+id/rl_suggest"
             android:layout_width="match_parent"
@@ -105,6 +119,11 @@
             app:rightDrawable="@mipmap/coming"
             app:rightDrawableHeight="12dp"
             app:rightDrawableWidth="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/line" />
 
         <com.umeng.soexample.custom.TextDrawable
             android:id="@+id/add_psw"
@@ -123,6 +142,11 @@
             app:rightDrawableHeight="12dp"
             app:rightDrawableWidth="8dp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/line" />
+
         <com.umeng.soexample.custom.TextDrawable
             android:id="@+id/switch_theme"
             android:layout_width="match_parent"
@@ -139,6 +163,11 @@
             app:rightDrawable="@mipmap/coming"
             app:rightDrawableHeight="12dp"
             app:rightDrawableWidth="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/line" />
 
         <!--<com.example.myselfapp.custom.TextDrawable-->
         <!--android:id="@+id/clear_cache"-->
@@ -201,7 +230,6 @@
         android:gravity="center"
         android:text="退出登录"
         android:background="@color/bg_color"
-        android:textColor="@color/main_color"
         android:textSize="16sp"
         app:rightDrawableHeight="12dp"
         app:rightDrawableWidth="8dp" />

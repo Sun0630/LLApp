@@ -4,14 +4,13 @@ import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
 import com.android.core.MainApp;
+import com.android.core.StaticValue;
 import com.android.core.control.crash.AndroidCrash;
 import com.android.core.control.crash.HttpReportCallback;
 import com.android.core.control.logcat.Logcat;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
+import com.android.core.utils.ThemeUtils;
 import com.umeng.soexample.music.MusicService;
 import com.umeng.soexample.music.Playlist;
-import com.umeng.soexample.net.HurlStack;
 import com.heaton.liulei.utils.utils.LiuleiUtils;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -38,21 +37,13 @@ public class App extends MainApp {
     public MusicService mMusicServer;
     public ArrayList<Playlist> musicList;
     public int batteryValue;
-    private RequestQueue mRequestQueue;
-
-    public RequestQueue getRequestQueue() {
-        if (this.mRequestQueue == null) {
-            this.mRequestQueue = Volley.newRequestQueue(this, new HurlStack());
-            this.mRequestQueue.start();
-        }
-        return this.mRequestQueue;
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         instance = this;
+        StaticValue.color = ThemeUtils.getThemeColor(this);
         //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
         Config.DEBUG = true;
         // 初始化友盟组件

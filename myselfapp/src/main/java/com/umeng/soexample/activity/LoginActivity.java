@@ -98,8 +98,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnTouchList
     private void getData() {
         Resources resources = getResources();
         list.add(BitmapFactory.decodeResource(resources, R.mipmap.b_1));
-        list.add(BitmapFactory.decodeResource(resources, R.mipmap.b_2));
-        list.add(BitmapFactory.decodeResource(resources, R.mipmap.b_3));
+        list.add(BitmapFactory.decodeResource(resources, R.mipmap.b_4));
+        list.add(BitmapFactory.decodeResource(resources, R.mipmap.b_1));
         list.add(BitmapFactory.decodeResource(resources, R.mipmap.b_4));
         bitmap = list.get(new Random().nextInt(4));
     }

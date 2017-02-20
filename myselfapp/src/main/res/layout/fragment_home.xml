@@ -13,7 +13,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         app:tabIndicatorColor="@color/main_color"
-        app:tabSelectedTextColor="#14001C"
+        app:tabSelectedTextColor="@color/main_color"
         app:tabTextColor="#14001C" />
 
     <!--<View

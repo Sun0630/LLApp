@@ -59,12 +59,6 @@ public abstract class AbsBaseFragment extends Fragment implements BaseView {
 
     protected abstract void onInitView();
 
-
-    //获得该页面的实例
-    public <T> T getLogicImpl(Class cls, BaseView o) {
-        return LogicProxy.getInstance().bind(cls, o);
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

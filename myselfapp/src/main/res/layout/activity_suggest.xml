@@ -17,7 +17,7 @@
         android:id="@+id/suggest_edit"
         android:layout_marginTop="5dp"
         android:layout_below="@id/suggest_toolbar"
-        android:background="@drawable/btn_search_bg"
+        android:background="@drawable/shape_touch_bule_button"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:gravity="left|top"

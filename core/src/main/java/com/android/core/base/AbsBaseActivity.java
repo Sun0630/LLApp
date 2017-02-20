@@ -27,14 +27,10 @@ import com.android.core.StaticValue;
 import com.android.core.control.StatusBarUtil;
 import com.android.core.control.ToastUtil;
 import com.android.core.control.logcat.Logcat;
+import com.android.core.listener.ThemeChangeListener;
 import com.android.core.model.LogicProxy;
 import com.android.core.utils.ThemeUtils;
 import com.android.core.widget.dialog.DialogManager;
-import com.heaton.liulei.utils.utils.SPUtils;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -43,7 +39,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * @author: liulei
  * @date: 2016-09-24 18:09
  */
-public abstract class AbsBaseActivity extends AppCompatActivity implements BaseView {
+public abstract class AbsBaseActivity extends AppCompatActivity implements BaseView{
 
     public Context mContext = null;//context
     protected BasePresenter mPresenter;
@@ -56,7 +52,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //设置主题   白天和夜间模式
+        //设置主题颜色
         ThemeUtils.applyTheme(this);
         super.onCreate(savedInstanceState);
         Logcat.d("Activity Location (%s.java:0)", getClass().getSimpleName());
@@ -104,7 +100,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
     //自己新添加的
     private void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(StaticValue.color));
+        toolbar.setBackgroundColor(StaticValue.color);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             abTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
@@ -130,11 +126,6 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
     @Override
     public void startActivity(Class<? extends Activity> targetActivity) {
         startActivity(new Intent(mContext, targetActivity));
-    }
-
-    //获得该页面的实例
-    public <T> T getLogicImpl(Class cls, BaseView o) {
-        return LogicProxy.getInstance().bind(cls, o);
     }
 
     @Override

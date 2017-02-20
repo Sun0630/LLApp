@@ -6,11 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.TextView;
 
-import com.android.core.Help;
-import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.android.core.base.AbsBaseFragment;
-import com.android.core.utils.LocationUtils;
 import com.umeng.soexample.App;
 import com.umeng.soexample.Constants;
 import com.umeng.soexample.R;
@@ -18,6 +15,7 @@ import com.umeng.soexample.activity.BigPhotoActivity;
 import com.umeng.soexample.activity.BloggerActivity;
 import com.umeng.soexample.activity.CameraAty;
 import com.umeng.soexample.activity.ChatActivity;
+import com.umeng.soexample.activity.DanmuActivity;
 import com.umeng.soexample.activity.DownloadManagerDemo;
 import com.umeng.soexample.activity.FloatViewActivity;
 import com.umeng.soexample.activity.MusicActivity;
@@ -99,7 +97,6 @@ public class PersonFragment extends AbsBaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LocationUtils.unregister();
     }
 
     @OnClick(R.id.button)
@@ -251,7 +248,18 @@ public class PersonFragment extends AbsBaseFragment {
 
     @OnClick(R.id.camera)
     void camera(){
-        startActivity(CameraAty.class);
+        ((AbsBaseActivity)getActivity()).requestPermission(new String[]{Manifest.permission.CAMERA}, "请求打开相机权限", new AbsBaseActivity.GrantedResult() {
+            @Override
+            public void onResult(boolean granted) {
+                if(granted){
+                    startActivity(CameraAty.class);
+                }else {
+                    ToastUtil.showToast("权限未被允许");
+                    return;
+                }
+
+            }
+        });
     }
 
     @OnClick(R.id.shot_screen)
@@ -284,6 +292,11 @@ public class PersonFragment extends AbsBaseFragment {
     @OnClick(R.id.popwindow)
     void pop(){
         startActivity(PopWindowActivity.class);
+    }
+
+    @OnClick(R.id.danmu)
+    void danmu(){
+        startActivity(DanmuActivity.class);
     }
 
     private Emitter.Listener onLogin = new Emitter.Listener() {

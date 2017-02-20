@@ -4,7 +4,6 @@
     android:id="@+id/main_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
     android:clipToPadding="true">
 
     <ScrollView
@@ -49,7 +48,7 @@
                 android:layout_height="40dp"
                 android:layout_below="@+id/portrait_bg"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/background_user">
 
                 <RelativeLayout
@@ -118,7 +117,7 @@
                 android:layout_height="40dp"
                 android:layout_below="@+id/relativeLayout1"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="14dp"
                 android:background="@color/background_user">
 
                 <RelativeLayout
@@ -197,13 +196,13 @@
                 android:layout_alignLeft="@+id/relativeLayout2"
                 android:layout_alignRight="@+id/relativeLayout2"
                 android:layout_below="@+id/relativeLayout2"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:padding="1dp"
                 android:text="登录"
                 android:textColor="@color/abc_white"
                 android:textSize="21sp"
-                app:normalBackgroundColor="@color/username6"
-                app:pressedBackgroundColor="@color/username4"
+                app:normalBackgroundColor="@color/colorPrimary"
+                app:pressedBackgroundColor="@color/colorPrimaryDark"
                 app:radius="5dp" />
 
             <RelativeLayout

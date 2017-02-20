@@ -1,24 +1,20 @@
 package com.umeng.soexample.fragment;
 
-import android.graphics.Color;
 import android.view.View;
-import android.view.ViewTreeObserver;
-
+import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseFragment;
 import com.android.core.control.XRecyclerViewHelper;
+import com.android.core.listener.ThemeChangeListener;
 import com.android.core.widget.CustomViewpager;
 import com.heaton.liulei.utils.utils.ToastUtil;
-import com.umeng.soexample.MainActivity;
 import com.umeng.soexample.R;
 import com.umeng.soexample.adapter.CustomViewPageAdapter;
 import com.umeng.soexample.adapter.DisCoverRecyclerAdapter;
-import com.umeng.soexample.custom.ObservableScrollView;
-import com.umeng.soexample.custom.floatView.FloatingActionButton;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.umeng.soexample.custom.floatView.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -27,7 +23,7 @@ import butterknife.ButterKnife;
  * author meikoz on 2016/4/19.
  * email  meikoz@126.com
  */
-public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.LoadingListener{
+public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.LoadingListener,ThemeChangeListener{
 
     @Bind(R.id.listView)
     XRecyclerView listView;
@@ -37,6 +33,7 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
     private CustomViewpager mViewpage;
     private int index = 0;// 当前第几次加载
     private int mCurrntDataSize = 20;//当前数据量   最大为100
+    private List<Integer> mAdList;
     /**
      * 广告图片
      */
@@ -50,15 +47,15 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
         return R.layout.fragment_discover;
     }
 
-    public static List<Integer> getAdData() {
-        List<Integer> adList = new ArrayList<>();
+    public List<Integer> getAdData() {
+        mAdList = new ArrayList<>();
 
-        adList.add(R.mipmap.ai1);
-        adList.add(R.mipmap.ai2);
-        adList.add(R.mipmap.ai3);
-        adList.add(R.mipmap.ai4);
-        adList.add(R.mipmap.ai5);
-        return adList;
+        mAdList.add(R.mipmap.ai1);
+        mAdList.add(R.mipmap.ai2);
+        mAdList.add(R.mipmap.ai3);
+        mAdList.add(R.mipmap.ai4);
+        mAdList.add(R.mipmap.ai5);
+        return mAdList;
     }
 
     private void addData(int index) {//模拟加载数据，每次增加10条   直到100
@@ -75,6 +72,9 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
 
     @Override
     protected void onInitView() {
+        getAdData();
+
+        fab.setColorNormal(StaticValue.color);
         XRecyclerViewHelper.init().setLinearLayout(getActivity(), listView);
         for (int i = 0; i < 20; i++) {
             datas.add("测试数据" + i);
@@ -82,8 +82,8 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
         View headView = mInflater.inflate(R.layout.find_head_layout, listView, false);
         mViewpage = (CustomViewpager) headView.findViewById(R.id.viewpager);
         listView.addHeaderView(headView);
-        CustomViewPageAdapter adapter = new CustomViewPageAdapter(getActivity(), getAdData());
-        mViewpage.updateIndicatorView(getAdData().size(), 0);
+        CustomViewPageAdapter adapter = new CustomViewPageAdapter(getActivity(), mAdList);
+        mViewpage.updateIndicatorView(mAdList.size(), 0);
         mViewpage.setAdapter(adapter);
         mViewpage.startScorll();
 
@@ -138,4 +138,10 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
         listView.loadMoreComplete();
     }
 
+    @Override
+    public void onThemeChanged() {
+        if(fab != null){
+            fab.setColorNormal(StaticValue.color);
+        }
+    }
 }

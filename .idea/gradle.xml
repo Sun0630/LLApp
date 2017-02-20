@@ -5,13 +5,13 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="I:\android_kits\android-studio\gradle\gradle-2.14.1" />
+        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/cameralibrary" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/danmukulight" />
             <option value="$PROJECT_DIR$/myselfapp" />
             <option value="$PROJECT_DIR$/utils" />
           </set>

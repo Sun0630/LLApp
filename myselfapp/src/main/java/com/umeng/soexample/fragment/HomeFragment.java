@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 
 
+import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseFragment;
 import com.umeng.soexample.R;
 
@@ -35,6 +36,8 @@ public class HomeFragment extends AbsBaseFragment {
 
     @Override
     protected void onInitView() {
+        tabLayout.setTabTextColors(R.color.black,StaticValue.color);
+        tabLayout.setSelectedTabIndicatorColor(StaticValue.color);
         for (int i=0;i<5;i++){
             datas.add("精选"+i);
         }

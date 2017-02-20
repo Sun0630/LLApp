@@ -47,8 +47,8 @@ public class EnterActivity extends AbsBaseActivity {
 
     private Integer getRes() {
         list.add(R.mipmap.b_1);
-        list.add(R.mipmap.b_2);
-        list.add(R.mipmap.b_3);
+        list.add(R.mipmap.b_4);
+        list.add(R.mipmap.b_1);
         list.add(R.mipmap.b_4);
         i = list.get(new Random().nextInt(4));
         return i;

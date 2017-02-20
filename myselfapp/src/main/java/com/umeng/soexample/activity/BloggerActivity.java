@@ -3,19 +3,28 @@ package com.umeng.soexample.activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
+import android.os.Build;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.android.core.base.AbsBaseActivity;
+import com.heaton.liulei.utils.utils.OtherUtils;
+import com.heaton.liulei.utils.utils.ScreenUtils;
 import com.umeng.soexample.R;
+import com.umeng.soexample.custom.ToShare;
 
 import butterknife.Bind;
 
@@ -27,7 +36,12 @@ public class BloggerActivity extends AbsBaseActivity {
     public static final String csdn_URL = "http://blog.csdn.net/liulei823581722";
 
     @Bind(R.id.webView)
-    WebView webView;
+    WebView mWebView;
+    @Bind(R.id.progressbar_webview)
+    ProgressBar mProgressbar;
+    @Bind(R.id.appbar)
+    AppBarLayout mAppbar;
+
     private ProgressDialog dialog;
 
     @Override
@@ -37,9 +51,16 @@ public class BloggerActivity extends AbsBaseActivity {
 
     @Override
     protected void onInitView() {
-        initPressDialog();
+//        initPressDialog();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mAppbar.setPadding(
+                    mAppbar.getPaddingLeft(),
+                    mAppbar.getPaddingTop() + ScreenUtils.getStatusBarHeight(this),
+                    mAppbar.getPaddingRight(),
+                    mAppbar.getPaddingBottom());
+        }
         setTitle("博客");
-        toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
+        toolbar.setNavigationIcon(R.drawable.ic_webview_finish);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,18 +72,22 @@ public class BloggerActivity extends AbsBaseActivity {
 
     private void initWebView() {
 //        webView.loadDataWithBaseURL(null, Goods_Url, "text/html", "utf-8", null);
-        webView.getSettings().setJavaScriptEnabled(true);
+        WebSettings settings = mWebView.getSettings();
+        settings.setLoadWithOverviewMode(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setAppCacheEnabled(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setSupportZoom(true);
 
-        webView.setWebChromeClient(new WebChromeClient(){
+        mWebView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                if(newProgress > 20){
-                    dialog.dismiss();
-                }
+                mProgressbar.setVisibility(View.VISIBLE);
+                mProgressbar.setProgress(newProgress);
             }
         });
 
-        webView.setWebViewClient(new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 // TODO Auto-generated method stub
@@ -82,7 +107,7 @@ public class BloggerActivity extends AbsBaseActivity {
                 super.onReceivedError(view, errorCode, description, failingUrl);
                 //这里进行无网络或错误处理，具体可以根据errorCode的值进行判断，做跟详细的处理。
 //                view.loadUrl(file:///android_asset/error.html );
-                dialog.dismiss();
+//                dialog.dismiss();
             }
 
             @Override
@@ -94,11 +119,11 @@ public class BloggerActivity extends AbsBaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 Log.i("onPageFinished", url);
-                super.onPageFinished(view, url);
-                dialog.dismiss();
+//                dialog.dismiss();
+                mProgressbar.setVisibility(View.GONE);
             }
         });
-        webView.loadUrl(csdn_URL);
+        mWebView.loadUrl(csdn_URL);
 
 //        dialog.cancel();
 //// 设置可以支持缩放
@@ -144,8 +169,8 @@ public class BloggerActivity extends AbsBaseActivity {
     @Override
     public void onBackPressed() {
 
-        if (webView.canGoBack()) {
-            webView.goBack();
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
         } else {
             finish();
         }
@@ -155,26 +180,45 @@ public class BloggerActivity extends AbsBaseActivity {
     //android webview点击返回键返回上一个html
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
-            webView.goBack();//返回前一个页面
+        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+            mWebView.goBack();//返回前一个页面
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_webview,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.menu_share:
+                startActivity(ToShare.class);
+                break;
+            case R.id.menu_copy_link:
+                if (OtherUtils.copyText(this,csdn_URL)) {
+                    Snackbar.make(mWebView, "链接复制成功", Snackbar.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.menu_open_with:
+                OtherUtils.openWithBrowser(this, csdn_URL);
+                break;
         }
         return true;
     }
 
     @Override
     protected void onDestroy() {
-        webView.clearCache(true);
+        mWebView.clearCache(true);
 //        article_con_layout.removeView(mWeb);
-        webView.destroy();
+        mWebView.destroy();
         super.onDestroy();
     }
 

@@ -84,6 +84,7 @@ public class SystemBarTintManager {
      * @param activity The host activity.
      */
     @TargetApi(19)
+    @SuppressWarnings("ResourceType")
     public SystemBarTintManager(Activity activity) {
 
         Window win = activity.getWindow();
@@ -218,7 +219,8 @@ public class SystemBarTintManager {
      */
     public void setStatusBarTintResource(int res) {
         if (mStatusBarAvailable) {
-            mStatusBarTintView.setBackgroundResource(res);
+//            mStatusBarTintView.setBackgroundResource(res);
+            mStatusBarTintView.setBackgroundColor(res);
         }
     }
 

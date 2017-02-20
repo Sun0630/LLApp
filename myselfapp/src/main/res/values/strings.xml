@@ -23,8 +23,8 @@
     <string name="language">多语言</string>
     <string name="update">软件升级</string>
     <string name="no_internet">网络连接异常</string>
-    <string name="about">关于我们</string>
-    <string name="clock">时钟</string>
+    <string name="about">关于APP</string>
+    <string name="theme_color">主题颜色</string>
     <string name="suggest">建议或意见</string>
     <string name="commit">提交</string>
     <string name="put_suggest">请输入您的建议或意见,我们会在最短的时间内回复您！</string>
@@ -93,5 +93,10 @@
     <string name="coverview_tip">上滑关闭该界面</string>
     <string name="all_rights_reserved">Copyright © 2016-2017 way. All Rights Reserved.</string>
     <string name="setting_about_description">弹指间 心无间</string>
+
+
+    <string name="menu_share">分享</string>
+    <string name="menu_copy_link">复制链接</string>
+    <string name="menu_open_with">用浏览器打开</string>
     <!--友盟-->
 </resources>

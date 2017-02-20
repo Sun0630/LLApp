@@ -171,6 +171,15 @@
             android:layout_below="@id/shot_screen"
             android:text="弹出窗界面" />
 
+        <Button
+            android:id="@+id/danmu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/popwindow"
+            android:layout_below="@id/shot_screen"
+            android:text="弹幕界面" />
+
 
         <TextView
             android:id="@+id/jni"

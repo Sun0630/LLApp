@@ -30,6 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.android.core.StaticValue;
 import com.android.core.control.logcat.Logcat;
 import com.umeng.soexample.App;
 import com.umeng.soexample.Constants;
@@ -105,6 +106,7 @@ public class MusicListActivity extends Activity implements OnItemClickListener {
         mAlphaForegroundColorSpan = new AlphaForegroundColorSpan(mActionBarTitleColor);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setColorNormal(StaticValue.color);
 //        fab.attachToListView(mListView, new ScrollDirectionListener() {
 //            @Override
 //            public void onScrollDown() {
@@ -127,16 +129,6 @@ public class MusicListActivity extends Activity implements OnItemClickListener {
 //            }
 //        });
         fab.setOnClickListener(view -> mListView.smoothScrollToPosition(0));
-//        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.music_fab);
-//        fab.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-////                Snackbar.make(view,"敬请期待",Snackbar.LENGTH_LONG)
-////                        .setAction("Action",null).show();
-//                mListView.smoothScrollToPosition(0);
-//            }
-//        });
-
         setupActionBar();
         setupListView();
         init();

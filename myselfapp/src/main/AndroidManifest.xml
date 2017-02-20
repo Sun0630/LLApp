@@ -79,8 +79,7 @@
         <activity android:name="com.umeng.soexample.music.MusicModeActivity"/>
         <activity android:name="com.umeng.soexample.activity.FloatViewActivity"/>
         <activity android:name="com.umeng.soexample.activity.ShareActivity"/>
-        <activity android:name="com.umeng.soexample.activity.SetPatternActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name="com.umeng.soexample.activity.SetPatternActivity"/>
         <activity android:name="com.umeng.soexample.activity.AlbumAty"/>
         <activity android:name="com.umeng.soexample.activity.AlbumItemAty"/>
         <activity android:name="com.umeng.soexample.activity.CameraAty"
@@ -92,6 +91,7 @@
         <activity android:name="com.umeng.soexample.activity.PopWindowActivity"/>
         <activity android:name="com.umeng.soexample.activity.SuggestActivity"/>
         <activity android:name=".activity.EnterActivity"/>
+        <activity android:name=".activity.DanmuActivity"/>
         <!-- 分享 -->
         <activity
             android:name="com.umeng.soexample.custom.ToShare"

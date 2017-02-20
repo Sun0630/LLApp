@@ -11,26 +11,25 @@ import android.util.Log;
 
 import com.android.core.R;
 import com.android.core.StaticValue;
+import com.heaton.liulei.utils.utils.SPUtils;
 
 
 public class ThemeUtils {
 
     private ThemeUtils() {}
 
-    private static final int[] THEME_IDS = new int[] {
-            R.style.Base_Theme_DesignDemo,
-            R.style.NightTheme
-    };
+//    private static final int[] THEME_IDS = new int[] {
+//            R.style.Base_Theme_DesignDemo,
+//            R.style.NightTheme
+//    };
 
-    public static int getThemeId(Context context) {
-//        int index = Integer.valueOf(SPUtils.get(context, StaticValue.KEY_THEME,
-//                StaticValue.DEFAULT_THEME));
-        int index = StaticValue.THEME_MODE;
-        Log.e("ThemeUtils",index+"");
-        return THEME_IDS[index];
+    public static int getThemeColor(Context context) {
+        int color = SPUtils.get(context, StaticValue.THEME_COLOR,
+                StaticValue.color);
+        return color;
     }
 
     public static void applyTheme(Activity activity) {
-        activity.setTheme(getThemeId(activity));
+        activity.setTheme(getThemeColor(activity));
     }
 }
