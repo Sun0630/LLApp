@@ -22,7 +22,7 @@ import android.view.Window;
 import com.android.core.Help;
 import com.android.core.StaticValue;
 import com.umeng.soexample.R;
-import com.umeng.soexample.custom.MDTintUtil;
+import com.android.core.control.MDTintUtil;
 import com.umeng.soexample.fragment.LoginFragment;
 
 import java.lang.reflect.Method;

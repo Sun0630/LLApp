@@ -1,200 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.umeng.soexample.custom.design.SlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:sliding_mode="top"
-    app:background_view="@layout/view_bg"
-    app:top_max="200dp">
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:background="@color/abc_white"
+    <include
+        android:id="@+id/person_toolbar"
+        layout="@layout/toolbar_layout" />
+
+    <android.support.v7.widget.RecyclerView
+
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="跳转到登录界面" />
+    <!--<RelativeLayout-->
+    <!--android:background="@color/abc_white"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:visibility="gone">-->
 
-        <Button
-            android:id="@+id/swip_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/button"
-            android:text="跳转到右滑关闭界面" />
+    <!--<Button-->
+    <!--android:id="@+id/button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="跳转到登录界面" />-->
 
-        <Button
-            android:id="@+id/person"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/swip_back"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/button"
-            android:text="跳转到个人中心界面" />
+    <!--<Button-->
+    <!--android:id="@+id/swip_back"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/button"-->
+    <!--android:text="跳转到右滑关闭界面" />-->
 
-        <Button
-            android:id="@+id/chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/button"
-            android:text="跳转到聊天界面" />
+    <!--<Button-->
+    <!--android:id="@+id/person"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/swip_back"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/button"-->
+    <!--android:text="跳转到个人中心界面" />-->
 
-        <Button
-            android:id="@+id/video"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/chat"
-            android:text="跳转到播放器界面" />
+    <!--<Button-->
+    <!--android:id="@+id/chat"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/button"-->
+    <!--android:text="跳转到聊天界面" />-->
 
-        <Button
-            android:id="@+id/theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/chat"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/video"
-            android:text="切换应用主题颜色" />
+    <!--<Button-->
+    <!--android:id="@+id/video"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/chat"-->
+    <!--android:text="跳转到播放器界面" />-->
 
-        <Button
-            android:id="@+id/video_chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/video"
-            android:text="跳转到视频聊天界面" />
+    <!--<Button-->
+    <!--android:id="@+id/theme"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/chat"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@+id/video"-->
+    <!--android:text="切换应用主题颜色" />-->
 
-        <Button
-            android:id="@+id/blogger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/theme"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/video_chat"
-            android:text="跳转到我的博客" />
+    <!--<Button-->
+    <!--android:id="@+id/video_chat"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/video"-->
+    <!--android:text="跳转到视频聊天界面" />-->
 
-        <Button
-            android:id="@+id/rq_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/video_chat"
-            android:text="跳转到二维码界面" />
+    <!--<Button-->
+    <!--android:id="@+id/blogger"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/theme"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@+id/video_chat"-->
+    <!--android:text="跳转到我的博客" />-->
 
-
-        <Button
-            android:id="@+id/music"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/video_chat"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/rq_view"
-            android:text="跳转到音乐播放器界面" />
-
-        <Button
-            android:id="@+id/look_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rq_view"
-            android:text="跳转到查看大图界面" />
-
-        <Button
-            android:id="@+id/float_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rq_view"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/look_photo"
-            android:text="跳转到悬浮窗界面" />
-
-        <Button
-            android:id="@+id/download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/look_photo"
-            android:text="下载apk并安装" />
-
-        <Button
-            android:id="@+id/share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/look_photo"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/download"
-            android:text="跳转到分享界面" />\
-
-        <Button
-            android:id="@+id/shark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/download"
-            android:text="摇一摇" />
-
-        <Button
-            android:id="@+id/camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/download"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/shark"
-            android:text="自定义相机拍摄视频或图片" />
-
-        <Button
-            android:id="@+id/shot_screen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/camera"
-            android:text="截图" />
-
-        <Button
-            android:id="@+id/sql"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/camera"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/shot_screen"
-            android:text="模糊查询" />
-
-        <Button
-            android:id="@+id/notify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/camera"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/sql"
-            android:text="通知栏界面" />
-
-        <Button
-            android:id="@+id/popwindow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/shot_screen"
-            android:text="弹出窗界面" />
-
-        <Button
-            android:id="@+id/danmu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/popwindow"
-            android:layout_below="@id/shot_screen"
-            android:text="弹幕界面" />
+    <!--<Button-->
+    <!--android:id="@+id/rq_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/video_chat"-->
+    <!--android:text="跳转到二维码界面" />-->
 
 
-        <TextView
-            android:id="@+id/jni"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/popwindow"
-            android:typeface="serif" />
+    <!--<Button-->
+    <!--android:id="@+id/music"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/video_chat"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/rq_view"-->
+    <!--android:text="跳转到音乐播放器界面" />-->
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_below="@id/jni"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="国家："/>
+    <!--<Button-->
+    <!--android:id="@+id/look_photo"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/rq_view"-->
+    <!--android:text="跳转到查看大图界面" />-->
 
-    </RelativeLayout>
+    <!--<Button-->
+    <!--android:id="@+id/float_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/rq_view"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/look_photo"-->
+    <!--android:text="跳转到悬浮窗界面" />-->
 
-</com.umeng.soexample.custom.design.SlidingLayout>
+    <!--<Button-->
+    <!--android:id="@+id/download"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/look_photo"-->
+    <!--android:text="下载apk并安装" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/share"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/look_photo"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/download"-->
+    <!--android:text="跳转到分享界面" />\-->
+
+    <!--<Button-->
+    <!--android:id="@+id/shark"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/download"-->
+    <!--android:text="摇一摇" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/camera"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/download"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/shark"-->
+    <!--android:text="自定义相机拍摄视频或图片" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/shot_screen"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/camera"-->
+    <!--android:text="截图" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/sql"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/camera"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/shot_screen"-->
+    <!--android:text="模糊查询" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/notify"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/camera"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/sql"-->
+    <!--android:text="通知栏界面" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/popwindow"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/shot_screen"-->
+    <!--android:text="弹出窗界面" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/danmu"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_toRightOf="@id/popwindow"-->
+    <!--android:layout_below="@id/shot_screen"-->
+    <!--android:text="弹幕界面" />-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/jni"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/popwindow"-->
+    <!--android:typeface="serif" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/address"-->
+    <!--android:layout_below="@id/jni"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="国家："/>-->
+
+    <!--</RelativeLayout>-->
+</LinearLayout>

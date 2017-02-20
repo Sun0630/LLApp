@@ -1,6 +1,8 @@
 package com.umeng.soexample.fragment;
 
 import android.view.View;
+
+import com.android.core.Help;
 import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseFragment;
 import com.android.core.control.XRecyclerViewHelper;

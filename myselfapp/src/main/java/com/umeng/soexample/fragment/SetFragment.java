@@ -9,13 +9,16 @@ import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.core.Help;
 import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.android.core.base.AbsBaseFragment;
+import com.android.core.control.StatusBarUtil;
 import com.android.core.control.ToastUtil;
 import com.android.core.listener.ThemeChangeListener;
 import com.android.core.widget.dialog.DialogManager;
@@ -54,6 +57,8 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
     TextView cache_size;
     @Bind(R.id.text_exit)
     TextDrawable exit;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     ThemeChangeListener listener;
 
@@ -77,10 +82,19 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
 
     @Override
     protected void onInitView() {
+        initToolBar();
         mSubscriptions = new CompositeSubscription();
 //        long size = DataCleanManager.getPhotoCacheSize(getContext());
         cache_size.setText(getCachedSize());
         exit.setTextColor(StaticValue.color);
+    }
+
+    //自己新添加的
+    private void initToolBar() {
+        toolbar.setBackgroundColor(StaticValue.color);
+        if (toolbar != null) {
+            ((TextView) toolbar.findViewById(com.android.core.R.id.toolbar_title)).setText("设置");
+        }
     }
 
     /**
@@ -92,13 +106,7 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
 
     @OnClick(R.id.rl_language)
     void language() {
-        showDialog();
-    }
-
-    public void showDialog() {
-//        showErrorMessage("错误啦","这是个错误的对话框");
-//        showMessage("当前已是最新版本！");
-        showProgress("www",23);
+        Snackbar.make(cache_size,"该功能尚未开发",Snackbar.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.rl_app_update)
@@ -232,27 +240,27 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
         dialog.show();
     }
 
-    @OnClick(R.id.switch_theme)
-    void switch_theme() {
-        AlertDialog dialog = new AlertDialog.Builder(getActivity()).setTitle("选择主题")
-                .setSingleChoiceItems(new String[]{"标准模式", "夜间模式"}, 0, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        //暂时注释
-                        Snackbar.make(cache_size,"该功能尚未开发",Snackbar.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("取消", null).create();
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(StaticValue.color);
-            }
-        });
-
-        dialog.show();
-    }
+//    @OnClick(R.id.switch_theme)
+//    void switch_theme() {
+//        AlertDialog dialog = new AlertDialog.Builder(getActivity()).setTitle("选择主题")
+//                .setSingleChoiceItems(new String[]{"标准模式", "夜间模式"}, 0, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                        //暂时注释
+//                        Snackbar.make(cache_size,"该功能尚未开发",Snackbar.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .setNegativeButton("取消", null).create();
+//        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//            @Override
+//            public void onShow(DialogInterface dialogInterface) {
+//                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(StaticValue.color);
+//            }
+//        });
+//
+//        dialog.show();
+//    }
 
     @OnClick(R.id.clear_cache)
     void clear() {

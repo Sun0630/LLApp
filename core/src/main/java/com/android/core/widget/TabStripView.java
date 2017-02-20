@@ -2,6 +2,7 @@ package com.android.core.widget;
 
 //import android.app.Fragment;
 //import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
@@ -20,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.core.R;
+import com.android.core.StaticValue;
+import com.android.core.control.MDTintUtil;
 import com.android.core.control.ScreenUtil;
 
 import java.util.ArrayList;
@@ -237,9 +240,11 @@ public class TabStripView extends LinearLayout implements View.OnClickListener {
         for (ViewHolder holder : mViewHolderList) {
             if (TextUtils.equals(mCurrentTag, holder.tag)) {
                 holder.tabIcon.setImageResource(holder.pageParam.iconResId);
+                MDTintUtil.setTint(holder.tabIcon, R.color.abc_tab_text_normal);
                 holder.tabTitle.setTextColor(mNormalTextColor);
             } else if (TextUtils.equals(tag, holder.tag)) {
-                holder.tabIcon.setImageResource(holder.pageParam.iconSelectedResId);
+//                holder.tabIcon.setImageResource(holder.pageParam.iconSelectedResId);
+                MDTintUtil.setTint(holder.tabIcon, StaticValue.color);
                 holder.tabTitle.setTextColor(mSelectedTextColor);
             }
         }

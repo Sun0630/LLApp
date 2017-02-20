@@ -1,14 +1,16 @@
-<com.umeng.soexample.custom.design.SlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:background_view="@layout/view_bg"
-    app:sliding_mode="top"
-    app:sliding_pointer_mode="more"
-    app:top_max="200dp">
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/set_toolbar"
+        layout="@layout/toolbar_layout" />
 
     <LinearLayout
+        android:layout_below="@id/set_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/abc_white"
@@ -147,27 +149,22 @@
             android:layout_height="0.1dp"
             android:background="@color/line" />
 
-        <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/switch_theme"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="切换主题"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:leftDrawable="@mipmap/help"
-            app:rightDrawable="@mipmap/coming"
-            app:rightDrawableHeight="12dp"
-            app:rightDrawableWidth="8dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/line" />
+        <!--<com.umeng.soexample.custom.TextDrawable-->
+            <!--android:id="@+id/switch_theme"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:clickable="true"-->
+            <!--android:drawablePadding="10dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:text="切换主题"-->
+            <!--android:textColor="@color/text"-->
+            <!--android:textSize="16sp"-->
+            <!--app:leftDrawable="@mipmap/help"-->
+            <!--app:rightDrawable="@mipmap/coming"-->
+            <!--app:rightDrawableHeight="12dp"-->
+            <!--app:rightDrawableWidth="8dp" />-->
 
         <!--<com.example.myselfapp.custom.TextDrawable-->
         <!--android:id="@+id/clear_cache"-->
@@ -224,7 +221,7 @@
         android:id="@+id/text_exit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:clickable="true"
         android:drawablePadding="10dp"
         android:gravity="center"
@@ -234,4 +231,4 @@
         app:rightDrawableHeight="12dp"
         app:rightDrawableWidth="8dp" />
 
-</com.umeng.soexample.custom.design.SlidingLayout>
+</RelativeLayout>

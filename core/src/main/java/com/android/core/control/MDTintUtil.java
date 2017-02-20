@@ -1,4 +1,4 @@
-package com.umeng.soexample.custom;
+package com.android.core.control;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
@@ -68,8 +69,8 @@ public class MDTintUtil {
         switchCompat.setThumbTintList(new ColorStateList(states, colors));
     }
 
-    public static void setTint(@NonNull View view, @ColorInt int color) {
-        int[] colors = new int[]{color, Color.rgb(236, 236, 236), Color.rgb(236, 236, 236), Color.rgb(236, 236, 236), Color.rgb(236, 236, 236), Color.rgb(236, 236, 236)};
+    public static void setTint(@NonNull ImageView view, @ColorInt int color) {
+        int[] colors = new int[]{color, color, color, color, color, color};
         int[][] states = new int[6][];
         states[0] = new int[]{android.R.attr.state_checked, android.R.attr.state_enabled};
         states[1] = new int[]{android.R.attr.state_enabled, android.R.attr.state_focused};
@@ -77,6 +78,6 @@ public class MDTintUtil {
         states[3] = new int[]{android.R.attr.state_focused};
         states[4] = new int[]{android.R.attr.state_window_focused};
         states[5] = new int[]{};
-        view.setBackgroundTintList(new ColorStateList(states, colors));
+        view.setImageTintList(new ColorStateList(states, colors));
     }
 }

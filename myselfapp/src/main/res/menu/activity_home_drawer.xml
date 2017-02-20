@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checked="true"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_local"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Local Music" />
+        <item
+            android:id="@+id/nav_playlists"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Playlists" />
+        <item
+            android:id="@+id/nav_recent"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Recently Played" />
+        <item
+            android:id="@+id/nav_fav"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Favourites" />
+        <item
+            android:id="@+id/nav_folder"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Folders" />
+        <item
+            android:id="@+id/nav_view"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Saved DNA" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Settings" />
+    </group>
+
+</menu>

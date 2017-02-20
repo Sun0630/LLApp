@@ -7,9 +7,9 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/main_toolbar"
-        layout="@layout/toolbar_layout" />
+    <!--<include-->
+        <!--android:id="@+id/main_toolbar"-->
+        <!--layout="@layout/toolbar_layout" />-->
 
     <RelativeLayout
         android:layout_width="match_parent"
