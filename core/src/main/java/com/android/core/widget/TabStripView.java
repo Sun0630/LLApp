@@ -3,6 +3,7 @@ package com.android.core.widget;
 //import android.app.Fragment;
 //import android.app.FragmentTransaction;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
@@ -240,11 +241,15 @@ public class TabStripView extends LinearLayout implements View.OnClickListener {
         for (ViewHolder holder : mViewHolderList) {
             if (TextUtils.equals(mCurrentTag, holder.tag)) {
                 holder.tabIcon.setImageResource(holder.pageParam.iconResId);
-                MDTintUtil.setTint(holder.tabIcon, R.color.abc_tab_text_normal);
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    MDTintUtil.setTint(holder.tabIcon, R.color.abc_tab_text_normal);
+                }
                 holder.tabTitle.setTextColor(mNormalTextColor);
             } else if (TextUtils.equals(tag, holder.tag)) {
 //                holder.tabIcon.setImageResource(holder.pageParam.iconSelectedResId);
-                MDTintUtil.setTint(holder.tabIcon, StaticValue.color);
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    MDTintUtil.setTint(holder.tabIcon, StaticValue.color);
+                }
                 holder.tabTitle.setTextColor(mSelectedTextColor);
             }
         }

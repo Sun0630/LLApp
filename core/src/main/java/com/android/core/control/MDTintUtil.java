@@ -1,9 +1,11 @@
 package com.android.core.control;
 
+import android.annotation.TargetApi;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -69,6 +71,7 @@ public class MDTintUtil {
         switchCompat.setThumbTintList(new ColorStateList(states, colors));
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void setTint(@NonNull ImageView view, @ColorInt int color) {
         int[] colors = new int[]{color, color, color, color, color, color};
         int[][] states = new int[6][];
