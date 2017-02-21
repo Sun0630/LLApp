@@ -12,8 +12,8 @@
         android:id="@+id/nav_header"
         android:layout_above="@+id/user_name"
         android:layout_margin="10dp"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:scaleType="fitXY"
         android:src="@mipmap/b_4"/>
 
@@ -23,6 +23,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="10dp"
         android:text="三生石0911"
+        android:textColor="@color/abc_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <!--<ImageView-->

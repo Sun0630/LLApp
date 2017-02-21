@@ -2,4 +2,7 @@
     <string name="app_name">Core</string>
     <string name="btn_cancel">取消</string>
     <string name="btn_sure">确定</string>
+
+    <string name="rv_with_footer_loading">加载中…</string>
+    <string name="rv_with_footer_empty">没有数据啦</string>
 </resources>

@@ -3,6 +3,10 @@ package com.umeng.soexample.fragment;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,155 +14,163 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 
 import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseFragment;
-import com.android.core.control.Glides;
-import com.android.core.control.StatusBarUtil;
-import com.umeng.soexample.MainActivity;
+import com.android.core.control.MDTintUtil;
+import com.bumptech.glide.Glide;
+import com.heaton.liulei.utils.utils.DensityUtils;
 import com.umeng.soexample.R;
-import com.umeng.soexample.activity.QrViewActivity;
-import com.umeng.soexample.activity.SetActivity;
-import com.umeng.soexample.custom.ToShare;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * @author: liulei
  * @date: 2016-10-27 09:46
  */
-public class HomeFragment extends AbsBaseFragment implements NavigationView.OnNavigationItemSelectedListener {
-    @Bind(R.id.tabs)
-    TabLayout  tabLayout;
-    @Bind(R.id.viewPager)
-    ViewPager viewPager;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.drawer_layout)
-    DrawerLayout drawer;
-    @Bind(R.id.nav_view)
-    NavigationView navigationView;
-    RelativeLayout navBgView;
-    ImageView headImg;
-    private ArrayList<String> datas = new ArrayList<>();
+public class HomeFragment extends AbsBaseFragment{
+    @Bind(R.id.fab_home_random)
+    FloatingActionButton mFloatingActionButton;
+    @Bind(R.id.appbar)
+    AppBarLayout mAppBarLayout;
+    @Bind(R.id.iv_home_banner)
+    ImageView mIvHomeBanner;
+    @Bind(R.id.tl_home_category)
+    TabLayout mTlHomeCategory;
+    @Bind(R.id.vp_home_category)
+    ViewPager mVpCategory;
+    @Bind(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout mCollapsingToolbar;
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_home;
+        return R.layout.fragment_home;
     }
 
     @Override
     protected void onInitView() {
 //        setHasOptionsMenu(true);
-        initToolBar();
-        initDrawer();
-        tabLayout.setTabTextColors(R.color.black,StaticValue.color);
-        tabLayout.setSelectedTabIndicatorColor(StaticValue.color);
-        for (int i=0;i<5;i++){
-            datas.add("精选"+i);
-        }
-        if (viewPager != null) {
-            setupViewPager(viewPager);
-        }
-        if(datas.size() >= 5) {  // Tab 数量大于5，就允许水平滑动
-            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        }else {
-            tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        }
-        tabLayout.setupWithViewPager(viewPager);
+        initView();
+        MDTintUtil.setTint(mFloatingActionButton, StaticValue.color);
+        mCollapsingToolbar.setContentScrimColor(StaticValue.color);
+        mAppBarLayout.setBackgroundColor(StaticValue.color);
+
+//        mTlHomeCategory.setTabTextColors(R.color.abc_white,StaticValue.color);
+//        mTlHomeCategory.setSelectedTabIndicatorColor(StaticValue.color);
+
+        Glide.with(getActivity())
+                .load(R.mipmap.b_1)
+                .into(mIvHomeBanner);
+
     }
 
-    //自己新添加的
-    private void initToolBar() {
-        toolbar.setBackgroundColor(StaticValue.color);
-        if (toolbar != null) {
-            ((TextView) toolbar.findViewById(com.android.core.R.id.toolbar_title)).setText("首页");
+    private void initView() {
+        setFabDynamicState();
+
+//        String[] titles = {"App", "Android", "iOS", "前端", "瞎推荐", "拓展资源"};
+        ArrayList<String>titles = new ArrayList<>();
+        titles.add("App");
+        titles.add("Android");
+        titles.add("iOS");
+        titles.add("前端");
+        titles.add("瞎推荐");
+        titles.add("拓展资源");
+        Adapter infoPagerAdapter = new Adapter(getFragmentManager(), titles);
+
+//        // App
+//        CategoryFragment appFragment = CategoryFragment.newInstance("App");
+//        // Android
+//        CategoryFragment androidFragment = CategoryFragment.newInstance("Android");
+//        // iOS
+//        CategoryFragment iOSFragment = CategoryFragment.newInstance("iOS");
+//        // 前端
+//        CategoryFragment frontFragment = CategoryFragment.newInstance("前端");
+//        // 瞎推荐
+//        CategoryFragment referenceFragment = CategoryFragment.newInstance("瞎推荐");
+//        // 拓展资源s
+//        CategoryFragment resFragment = CategoryFragment.newInstance("拓展资源");
+
+        MyArticleTypeFragment fragment = new MyArticleTypeFragment();
+//        infoPagerAdapter.addFragment(fragment);
+//        infoPagerAdapter.addFragment(fragment);
+//        infoPagerAdapter.addFragment(fragment);
+//        infoPagerAdapter.addFragment(fragment);
+//        infoPagerAdapter.addFragment(fragment);
+//        infoPagerAdapter.addFragment(fragment);
+        for (int i =0;i<titles.size();i++) {
+//            Bundle bundle = new Bundle();
+//            bundle.putString("ID", model.getID());
+            fragment = new MyArticleTypeFragment();
+//            fragment.setArguments(bundle);
+            infoPagerAdapter.addFragment(fragment);
         }
+
+        mVpCategory.setAdapter(infoPagerAdapter);
+        mTlHomeCategory.setupWithViewPager(mVpCategory);
+        mTlHomeCategory.setTabGravity(TabLayout.GRAVITY_FILL);
+        mVpCategory.setCurrentItem(1);
     }
 
-    private void initDrawer() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                getActivity(), drawer, toolbar, R.string.open_nav_drawer, R.string.close_nav_drawer);
-        drawer.setDrawerListener(toggle);
-        drawer.setFitsSystemWindows(true);
-        drawer.setClipToPadding(false);
-        toggle.syncState();
+    private CollapsingToolbarLayoutState state; // CollapsingToolbarLayout 折叠状态
 
-        if (navigationView != null) {
-//            StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this,drawer,getColor(R.color.black));
-            navigationView.setNavigationItemSelectedListener(this);
-            navigationView.setItemIconTintList(ColorStateList.valueOf(StaticValue.color));
-            navigationView.setCheckedItem(R.id.nav_home);
-            navigationView.setItemTextColor(ColorStateList.valueOf(StaticValue.color));
-        }
+    private enum CollapsingToolbarLayoutState {
+        EXPANDED, // 完全展开
+        COLLAPSED, // 折叠
+        INTERNEDIATE // 中间状态
+    }
 
-        View header = navigationView.getHeaderView(0);
-        navBgView = (RelativeLayout) header.findViewById(R.id.nav_head_bg);
-        headImg = (ImageView) header.findViewById(R.id.nav_header);
-        navBgView.setBackgroundResource(R.mipmap.b_1);
-        Glides.getInstance().loadCircle(getActivity(),R.mipmap.ai1,headImg);
+    /**
+     * 根据 CollapsingToolbarLayout 的折叠状态，设置 FloatingActionButton 的隐藏和显示
+     */
+    private void setFabDynamicState() {
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
+                if (verticalOffset == 0) {
+                    if (state != CollapsingToolbarLayoutState.EXPANDED) {
+                        state = CollapsingToolbarLayoutState.EXPANDED; // 修改状态标记为展开
+                    }
+                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                    if (state != CollapsingToolbarLayoutState.COLLAPSED) {
+                        mFloatingActionButton.hide();
+                        state = CollapsingToolbarLayoutState.COLLAPSED; // 修改状态标记为折叠
+                        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
+                        layoutParams.height = DensityUtils.dp2px(240);
+                        mAppBarLayout.setLayoutParams(layoutParams);
+//                        isBannerBig = false;
+                    }
+                } else {
+                    if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
+                        if (state == CollapsingToolbarLayoutState.COLLAPSED) {
+                            mFloatingActionButton.show();
+                        }
+                        state = CollapsingToolbarLayoutState.INTERNEDIATE; // 修改状态标记为中间
+                    }
+                }
+            }
+        });
+    }
+
+    @OnClick(R.id.ll_home_search)
+    public void search(View view) {
+//        startActivity();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getFragmentManager(), datas);
-        Fragment fragment;
-        for (int i =0;i<datas.size();i++) {
-//            Bundle bundle = new Bundle();
-//            bundle.putString("ID", model.getID());
-            if(i==0){
-                fragment = new TxtFragment();
-            }else {
-                fragment = new MyArticleTypeFragment();
-            }
-//            fragment.setArguments(bundle);
-            adapter.addFragment(fragment);
-        }
-        viewPager.setAdapter(adapter);
-    }
-
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-
-                break;
-            case R.id.nav_share:
-                startActivity(ToShare.class);
-                break;
-            case R.id.nav_mode:
-
-                break;
-            case R.id.nav_scan:
-                startActivity(QrViewActivity.class);
-                break;
-            case R.id.nav_set:
-                startActivity(SetActivity.class);
-                break;
-        }
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     static class Adapter extends FragmentPagerAdapter {
@@ -196,6 +208,5 @@ public class HomeFragment extends AbsBaseFragment implements NavigationView.OnNa
         }
 
     }
-
 
 }

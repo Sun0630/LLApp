@@ -100,5 +100,6 @@
     <string name="menu_open_with">用浏览器打开</string>
     <string name="open_nav_drawer">打开侧滑菜单</string>
     <string name="close_nav_drawer">关闭侧滑菜单</string>
+    <string name="home_search">搜索有福利哦</string>
     <!--友盟-->
 </resources>

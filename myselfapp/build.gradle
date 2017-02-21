@@ -102,7 +102,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
-//    compile 'com.android.support:design:25.1.0'
+    //    compile 'com.android.support:design:25.1.0'
     testCompile 'junit:junit:4.12'
     compile project(':core')
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.2'
@@ -120,6 +120,7 @@ dependencies {
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.2'
     compile 'io.reactivex:rxandroid:0.24.0'
     compile project(':danmukulight')
+    compile project(':http')
 }
 
 tasks.withType(JavaCompile){

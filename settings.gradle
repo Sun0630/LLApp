@@ -1,2 +1,2 @@
-include ':myselfapp', ':core', ':utils', ':cameralibrary', ':danmukulight'
+include ':myselfapp', ':core', ':utils', ':cameralibrary', ':danmukulight', ':http'
 //':library',

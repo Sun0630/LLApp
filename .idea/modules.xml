@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/cameralibrary/cameralibrary.iml" filepath="$PROJECT_DIR$/cameralibrary/cameralibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/danmukulight/danmukulight.iml" filepath="$PROJECT_DIR$/danmukulight/danmukulight.iml" />
+      <module fileurl="file://$PROJECT_DIR$/http/http.iml" filepath="$PROJECT_DIR$/http/http.iml" />
       <module fileurl="file://$PROJECT_DIR$/myselfapp/myselfapp.iml" filepath="$PROJECT_DIR$/myselfapp/myselfapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
     </modules>

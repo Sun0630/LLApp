@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.bumptech.glide.Glide;
+import com.heaton.liulei.utils.custom.RoundWhiteImageView;
 import com.umeng.soexample.R;
 import com.umeng.soexample.custom.AppSelectPicsDialog;
 import com.heaton.liulei.utils.custom.RoundImageView;
@@ -46,7 +47,7 @@ public class PersonActivity extends AbsBaseActivity implements DampView.ScrollVi
     @Bind(R.id.person_title)
     TextView title;
     @Bind(R.id.aviter)
-    RoundImageView aviter;
+    RoundWhiteImageView aviter;
     @Bind(R.id.top_img)
     ImageView topImg;
     @Bind(R.id.scrollview)

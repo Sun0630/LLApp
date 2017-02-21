@@ -4,11 +4,21 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.core.StaticValue;
@@ -16,6 +26,7 @@ import com.android.core.adapter.RecyclerAdapter;
 import com.android.core.adapter.RecyclerViewHolder;
 import com.android.core.base.AbsBaseActivity;
 import com.android.core.base.AbsBaseFragment;
+import com.android.core.control.Glides;
 import com.android.core.widget.SpacesItemDecoration;
 import com.umeng.soexample.App;
 import com.umeng.soexample.Constants;
@@ -35,12 +46,14 @@ import com.umeng.soexample.activity.PopWindowActivity;
 import com.umeng.soexample.activity.QrViewActivity;
 import com.umeng.soexample.activity.SQLActivity;
 import com.umeng.soexample.activity.ScreenCopyActivity;
+import com.umeng.soexample.activity.SetActivity;
 import com.umeng.soexample.activity.ShareActivity;
 import com.umeng.soexample.activity.SwipBackActivity;
 import com.umeng.soexample.activity.VideoChatActivity;
 import com.umeng.soexample.JniUtils;
 import com.umeng.soexample.adapter.PopWindowAdapter;
 import com.umeng.soexample.adapter.RecycleViewDivider;
+import com.umeng.soexample.custom.ToShare;
 import com.umeng.soexample.listener.SensonListener;
 import com.umeng.soexample.music.MusicModeActivity;
 import com.heaton.liulei.utils.utils.ScreenUtils;
@@ -62,7 +75,7 @@ import io.socket.emitter.Emitter;
  * 作者：liulei
  * 公司：希顿科技
  */
-public class PersonFragment extends AbsBaseFragment {
+public class PersonFragment extends AbsBaseFragment implements NavigationView.OnNavigationItemSelectedListener{
 
 //    @Bind(R.id.jni)
 //    TextView jni;
@@ -72,6 +85,13 @@ public class PersonFragment extends AbsBaseFragment {
     RecyclerView mRecyclerView;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
+    RelativeLayout navBgView;
+    ImageView headImg;
 
     private Socket mSocket;
     private SensonListener mSensor;
@@ -95,12 +115,13 @@ public class PersonFragment extends AbsBaseFragment {
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_person;
+        return R.layout.fragment_main;
     }
 
     @Override
     protected void onInitView() {
         initToolBar();
+        initDrawer();
         App app = (App)getActivity().getApplication();
         mSocket = app.getSocket();
 
@@ -127,7 +148,9 @@ public class PersonFragment extends AbsBaseFragment {
         };
         mRecyclerView.setAdapter(adapter);
         //设置自定义的分割线
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(getActivity(),LinearLayoutManager.VERTICAL,10, getResources().getColor(R.color.text)));
+//        mRecyclerView.addItemDecoration(new RecycleViewDivider(getActivity(),LinearLayoutManager.VERTICAL,10, getResources().getColor(R.color.text)));
+//        mRecyclerView.addItemDecoration(new SpacesItemDecoration(2));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
 
         adapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
@@ -182,6 +205,38 @@ public class PersonFragment extends AbsBaseFragment {
             ((TextView) toolbar.findViewById(com.android.core.R.id.toolbar_title)).setText("功能");
         }
     }
+
+    private void initDrawer() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                getActivity(), drawer, toolbar, R.string.open_nav_drawer, R.string.close_nav_drawer);
+        drawer.setDrawerListener(toggle);
+        drawer.setFitsSystemWindows(true);
+        drawer.setClipToPadding(false);
+        toggle.syncState();
+
+        if (navigationView != null) {
+//            StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this,drawer,getColor(R.color.black));
+            navigationView.setNavigationItemSelectedListener(this);
+            navigationView.setItemIconTintList(ColorStateList.valueOf(StaticValue.color));
+            navigationView.setCheckedItem(R.id.nav_home);
+            navigationView.setItemTextColor(ColorStateList.valueOf(StaticValue.color));
+        }
+
+        View header = navigationView.getHeaderView(0);
+        navBgView = (RelativeLayout) header.findViewById(R.id.nav_head_bg);
+        headImg = (ImageView) header.findViewById(R.id.nav_header);
+        navBgView.setBackgroundResource(R.mipmap.b_1);
+        Glides.getInstance().loadCircle(getActivity(),R.mipmap.ai1,headImg);
+        headImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(PersonActivity.class);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+    }
+
 
     private void initActs() {
         mTargetActs = new ArrayList<>();
@@ -276,6 +331,29 @@ public class PersonFragment extends AbsBaseFragment {
             }
         }
     };
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+
+                break;
+            case R.id.nav_share:
+                startActivity(ToShare.class);
+                break;
+            case R.id.nav_mode:
+
+                break;
+            case R.id.nav_scan:
+                startActivity(QrViewActivity.class);
+                break;
+            case R.id.nav_set:
+                startActivity(SetActivity.class);
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     @Override
     public void onDestroy() {
