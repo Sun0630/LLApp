@@ -9,27 +9,20 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.core.Help;
 import com.android.core.R;
 import com.android.core.StaticValue;
-import com.android.core.control.StatusBarUtil;
 import com.android.core.control.ToastUtil;
 import com.android.core.control.logcat.Logcat;
-import com.android.core.listener.ThemeChangeListener;
-import com.android.core.model.LogicProxy;
-import com.android.core.utils.ThemeUtils;
+import com.android.core.control.statusbar.StatusBarUtil;
 import com.android.core.widget.dialog.DialogManager;
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -53,7 +46,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置主题颜色
-        ThemeUtils.applyTheme(this);
+//        ThemeUtils.applyTheme(this);
         super.onCreate(savedInstanceState);
         Logcat.d("Activity Location (%s.java:0)", getClass().getSimpleName());
         mContext = this;
@@ -80,8 +73,10 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
         super.setContentView(layoutResID);
         if(isTransparent){
             Help.initSystemBar(this, R.color.transparent);//这个对所有的都适合
+//            StatusBarUtil.setColor(this,getResources().getColor(R.color.transparent),0);
         }else {
             Help.initSystemBar(this, StaticValue.color);
+//            StatusBarUtil.setColor(this,StaticValue.color,0);
         }
         if(isShowTool){
             initToolBar();

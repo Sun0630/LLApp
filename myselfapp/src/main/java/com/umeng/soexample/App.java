@@ -51,6 +51,10 @@ public class App extends MainApp {
         //初始化LiuleiUtils
         LiuleiUtils.init(this);
         LitePalApplication.initialize(this);//litepal的配置
+        //崩溃日志
+        //注册crashHandler
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(this);
         //Android crash 上传服务器回掉
         HttpReportCallback report = new HttpReportCallback() {
             @Override

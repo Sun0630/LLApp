@@ -45,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
             if (isFirstRun) {
                 SPUtils.put(getApplication(), Constants.IS_FIRST_RUN, false);
                 startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
             } else {
                 Intent intent;
                 //是否打开图案密码验证

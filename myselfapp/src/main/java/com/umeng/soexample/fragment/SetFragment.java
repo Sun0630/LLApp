@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Build;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
@@ -14,20 +16,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.core.Help;
 import com.android.core.StaticValue;
-import com.android.core.base.AbsBaseActivity;
 import com.android.core.base.AbsBaseFragment;
-import com.android.core.control.StatusBarUtil;
-import com.android.core.control.ToastUtil;
 import com.android.core.listener.ThemeChangeListener;
-import com.android.core.widget.dialog.DialogManager;
 import com.bumptech.glide.Glide;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.heaton.liulei.utils.utils.SPUtils;
+import com.heaton.liulei.utils.utils.ScreenUtils;
 import com.umeng.soexample.App;
 import com.umeng.soexample.Constants;
 import com.umeng.soexample.R;
@@ -38,7 +36,6 @@ import com.umeng.soexample.utils.GlideCacheUtil;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -57,6 +54,8 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
     TextView cache_size;
     @Bind(R.id.text_exit)
     TextDrawable exit;
+    @Bind(R.id.appbar_setting)
+    AppBarLayout mAppbarSetting;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
@@ -91,6 +90,13 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
 
     //自己新添加的
     private void initToolBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mAppbarSetting.setPadding(
+                    mAppbarSetting.getPaddingLeft(),
+                    mAppbarSetting.getPaddingTop() + ScreenUtils.getStatusBarHeight(getActivity()),
+                    mAppbarSetting.getPaddingRight(),
+                    mAppbarSetting.getPaddingBottom());
+        }
         toolbar.setBackgroundColor(StaticValue.color);
         if (toolbar != null) {
             ((TextView) toolbar.findViewById(com.android.core.R.id.toolbar_title)).setText("设置");

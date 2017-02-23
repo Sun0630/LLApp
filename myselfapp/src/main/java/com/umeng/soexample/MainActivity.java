@@ -1,28 +1,15 @@
 package com.umeng.soexample;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.android.core.Help;
 import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
-import com.android.core.control.Glides;
-import com.android.core.control.StatusBarUtil;
 import com.android.core.control.ToastUtil;
+import com.android.core.control.statusbar.StatusBarUtil;
 import com.android.core.listener.ThemeChangeListener;
 import com.android.core.widget.TabStripView;
-import com.umeng.soexample.activity.QrViewActivity;
-import com.umeng.soexample.activity.SetActivity;
-import com.umeng.soexample.custom.ToShare;
 import com.umeng.soexample.fragment.DiscoveryFragment;
 import com.umeng.soexample.fragment.HomeFragment;
 import com.umeng.soexample.fragment.PersonFragment;
@@ -61,9 +48,9 @@ public class MainActivity extends AbsBaseActivity implements ThemeChangeListener
         navigateTabBar.addTab(DiscoveryFragment.class, new TabStripView.TabParam(R.drawable.ic_tab_bar_find, R.drawable.ic_tab_bar_find_selected, R.string.abc_tab_text_find));
         navigateTabBar.addTab(SetFragment.class, new TabStripView.TabParam(R.drawable.ic_tab_bar_person, R.drawable.ic_tab_bar_person_selected, R.string.abc_tab_text_set));
         setTitle("首页");
-        navigateTabBar.setTabSelectListener(new TabStripView.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabStripView.ViewHolder holder) {
+//        navigateTabBar.setTabSelectListener(new TabStripView.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabStripView.ViewHolder holder) {
 //                if (holder.tabIndex == 0) {
 //                    setTitle("首页");
 //                } else if (holder.tabIndex == 1) {
@@ -73,8 +60,8 @@ public class MainActivity extends AbsBaseActivity implements ThemeChangeListener
 //                } else {
 //                    setTitle("设置");
 //                }
-            }
-        });
+//            }
+//        });
     }
 
     @Override

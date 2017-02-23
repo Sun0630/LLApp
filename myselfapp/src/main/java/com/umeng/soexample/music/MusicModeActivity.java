@@ -100,8 +100,8 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
     protected void onInitView() {
         bg.setBackgroundResource(getRes());
         setTitle(R.string.music_song);
-        Help.initSystemBar(this, R.color.transparent);//这个对所有的都适合
-        toolbar.setBackgroundColor(getColor(R.color.transparent));
+//        Help.initSystemBar(this, R.color.transparent);//这个对所有的都适合
+        toolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);//必须放在setSupportActionBar后才有用，否则没有，设置返回图标
 
         mApp = App.getInstance();

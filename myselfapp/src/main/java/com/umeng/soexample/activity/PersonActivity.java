@@ -21,6 +21,7 @@ import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.bumptech.glide.Glide;
 import com.heaton.liulei.utils.custom.RoundWhiteImageView;
+import com.heaton.liulei.utils.utils.ScreenUtils;
 import com.umeng.soexample.R;
 import com.umeng.soexample.custom.AppSelectPicsDialog;
 import com.heaton.liulei.utils.custom.RoundImageView;
@@ -75,6 +76,13 @@ public class PersonActivity extends AbsBaseActivity implements DampView.ScrollVi
 
     @Override
     protected void onInitView() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            toolbar.setPadding(
+//                    toolbar.getPaddingLeft(),
+//                    toolbar.getPaddingTop() + ScreenUtils.getStatusBarHeight(this),
+//                    toolbar.getPaddingRight(),
+//                    toolbar.getPaddingBottom());
+//        }
         toolbar.setBackgroundColor(Color.argb(0, 0xfd, 0x91, 0x5b));
         title.setText("个人中心");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);

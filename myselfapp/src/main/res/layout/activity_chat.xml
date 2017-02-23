@@ -3,12 +3,21 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <include layout="@layout/toolbar_layout" />
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom">
+
+        <include
+            android:id="@+id/person_toolbar"
+            layout="@layout/toolbar_layout" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <fragment
         class="com.umeng.soexample.fragment.ChatFragment"

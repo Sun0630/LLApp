@@ -95,6 +95,8 @@
         <activity android:name=".activity.EnterActivity"/>
         <activity android:name=".activity.DanmuActivity"/>
         <activity android:name=".activity.SetActivity"/>
+        <activity android:name=".activity.LeftMenuActivity"/>
+        <activity android:name=".activity.NavHomePageActivity"/>
         <!-- 分享 -->
         <activity
             android:name="com.umeng.soexample.custom.ToShare"

@@ -27,6 +27,8 @@ import butterknife.OnClick;
 
 public class DanmuActivity extends AbsBaseActivity {
 
+//    @Bind(R.id.danmu_bg)
+//    ImageView bg;
     @Bind(R.id.danmu_bg)
     ImageView bg;
 
@@ -50,7 +52,8 @@ public class DanmuActivity extends AbsBaseActivity {
 //        toolbar.setNavigationOnClickListener(v -> finish());
 
         initDanmu();
-        Glide.with(this).load(url).into(bg);
+        bg.setBackgroundResource(R.mipmap.b_1);
+//        Glide.with(this).load(url).into(bg);
     }
 
     private void initDanmu() {

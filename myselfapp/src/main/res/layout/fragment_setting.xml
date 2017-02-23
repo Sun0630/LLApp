@@ -5,12 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom">
+
     <include
         android:id="@+id/set_toolbar"
         layout="@layout/toolbar_layout" />
 
+    </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
-        android:layout_below="@id/set_toolbar"
+        android:layout_below="@id/appbar_setting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/abc_white"

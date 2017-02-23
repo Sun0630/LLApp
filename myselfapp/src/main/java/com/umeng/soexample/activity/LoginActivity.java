@@ -27,12 +27,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.core.Help;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.heaton.liulei.utils.utils.SPUtils;
 import com.umeng.soexample.Constants;
 import com.umeng.soexample.MainActivity;
@@ -50,7 +46,6 @@ import java.util.TimerTask;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * 作者：刘磊 on 2016/10/31 11:31

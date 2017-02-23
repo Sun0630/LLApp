@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.lang.reflect.Field;
 
@@ -82,5 +83,18 @@ public class MDTintUtil {
         states[4] = new int[]{android.R.attr.state_window_focused};
         states[5] = new int[]{};
         view.setImageTintList(new ColorStateList(states, colors));
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setTint(@NonNull ToggleButton view, @ColorInt int color) {
+        int[] colors = new int[]{color, color, color, color, color, color};
+        int[][] states = new int[6][];
+        states[0] = new int[]{android.R.attr.state_checked, android.R.attr.state_enabled};
+        states[1] = new int[]{android.R.attr.state_enabled, android.R.attr.state_focused};
+        states[2] = new int[]{android.R.attr.state_enabled};
+        states[3] = new int[]{android.R.attr.state_focused};
+        states[4] = new int[]{android.R.attr.state_window_focused};
+        states[5] = new int[]{};
+        view.setButtonTintList(new ColorStateList(states, colors));
     }
 }

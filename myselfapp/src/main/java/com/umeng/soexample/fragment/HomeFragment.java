@@ -1,5 +1,6 @@
 package com.umeng.soexample.fragment;
 
+import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,11 +16,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import com.android.core.StaticValue;
@@ -27,6 +30,7 @@ import com.android.core.base.AbsBaseFragment;
 import com.android.core.control.MDTintUtil;
 import com.bumptech.glide.Glide;
 import com.heaton.liulei.utils.utils.DensityUtils;
+import com.heaton.liulei.utils.utils.ToastUtil;
 import com.umeng.soexample.R;
 import java.util.ArrayList;
 import java.util.List;
