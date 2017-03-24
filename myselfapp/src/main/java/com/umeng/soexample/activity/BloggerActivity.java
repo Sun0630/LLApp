@@ -6,6 +6,7 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.heaton.liulei.utils.utils.OtherUtils;
 import com.heaton.liulei.utils.utils.ScreenUtils;
@@ -33,6 +35,9 @@ import butterknife.Bind;
  */
 public class BloggerActivity extends AbsBaseActivity {
 
+    public static final String GANK_URL = "me.bakumon.gank.module.webview.WebViewActivity.gank_url";
+    public static final String GANK_TITLE = "me.bakumon.gank.module.webview.WebViewActivity.gank_title";
+
     public static final String csdn_URL = "http://blog.csdn.net/liulei823581722";
 
     @Bind(R.id.webView)
@@ -44,6 +49,9 @@ public class BloggerActivity extends AbsBaseActivity {
 
     private ProgressDialog dialog;
 
+    private String url = "http://blog.csdn.net/liulei823581722";
+    private String title = "博客";
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_blogger;
@@ -51,15 +59,14 @@ public class BloggerActivity extends AbsBaseActivity {
 
     @Override
     protected void onInitView() {
-//        initPressDialog();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mAppbar.setPadding(
-                    mAppbar.getPaddingLeft(),
-                    mAppbar.getPaddingTop() + ScreenUtils.getStatusBarHeight(this),
-                    mAppbar.getPaddingRight(),
-                    mAppbar.getPaddingBottom());
+        if(getIntent().getStringExtra(GANK_URL) != null){
+            url = getIntent().getStringExtra(GANK_URL);
         }
-        setTitle("博客");
+        if(getIntent().getStringExtra(GANK_TITLE) != null){
+            title = getIntent().getStringExtra(GANK_TITLE);
+        }
+//        initPressDialog();
+        setTitle(title);
         toolbar.setNavigationIcon(R.drawable.ic_webview_finish);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +130,7 @@ public class BloggerActivity extends AbsBaseActivity {
                 mProgressbar.setVisibility(View.GONE);
             }
         });
-        mWebView.loadUrl(csdn_URL);
+        mWebView.loadUrl(url);
 
 //        dialog.cancel();
 //// 设置可以支持缩放
@@ -203,12 +210,12 @@ public class BloggerActivity extends AbsBaseActivity {
                 startActivity(ToShare.class);
                 break;
             case R.id.menu_copy_link:
-                if (OtherUtils.copyText(this,csdn_URL)) {
+                if (OtherUtils.copyText(this,url)) {
                     Snackbar.make(mWebView, "链接复制成功", Snackbar.LENGTH_LONG).show();
                 }
                 break;
             case R.id.menu_open_with:
-                OtherUtils.openWithBrowser(this, csdn_URL);
+                OtherUtils.openWithBrowser(this, url);
                 break;
         }
         return true;

@@ -14,6 +14,8 @@ import com.umeng.soexample.adapter.CustomViewPageAdapter;
 import com.umeng.soexample.adapter.DisCoverRecyclerAdapter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.umeng.soexample.custom.floatView.FloatingActionButton;
+import com.umeng.soexample.task.TaskExecutor;
+import com.umeng.soexample.task.ThreadPoolManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,15 +113,38 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
 
     @Override
     public void onRefresh() {
-        new Thread(() -> {
-            try {
-                Thread.sleep(3000);
-//                Runnable runnable = () -> listView.refreshComplete();
+//        new Thread(() -> {
+//            try {
+//                Thread.sleep(3000);
+////                Runnable runnable = () -> listView.refreshComplete();
+//                getActivity().runOnUiThread(() -> listView.refreshComplete());//使用lamdba表达式
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
+
+//        TaskExecutor.executeTask(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                getActivity().runOnUiThread(() -> listView.refreshComplete());//使用lamdba表达式
+//            }
+//        });
+        ThreadPoolManager.getmInstance().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 getActivity().runOnUiThread(() -> listView.refreshComplete());//使用lamdba表达式
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-        }).start();
+        });
     }
 
     @Override

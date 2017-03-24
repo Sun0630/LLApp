@@ -10,6 +10,7 @@ public class AppConfig {
 
     public static boolean DIALOG_BUTTON_REVERSAL;
     public static boolean CENTER_SINGLE_BUTTON;
+    public final static int PAGE_SIZE_CATEGORY = 10;
     public final static String APP_HOST = "http://media.e-toys.cn/";
 
     public AppConfig() {

@@ -6,5 +6,5 @@ package com.umeng.soexample.api;
  */
 
 public interface ApiConstant {
-    String BASE_URL = "http://www.tngou.net/";
+    String BASE_URL = "http://gank.io/api/";
 }

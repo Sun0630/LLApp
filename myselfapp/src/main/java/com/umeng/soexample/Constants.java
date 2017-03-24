@@ -1,8 +1,8 @@
 package com.umeng.soexample;
 
 public class Constants {
-    public static final String CHAT_SERVER_URL = "http://chat.socket.io";
-//    public final static String WEB_RTC_URL = "地址屏蔽";// 视频服务器
+    public static final String CHAT_SERVER_URL = "https://socketio-chat.now.sh/";
+    public final static String WEB_RTC_URL = "http://121.201.28.184:3000";// 视频服务器
     public static final String IS_FIRST_RUN = "isFirstRun";
     public static final String APP_COUNT = "app_count";
     public static final String APP_PSW = "app_psw";

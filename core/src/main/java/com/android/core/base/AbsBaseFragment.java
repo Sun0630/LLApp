@@ -10,10 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.core.control.ToastUtil;
+import com.android.core.control.logcat.BuildConfig;
 import com.android.core.control.logcat.Logcat;
 import com.android.core.model.LogicProxy;
 import com.android.core.widget.dialog.DialogManager;
+import com.heaton.liulei.utils.utils.ToastUtil;
 
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -43,7 +44,9 @@ public abstract class AbsBaseFragment extends Fragment implements BaseView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Logcat.d("Fragment Location (%s.java:0)", getClass().getSimpleName());
+        if(BuildConfig.DEBUG){
+            Logcat.d("Fragment Location (%s.java:0)", getClass().getSimpleName());
+        }
         mContext = getActivity();
         TAG = getClass().getSimpleName();
     }
@@ -74,7 +77,8 @@ public abstract class AbsBaseFragment extends Fragment implements BaseView {
 
     @Override
     public void showMessage(String msg) {
-        ToastUtil.show(msg);
+//        ToastUtil.show(msg);
+        ToastUtil.showToast(msg);
     }
 
     @Override

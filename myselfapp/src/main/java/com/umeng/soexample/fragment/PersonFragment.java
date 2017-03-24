@@ -17,6 +17,8 @@ import com.android.core.adapter.RecyclerAdapter;
 import com.android.core.adapter.RecyclerViewHolder;
 import com.android.core.base.AbsBaseActivity;
 import com.android.core.base.AbsBaseFragment;
+import com.android.core.control.statusbar.StatusBarUtil;
+import com.heaton.liulei.utils.utils.StringUtils;
 import com.umeng.soexample.App;
 import com.umeng.soexample.Constants;
 import com.umeng.soexample.R;
@@ -40,6 +42,7 @@ import com.umeng.soexample.activity.ShareActivity;
 import com.umeng.soexample.activity.SwipBackActivity;
 import com.umeng.soexample.activity.VideoChatActivity;
 import com.umeng.soexample.listener.SensonListener;
+import com.umeng.soexample.manager.ConfigManage;
 import com.umeng.soexample.music.MusicModeActivity;
 import com.heaton.liulei.utils.utils.ScreenUtils;
 import com.heaton.liulei.utils.utils.ToastUtil;
@@ -179,13 +182,14 @@ public class PersonFragment extends AbsBaseFragment{
 
     //自己新添加的
     private void initToolBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mAppbarFuction.setPadding(
-                    mAppbarFuction.getPaddingLeft(),
-                    mAppbarFuction.getPaddingTop() + ScreenUtils.getStatusBarHeight(getActivity()),
-                    mAppbarFuction.getPaddingRight(),
-                    mAppbarFuction.getPaddingBottom());
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            mAppbarFuction.setPadding(
+//                    mAppbarFuction.getPaddingLeft(),
+//                    mAppbarFuction.getPaddingTop() + ScreenUtils.getStatusBarHeight(getActivity()),
+//                    mAppbarFuction.getPaddingRight(),
+//                    mAppbarFuction.getPaddingBottom());
+//        }
+        mAppbarFuction.setBackgroundColor(StaticValue.color);
         toolbar.setBackgroundColor(StaticValue.color);
         if (toolbar != null) {
             ((TextView) toolbar.findViewById(com.android.core.R.id.toolbar_title)).setText("功能");
@@ -219,26 +223,26 @@ public class PersonFragment extends AbsBaseFragment{
 
     private List<String> initData(){
         mDatas = new ArrayList<>();
-        mDatas.add("跳转到侧滑界面");
-        mDatas.add("跳转到右滑关闭界面");
-        mDatas.add("跳转到个人中心界面");
-        mDatas.add("跳转到聊天界面");
-        mDatas.add("跳转到播放器界面");
-        mDatas.add("跳转到视频聊天界面");
-        mDatas.add("跳转到我的博客");
-        mDatas.add("跳转到二维码界面");
-        mDatas.add("跳转到音乐播放器界面");
-        mDatas.add("跳转到查看大图界面");
-        mDatas.add("跳转到悬浮窗界面");
+        mDatas.add("个性化侧滑界面");
+        mDatas.add("仿IOS右滑关闭界面");
+        mDatas.add("仿QQ个人中心界面");
+        mDatas.add("聊天室聊天界面");
+        mDatas.add("播放器播放界面");
+        mDatas.add("视频聊天界面（直播）");
+        mDatas.add("我的博客界面");
+        mDatas.add("二维码扫描界面");
+        mDatas.add("音乐播放器界面");
+        mDatas.add("查看头像的大图界面");
+        mDatas.add("自定义炫酷悬浮窗界面");
         mDatas.add("下载apk并安装");
-        mDatas.add("跳转到分享界面");
+        mDatas.add("分享功能界面");
         mDatas.add("自定义相机拍摄视频或图片");
-        mDatas.add("截图");
-        mDatas.add("模糊查询");
+        mDatas.add("截图保存并可手势圈中并保存");
+        mDatas.add("模糊查询联系人");
         mDatas.add("通知栏界面");
         mDatas.add("弹出窗界面");
         mDatas.add("弹幕界面");
-        mDatas.add("跳转到登录界面");
+        mDatas.add("登录界面");
         return mDatas;
     }
 

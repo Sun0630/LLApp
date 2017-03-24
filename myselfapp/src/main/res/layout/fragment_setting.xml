@@ -1,240 +1,284 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar_setting"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:gravity="bottom">
 
-    <include
-        android:id="@+id/set_toolbar"
-        layout="@layout/toolbar_layout" />
+        <include
+            android:id="@+id/set_toolbar"
+            layout="@layout/toolbar_layout" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
-        android:layout_below="@id/appbar_setting"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/abc_white"
-        android:orientation="vertical">
+        android:layout_below="@id/appbar_setting">
 
-        <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/rl_language"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/language"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:leftDrawable="@mipmap/language"
-            app:rightDrawable="@mipmap/coming"
-            app:rightDrawableHeight="12dp"
-            app:rightDrawableWidth="8dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/line" />
-
-        <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/rl_app_update"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/update"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:leftDrawable="@mipmap/update"
-            app:rightDrawable="@mipmap/coming"
-            app:rightDrawableHeight="12dp"
-            app:rightDrawableWidth="8dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/line" />
-
-        <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/rl_theme"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/theme_color"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:leftDrawable="@mipmap/clock"
-            app:rightDrawable="@mipmap/coming"
-            app:rightDrawableHeight="12dp"
-            app:rightDrawableWidth="8dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/line" />
-
-        <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/rl_about"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/about"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:leftDrawable="@mipmap/about"
-            app:rightDrawable="@mipmap/coming"
-            app:rightDrawableHeight="12dp"
-            app:rightDrawableWidth="8dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/line" />
-
-        <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/rl_suggest"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/suggest"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:leftDrawable="@mipmap/help"
-            app:rightDrawable="@mipmap/coming"
-            app:rightDrawableHeight="12dp"
-            app:rightDrawableWidth="8dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/line" />
-
-        <com.umeng.soexample.custom.TextDrawable
-            android:id="@+id/add_psw"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="加密图案"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:leftDrawable="@mipmap/help"
-            app:rightDrawable="@mipmap/coming"
-            app:rightDrawableHeight="12dp"
-            app:rightDrawableWidth="8dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/line" />
-
-        <!--<com.umeng.soexample.custom.TextDrawable-->
-            <!--android:id="@+id/switch_theme"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:clickable="true"-->
-            <!--android:drawablePadding="10dp"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:text="切换主题"-->
-            <!--android:textColor="@color/text"-->
-            <!--android:textSize="16sp"-->
-            <!--app:leftDrawable="@mipmap/help"-->
-            <!--app:rightDrawable="@mipmap/coming"-->
-            <!--app:rightDrawableHeight="12dp"-->
-            <!--app:rightDrawableWidth="8dp" />-->
-
-        <!--<com.example.myselfapp.custom.TextDrawable-->
-        <!--android:id="@+id/clear_cache"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:clickable="true"-->
-        <!--android:drawablePadding="10dp"-->
-        <!--android:text="清除缓存"-->
-        <!--android:textColor="@color/text"-->
-        <!--android:textSize="16sp"-->
-        <!--app:leftDrawable="@mipmap/help"-->
-        <!--app:rightDrawable="@mipmap/coming"-->
-        <!--app:rightDrawableWidth="8dp"-->
-        <!--app:rightDrawableHeight="12dp"/>-->
-
-        <RelativeLayout
-            android:id="@+id/clear_cache"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+            <com.umeng.soexample.custom.TextDrawable
+                android:id="@+id/rl_language"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:background="@mipmap/help" />
-
-            <TextView
-                android:id="@+id/cache_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:text="0 M" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="45dp"
-                android:text="清除缓存"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/language"
                 android:textColor="@color/text"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/language"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableHeight="12dp"
+                app:rightDrawableWidth="8dp" />
 
-        </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
 
-    </LinearLayout>
+            <com.umeng.soexample.custom.TextDrawable
+                android:id="@+id/rl_app_update"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/update"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/update"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableHeight="12dp"
+                app:rightDrawableWidth="8dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
+
+            <com.umeng.soexample.custom.TextDrawable
+                android:id="@+id/rl_theme"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/theme_color"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/clock"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableHeight="12dp"
+                app:rightDrawableWidth="8dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
+
+            <com.umeng.soexample.custom.TextDrawable
+                android:id="@+id/rl_about"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/about"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/about"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableHeight="12dp"
+                app:rightDrawableWidth="8dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/mode_rl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@mipmap/help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:text="夜间模式"
+                    android:textColor="@color/text"
+                    android:textSize="16sp" />
+
+                <com.umeng.soexample.custom.ToggleButton
+                    android:id="@+id/toggle_mode"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/showImg_rl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@mipmap/help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:text="是否加载文章缩略图"
+                    android:textColor="@color/text"
+                    android:textSize="16sp" />
+
+                <com.umeng.soexample.custom.ToggleButton
+                    android:id="@+id/toggle_show_img"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
+
+            <com.umeng.soexample.custom.TextDrawable
+                android:id="@+id/rl_suggest"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/suggest"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/help"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableHeight="12dp"
+                app:rightDrawableWidth="8dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
+
+            <com.umeng.soexample.custom.TextDrawable
+                android:id="@+id/add_psw"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="加密图案"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:leftDrawable="@mipmap/help"
+                app:rightDrawable="@mipmap/coming"
+                app:rightDrawableHeight="12dp"
+                app:rightDrawableWidth="8dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/clear_cache"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@mipmap/help" />
+
+                <TextView
+                    android:id="@+id/cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:text="0 M" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:text="清除缓存"
+                    android:textColor="@color/text"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.umeng.soexample.custom.TextDrawable
         android:id="@+id/text_exit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:background="@color/bg_color"
         android:clickable="true"
         android:drawablePadding="10dp"
         android:gravity="center"
         android:text="退出登录"
-        android:background="@color/bg_color"
         android:textSize="16sp"
         app:rightDrawableHeight="12dp"
         app:rightDrawableWidth="8dp" />

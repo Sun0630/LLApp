@@ -1,5 +1,9 @@
 package com.umeng.soexample.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -20,6 +24,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -30,13 +35,20 @@ import com.android.core.base.AbsBaseFragment;
 import com.android.core.control.MDTintUtil;
 import com.bumptech.glide.Glide;
 import com.heaton.liulei.utils.utils.DensityUtils;
+import com.heaton.liulei.utils.utils.ScreenUtils;
 import com.heaton.liulei.utils.utils.ToastUtil;
+import com.heaton.liulei.utils.utils.WebUtils;
+import com.umeng.soexample.AppConfig;
 import com.umeng.soexample.R;
+import com.umeng.soexample.api.http.RetrofitUtil;
+import com.umeng.soexample.bean.CategoryVO;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.Subscriber;
 
 /**
  * @author: liulei
@@ -56,6 +68,9 @@ public class HomeFragment extends AbsBaseFragment{
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout mCollapsingToolbar;
 
+    private boolean isBannerBig; // banner 是否是大图
+    private boolean isBannerAniming; // banner 放大缩小的动画是否正在执行
+
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_home;
@@ -72,9 +87,13 @@ public class HomeFragment extends AbsBaseFragment{
 //        mTlHomeCategory.setTabTextColors(R.color.abc_white,StaticValue.color);
 //        mTlHomeCategory.setSelectedTabIndicatorColor(StaticValue.color);
 
-        Glide.with(getActivity())
+        if(!WebUtils.isConnect()){
+            getMeizi();
+        }else {
+            Glide.with(getActivity())
                 .load(R.mipmap.b_1)
                 .into(mIvHomeBanner);
+        }
 
     }
 
@@ -91,33 +110,25 @@ public class HomeFragment extends AbsBaseFragment{
         titles.add("拓展资源");
         Adapter infoPagerAdapter = new Adapter(getFragmentManager(), titles);
 
-//        // App
-//        CategoryFragment appFragment = CategoryFragment.newInstance("App");
-//        // Android
-//        CategoryFragment androidFragment = CategoryFragment.newInstance("Android");
-//        // iOS
-//        CategoryFragment iOSFragment = CategoryFragment.newInstance("iOS");
-//        // 前端
-//        CategoryFragment frontFragment = CategoryFragment.newInstance("前端");
-//        // 瞎推荐
-//        CategoryFragment referenceFragment = CategoryFragment.newInstance("瞎推荐");
-//        // 拓展资源s
-//        CategoryFragment resFragment = CategoryFragment.newInstance("拓展资源");
+        // App
+        MyArticleTypeFragment appFragment = MyArticleTypeFragment.newInstance("App");
+        // Android
+        MyArticleTypeFragment androidFragment = MyArticleTypeFragment.newInstance("Android");
+        // iOS
+        MyArticleTypeFragment iOSFragment = MyArticleTypeFragment.newInstance("iOS");
+        // 前端
+        MyArticleTypeFragment frontFragment = MyArticleTypeFragment.newInstance("前端");
+        // 瞎推荐
+        MyArticleTypeFragment referenceFragment = MyArticleTypeFragment.newInstance("瞎推荐");
+        // 拓展资源s
+        MyArticleTypeFragment resFragment = MyArticleTypeFragment.newInstance("拓展资源");
 
-        MyArticleTypeFragment fragment = new MyArticleTypeFragment();
-//        infoPagerAdapter.addFragment(fragment);
-//        infoPagerAdapter.addFragment(fragment);
-//        infoPagerAdapter.addFragment(fragment);
-//        infoPagerAdapter.addFragment(fragment);
-//        infoPagerAdapter.addFragment(fragment);
-//        infoPagerAdapter.addFragment(fragment);
-        for (int i =0;i<titles.size();i++) {
-//            Bundle bundle = new Bundle();
-//            bundle.putString("ID", model.getID());
-            fragment = new MyArticleTypeFragment();
-//            fragment.setArguments(bundle);
-            infoPagerAdapter.addFragment(fragment);
-        }
+        infoPagerAdapter.addFragment(appFragment);
+        infoPagerAdapter.addFragment(androidFragment);
+        infoPagerAdapter.addFragment(iOSFragment);
+        infoPagerAdapter.addFragment(frontFragment);
+        infoPagerAdapter.addFragment(referenceFragment);
+        infoPagerAdapter.addFragment(resFragment);
 
         mVpCategory.setAdapter(infoPagerAdapter);
         mTlHomeCategory.setupWithViewPager(mVpCategory);
@@ -166,15 +177,89 @@ public class HomeFragment extends AbsBaseFragment{
         });
     }
 
+    @OnClick(R.id.iv_home_banner)
+    public void wantBig(View view) {
+        if (isBannerAniming) {
+            return;
+        }
+        startBannerAnim();
+    }
+
     @OnClick(R.id.ll_home_search)
     public void search(View view) {
 //        startActivity();
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    @OnClick(R.id.fab_home_random)
+    void switchMeizi(){
+        getMeizi();
+    }
 
+    private void getMeizi() {
+        startBannerLoadingAnim();
+        RetrofitUtil.getInstance().getBanner(1, new Subscriber<CategoryVO>() {
+            @Override
+            public void onCompleted() {
+            }
+            @Override
+            public void onError(Throwable e) {
+                showMessage("妹子加载失败，请重试一下吧！");
+                stopBannerLoadingAnim();
+            }
+            @Override
+            public void onNext(CategoryVO categoryVO) {
+                if(categoryVO != null && categoryVO.results != null &&
+                        categoryVO.results.size() > 0 && categoryVO.results.get(0).url != null){
+                    Glide.with(getActivity()).load(categoryVO.results.get(0).url).into(mIvHomeBanner);
+                }
+                stopBannerLoadingAnim();
+            }
+        });
+    }
+
+    private ObjectAnimator mAnimator;
+
+    public void startBannerLoadingAnim() {
+        mFloatingActionButton.setImageResource(R.drawable.ic_loading);
+        mAnimator = ObjectAnimator.ofFloat(mFloatingActionButton, "rotation", 0, 360);
+        mAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        mAnimator.setDuration(800);
+        mAnimator.setInterpolator(new LinearInterpolator());
+        mAnimator.start();
+    }
+
+    public void stopBannerLoadingAnim() {
+        mFloatingActionButton.setImageResource(R.drawable.ic_beauty);
+        mAnimator.cancel();
+        mFloatingActionButton.setRotation(0);
+    }
+
+    private void startBannerAnim() {
+        final CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
+        ValueAnimator animator;
+        if (isBannerBig) {
+            animator = ValueAnimator.ofInt(ScreenUtils.getScreenHeight(), DensityUtils.dp2px(240));
+        } else {
+            animator = ValueAnimator.ofInt(DensityUtils.dp2px(240), ScreenUtils.getScreenHeight());
+        }
+        animator.setDuration(1000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                layoutParams.height = (int) valueAnimator.getAnimatedValue();
+                mAppBarLayout.setLayoutParams(layoutParams);
+            }
+        });
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                isBannerBig = !isBannerBig;
+                isBannerAniming = false;
+            }
+        });
+        animator.start();
+        isBannerAniming = true;
     }
 
     static class Adapter extends FragmentPagerAdapter {

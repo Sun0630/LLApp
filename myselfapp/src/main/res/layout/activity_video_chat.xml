@@ -17,10 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<android.opengl.GLSurfaceView-->
-            <!--android:id="@+id/chat_surface_call"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
+        <android.opengl.GLSurfaceView
+            android:id="@+id/chat_surface_call"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/line_service"

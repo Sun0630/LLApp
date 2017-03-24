@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 
+import com.android.core.control.logcat.BuildConfig;
 import com.android.core.control.logcat.Logcat;
 
 import java.io.BufferedWriter;
@@ -26,7 +27,7 @@ public class LogWriter {
 
     public static synchronized void writeLog(Context context, Throwable ex, File file, String time, WriteCallback writeCallback) {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            if (DEBUG) {
+            if (BuildConfig.DEBUG) {
                 Logcat.w("sdcard unmounted,skip dump exception");
                 return;
             }
@@ -46,7 +47,9 @@ public class LogWriter {
             pw.close();
             writeCallback.writeSuccess();
         } catch (Exception e) {
-            Logcat.e("write crash exception failed");
+            if(BuildConfig.DEBUG){
+                Logcat.e("write crash exception failed");
+            }
         }
     }
 

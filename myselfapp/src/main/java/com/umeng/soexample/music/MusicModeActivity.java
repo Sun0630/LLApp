@@ -34,6 +34,7 @@ import com.umeng.soexample.R;
 import com.heaton.liulei.utils.custom.CircleImageView;
 import com.heaton.liulei.utils.utils.PhoneStateUtils;
 import com.heaton.liulei.utils.utils.ToastUtil;
+import com.umeng.soexample.task.TaskExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -385,16 +386,25 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
     private List<Playlist> musicMap;
 
     private void initMusic() {
-        new Thread() {
+        TaskExecutor.executeTask(new Runnable() {
             @Override
             public void run() {
                 musicMap = MusicUtil.getMp3List(MusicModeActivity.this);
                 mApp.musicList = (ArrayList<Playlist>) musicMap;
                 mApp.mMusicServer.setCurrentPlayList(mApp.musicList);
                 mApp.mMusicServer.setCurrentPlayMusic(mApp.musicList.get(0));
-                super.run();
             }
-        }.start();
+        });
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                musicMap = MusicUtil.getMp3List(MusicModeActivity.this);
+//                mApp.musicList = (ArrayList<Playlist>) musicMap;
+//                mApp.mMusicServer.setCurrentPlayList(mApp.musicList);
+//                mApp.mMusicServer.setCurrentPlayMusic(mApp.musicList.get(0));
+//                super.run();
+//            }
+//        }.start();
     }
 
     /**

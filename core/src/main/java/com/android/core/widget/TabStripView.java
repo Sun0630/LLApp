@@ -257,7 +257,7 @@ public class TabStripView extends LinearLayout implements View.OnClickListener {
     }
 
 
-    private Fragment getFragmentInstance(String tag) {
+    public Fragment getFragmentInstance(String tag) {
         Fragment fragment = null;
         for (ViewHolder holder : mViewHolderList) {
             if (TextUtils.equals(tag, holder.tag)) {

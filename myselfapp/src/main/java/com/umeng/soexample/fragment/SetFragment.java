@@ -32,6 +32,8 @@ import com.umeng.soexample.R;
 import com.umeng.soexample.activity.SetPatternActivity;
 import com.umeng.soexample.activity.SuggestActivity;
 import com.umeng.soexample.custom.TextDrawable;
+import com.umeng.soexample.custom.ToggleButton;
+import com.umeng.soexample.manager.ConfigManage;
 import com.umeng.soexample.utils.GlideCacheUtil;
 
 import butterknife.Bind;
@@ -58,8 +60,17 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
     AppBarLayout mAppbarSetting;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    @Bind(R.id.toggle_mode)
+    ToggleButton toggle_mode;
+    @Bind(R.id.toggle_show_img)
+    ToggleButton toggle_show;
+
 
     ThemeChangeListener listener;
+
+    public void setThemeChangeLisenter(ThemeChangeListener lisenter){
+        this.listener = lisenter;
+    }
 
     private CompositeSubscription mSubscriptions;
 
@@ -86,17 +97,46 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
 //        long size = DataCleanManager.getPhotoCacheSize(getContext());
         cache_size.setText(getCachedSize());
         exit.setTextColor(StaticValue.color);
+
+        toggle_mode.setToggleOn(false);
+        toggle_mode.setOnColor(StaticValue.color);
+        toggle_mode.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
+            @Override
+            public void onToggle(boolean on) {
+                if(on){
+                    showMessage("暂未开发夜间模式,敬请期待");
+                }else {
+                    showMessage("切换到正常模式");
+                }
+            }
+        });
+
+        if(!ConfigManage.INSTANCE.isListShowImg()){
+            toggle_show.setToggleOn(false);
+        }
+        toggle_show.setOnColor(StaticValue.color);
+        toggle_show.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
+            @Override
+            public void onToggle(boolean on) {
+                if(on){
+                    ConfigManage.INSTANCE.setListShowImg(getActivity(),true);
+                }else {
+                    ConfigManage.INSTANCE.setListShowImg(getActivity(),false);
+                }
+            }
+        });
     }
 
     //自己新添加的
     private void initToolBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mAppbarSetting.setPadding(
-                    mAppbarSetting.getPaddingLeft(),
-                    mAppbarSetting.getPaddingTop() + ScreenUtils.getStatusBarHeight(getActivity()),
-                    mAppbarSetting.getPaddingRight(),
-                    mAppbarSetting.getPaddingBottom());
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            mAppbarSetting.setPadding(
+//                    mAppbarSetting.getPaddingLeft(),
+//                    mAppbarSetting.getPaddingTop() + ScreenUtils.getStatusBarHeight(getActivity()),
+//                    mAppbarSetting.getPaddingRight(),
+//                    mAppbarSetting.getPaddingBottom());
+//        }
+        mAppbarSetting.setBackgroundColor(StaticValue.color);
         toolbar.setBackgroundColor(StaticValue.color);
         if (toolbar != null) {
             ((TextView) toolbar.findViewById(com.android.core.R.id.toolbar_title)).setText("设置");

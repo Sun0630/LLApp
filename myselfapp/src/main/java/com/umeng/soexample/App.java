@@ -3,18 +3,19 @@ package com.umeng.soexample;
 import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
-import com.android.core.MainApp;
 import com.android.core.StaticValue;
 import com.android.core.control.crash.AndroidCrash;
 import com.android.core.control.crash.HttpReportCallback;
-import com.android.core.control.logcat.Logcat;
+import com.android.core.control.logcat.*;
+import com.android.core.control.logcat.BuildConfig;
 import com.android.core.utils.ThemeUtils;
+import com.example.http.BaseApplication;
+import com.umeng.soexample.manager.ConfigManage;
 import com.umeng.soexample.music.MusicService;
 import com.umeng.soexample.music.Playlist;
 import com.heaton.liulei.utils.utils.LiuleiUtils;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.Config;
 import org.litepal.LitePalApplication;
 
 import java.io.File;
@@ -28,7 +29,7 @@ import io.socket.client.Socket;
  * 作者： liulei
  * 公司：希顿科技
  */
-public class App extends MainApp {
+public class App extends BaseApplication {
 
     public static final String WX_APPID = "wx387b0430eb11c163";
     public static final String WX_APPSecret = "66a6edf9c1fb372e5d12d2d0f85532f5";
@@ -45,26 +46,30 @@ public class App extends MainApp {
         instance = this;
         StaticValue.color = ThemeUtils.getThemeColor(this);
         //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
-        Config.DEBUG = true;
+        BuildConfig.DEBUG = false;
         // 初始化友盟组件
         UMShareAPI.get(this);
         //初始化LiuleiUtils
         LiuleiUtils.init(this);
-        LitePalApplication.initialize(this);//litepal的配置
+        //初始化加载文章缩略图配置
+        ConfigManage.INSTANCE.initConfig(this);
+        //litepal的配置
+        LitePalApplication.initialize(this);
         //崩溃日志
         //注册crashHandler
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(this);
-        //Android crash 上传服务器回掉
-        HttpReportCallback report = new HttpReportCallback() {
-            @Override
-            public void uploadException2remote(File file) {
-                //可以直接上传文件
-            }
-        };
-        AndroidCrash.getInstance().setCrashReporter(report).init(this);
-        if (BuildConfig.DEBUG)
+        //Android crash 上传服务器回掉  暂时注释
+//        HttpReportCallback report = new HttpReportCallback() {
+//            @Override
+//            public void uploadException2remote(File file) {
+//                //可以直接上传文件
+//            }
+//        };
+//        AndroidCrash.getInstance().setCrashReporter(report).init(this);
+        if (BuildConfig.DEBUG) {
             Logcat.init("com.android.racofix").hideThreadInfo().methodCount(3);
+        }
     }
 
     //各个平台的配置，建议放在全局Application或者程序入口

@@ -6,10 +6,11 @@ import android.widget.RelativeLayout;
 
 import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
-import com.android.core.control.ToastUtil;
 import com.android.core.control.statusbar.StatusBarUtil;
 import com.android.core.listener.ThemeChangeListener;
 import com.android.core.widget.TabStripView;
+import com.heaton.liulei.utils.utils.ToastUtil;
+import com.umeng.soexample.exception.PswException;
 import com.umeng.soexample.fragment.DiscoveryFragment;
 import com.umeng.soexample.fragment.HomeFragment;
 import com.umeng.soexample.fragment.PersonFragment;
@@ -43,8 +44,8 @@ public class MainActivity extends AbsBaseActivity implements ThemeChangeListener
         //恢复选项状态
         navigateTabBar.onRestoreInstanceState(savedInstanceState);
 
-        navigateTabBar.addTab(PersonFragment.class, new TabStripView.TabParam(R.drawable.ic_tab_bar_person, R.drawable.ic_tab_bar_person_selected, R.string.abc_tab_text_function));
         navigateTabBar.addTab(HomeFragment.class, new TabStripView.TabParam(R.drawable.ic_tab_bar_home, R.drawable.ic_tab_bar_home_selected, R.string.abc_tab_text_home));
+        navigateTabBar.addTab(PersonFragment.class, new TabStripView.TabParam(R.drawable.ic_tab_bar_person, R.drawable.ic_tab_bar_person_selected, R.string.abc_tab_text_function));
         navigateTabBar.addTab(DiscoveryFragment.class, new TabStripView.TabParam(R.drawable.ic_tab_bar_find, R.drawable.ic_tab_bar_find_selected, R.string.abc_tab_text_find));
         navigateTabBar.addTab(SetFragment.class, new TabStripView.TabParam(R.drawable.ic_tab_bar_person, R.drawable.ic_tab_bar_person_selected, R.string.abc_tab_text_set));
         setTitle("首页");
@@ -67,6 +68,7 @@ public class MainActivity extends AbsBaseActivity implements ThemeChangeListener
     @Override
     protected int getLayoutResource() {
         isShowTool(false);
+        isTransparentSystem(true);
         return R.layout.activity_main;
     }
 
@@ -84,7 +86,7 @@ public class MainActivity extends AbsBaseActivity implements ThemeChangeListener
 
     @Override
     public void onThemeChanged() {
-        ToastUtil.show("更换主题色了");
+        ToastUtil.showToast("更换主题色了");
 //        navigateTabBar.setSelectedTabTextColor(StaticValue.color);
         recreate();
 //        if(toolbar != null){

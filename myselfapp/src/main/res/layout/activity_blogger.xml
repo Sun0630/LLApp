@@ -2,6 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -19,7 +22,7 @@
             android:layout_height="1.5dp"
             android:layout_gravity="center"
             android:paddingTop="0dp"
-            android:progressDrawable="@drawable/progressbar"
+            android:progressDrawable="@drawable/progressbar_blog"
             android:visibility="visible" />
 
     </android.support.design.widget.AppBarLayout>

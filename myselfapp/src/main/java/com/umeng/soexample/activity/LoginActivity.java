@@ -25,14 +25,20 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.core.Help;
+import com.example.http.ProgressSubscriber;
+import com.example.http.listenser.SubscriberOnNextListener;
 import com.heaton.liulei.utils.utils.SPUtils;
 import com.umeng.soexample.Constants;
 import com.umeng.soexample.MainActivity;
 import com.umeng.soexample.R;
+import com.umeng.soexample.api.http.RetrofitUtil;
+import com.umeng.soexample.bean.CategoryVO;
+import com.umeng.soexample.task.TaskExecutor;
 import com.umeng.soexample.utils.EditTextClearTools;
 import com.heaton.liulei.utils.utils.BlurUtils;
 import com.heaton.liulei.utils.utils.ToastUtil;
@@ -100,14 +106,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnTouchList
     }
 
     private void initHeaderBg() {
-        new Thread(() -> {
-            if (bitmap != null) {
-                //高斯模糊
-                final Drawable drawable = BlurUtils.BoxBlurFilter(bitmap,2);
-                runOnUiThread(() -> setBg(drawable));//使用lamdba表达式
-//                runOnUiThread(() ->Glide.with(this).load(R.mipmap.b_1).bitmapTransform(new BlurTransformation(this,25)).crossFade(1000).into(target));
+//        new Thread(() -> {
+//            if (bitmap != null) {
+//                //高斯模糊
+//                final Drawable drawable = BlurUtils.BoxBlurFilter(bitmap,2);
+//                runOnUiThread(() -> setBg(drawable));//使用lamdba表达式
+////                runOnUiThread(() ->Glide.with(this).load(R.mipmap.b_1).bitmapTransform(new BlurTransformation(this,25)).crossFade(1000).into(target));
+//            }
+//        }).start();
+        TaskExecutor.executeTask(new Runnable() {
+            @Override
+            public void run() {
+                if (bitmap != null) {
+                    //高斯模糊
+                    final Drawable drawable = BlurUtils.BoxBlurFilter(bitmap, 2);
+                    runOnUiThread(() -> setBg(drawable));//使用lamdba表达式
+                }
             }
-        }).start();
+        });
     }
 
     private void setBg(Drawable drawable) {
@@ -160,8 +176,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnTouchList
     private void startAct(ProgressDialog dialog) {
         dialog.dismiss();
         //保存账号密码到内存中   下次直接登录
-        SPUtils.put(getBaseContext(), Constants.APP_COUNT,num);
-        SPUtils.put(getBaseContext(), Constants.APP_PSW,pass);
+        SPUtils.put(getBaseContext(), Constants.APP_COUNT, num);
+        SPUtils.put(getBaseContext(), Constants.APP_PSW, pass);
         startActivity(new Intent(LoginActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
     }

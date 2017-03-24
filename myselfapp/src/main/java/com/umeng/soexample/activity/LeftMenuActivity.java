@@ -21,6 +21,8 @@ import com.android.core.base.AbsBaseActivity;
 import com.android.core.control.Glides;
 import com.android.core.control.MDTintUtil;
 import com.android.core.control.statusbar.StatusBarUtil;
+import com.android.core.widget.glide.ImageLoader;
+import com.android.core.widget.glide.ImageLoaderUtil;
 import com.umeng.soexample.R;
 import com.umeng.soexample.custom.ToShare;
 import com.umeng.soexample.custom.ToggleButton;
@@ -84,7 +86,13 @@ public class LeftMenuActivity extends AbsBaseActivity implements View.OnClickLis
         navigationView.inflateHeaderView(R.layout.nav_header_main);
         View headerView = navigationView.getHeaderView(0);
         ImageView ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
-        Glides.getInstance().loadCircle(this,R.mipmap.ai1,ivAvatar);
+//        Glides.getInstance().loadCircle(this,R.mipmap.ai1,ivAvatar);
+        ImageLoader imageLoader = new ImageLoader.Builder()
+                .imgView(ivAvatar)
+                .placeHolder(R.mipmap.ai1)
+                .url("https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D360/sign=caa2d267cfef7609230b9f991edca301/6d81800a19d8bc3e7763d030868ba61ea9d345e5.jpg")
+                .build();
+        ImageLoaderUtil.getInstance().loadCircleImage(this,imageLoader);
         LinearLayout llNavHomepage = (LinearLayout) headerView.findViewById(R.id.ll_nav_homepage);
         LinearLayout llNavShare = (LinearLayout) headerView.findViewById(R.id.ll_nav_share);
         RelativeLayout llNavMode = (RelativeLayout) headerView.findViewById(R.id.ll_nav_mode);

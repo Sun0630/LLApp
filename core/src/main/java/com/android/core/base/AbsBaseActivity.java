@@ -20,10 +20,12 @@ import android.widget.TextView;
 import com.android.core.Help;
 import com.android.core.R;
 import com.android.core.StaticValue;
-import com.android.core.control.ToastUtil;
+import com.android.core.control.logcat.BuildConfig;
 import com.android.core.control.logcat.Logcat;
 import com.android.core.control.statusbar.StatusBarUtil;
 import com.android.core.widget.dialog.DialogManager;
+import com.heaton.liulei.utils.utils.ToastUtil;
+
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -48,7 +50,9 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
         //设置主题颜色
 //        ThemeUtils.applyTheme(this);
         super.onCreate(savedInstanceState);
-        Logcat.d("Activity Location (%s.java:0)", getClass().getSimpleName());
+        if(BuildConfig.DEBUG){
+            Logcat.d("Activity Location (%s.java:0)", getClass().getSimpleName());
+        }
         mContext = this;
         TAG = getClass().getSimpleName();
 
@@ -139,7 +143,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements BaseV
 
     @Override
     public void showMessage(String msg) {
-        ToastUtil.show(msg);
+        ToastUtil.showToast(msg);
     }
 
     public void showProgress(String message) {

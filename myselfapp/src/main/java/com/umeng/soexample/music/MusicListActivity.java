@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.android.core.StaticValue;
+import com.android.core.control.logcat.BuildConfig;
 import com.android.core.control.logcat.Logcat;
 import com.umeng.soexample.App;
 import com.umeng.soexample.Constants;
@@ -258,14 +259,18 @@ public class MusicListActivity extends Activity implements OnItemClickListener {
         public void onServiceConnected(ComponentName name, IBinder service) {
             MusicService.MusicBinder binder = (MusicService.MusicBinder) service;
             myApplication.mMusicServer = binder.getService();
-            Logcat.d(getClass().getSimpleName(), "绑定音乐服务成功");
+            if(BuildConfig.DEBUG){
+                Logcat.d(getClass().getSimpleName(), "绑定音乐服务成功");
+            }
 //            myApplication.mBound = true;
 //            initMusic();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Logcat.d(getClass().getSimpleName(), "绑定音乐服务断开");
+            if(BuildConfig.DEBUG){
+                Logcat.d(getClass().getSimpleName(), "绑定音乐服务断开");
+            }
 //            myApplication.mBound = false;
         }
     };
