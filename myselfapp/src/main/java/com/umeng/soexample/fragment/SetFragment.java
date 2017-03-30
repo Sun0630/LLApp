@@ -1,5 +1,6 @@
 package com.umeng.soexample.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -80,12 +81,12 @@ public class SetFragment extends AbsBaseFragment implements View.OnClickListener
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         try {
-            listener = (ThemeChangeListener) context;
+            listener = (ThemeChangeListener) getActivity();
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");
         }
     }

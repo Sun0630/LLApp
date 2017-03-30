@@ -18,6 +18,7 @@
     <color name="text">#333333</color>
     <color name="white">#FFFFFF</color>
     <color name="line">#dfdfdf</color>
+    <color name="translucent01">#55000000</color>
 
     <!--页面背景的颜色-->
     <color name="colorPageBg">#f2f4f5</color>
