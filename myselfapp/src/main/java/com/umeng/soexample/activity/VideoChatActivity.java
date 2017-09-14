@@ -63,7 +63,7 @@ public class VideoChatActivity extends AbsBaseActivity{
                 finish();
             }
         });
-        initEvent();
+//        initEvent();
 
         showMessage("视频聊天功能暂时屏蔽，敬请期待");
 
@@ -72,7 +72,7 @@ public class VideoChatActivity extends AbsBaseActivity{
     @OnClick(R.id.line_service)
     void line(){
         if(mSingleChatClient==null){
-            initEvent();
+//            initEvent();
         }
         // 创建令牌
         AlertDialog alertDialog = new AlertDialog.Builder(this)
@@ -81,7 +81,7 @@ public class VideoChatActivity extends AbsBaseActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         userName = "receiver";
-                        login("sender");
+//                        login("sender");
                         dialog.dismiss();
                     }
                 })
@@ -89,7 +89,7 @@ public class VideoChatActivity extends AbsBaseActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         userName = "sender";
-                        login("receiver");
+//                        login("receiver");
                         dialog.dismiss();
                     }
                 }).create();
@@ -99,28 +99,28 @@ public class VideoChatActivity extends AbsBaseActivity{
 
     @OnClick(R.id.close_service)
     void close(){
-        if (mSingleChatClient != null) {
-            mSingleChatClient.destroy();
-        }
+//        if (mSingleChatClient != null) {
+//            mSingleChatClient.destroy();
+//        }
         Log.e("MainActivity===","断开视频服务器");
         state.setText("未连接视频服务器");
     }
 
     @OnClick(R.id.send)
     void send(){
-        call();
+//        call();
     }
 
     @OnClick(R.id.hang_up)
     void hang_up(){
-        hangup();
+//        hangup();
     }
 
     @OnClick(R.id.accept)
     void accept(){
-        if (mSession != null) {
-            mSession.accept();
-        }
+//        if (mSession != null) {
+//            mSession.accept();
+//        }
     }
 
     private void initEvent(){
@@ -174,18 +174,18 @@ public class VideoChatActivity extends AbsBaseActivity{
             }
             @Override
             public void onClose() {
-                mSingleChatClient.getToken().closeSession(userName);
-                Log.e(TAG, "onClose  我是呼叫方");
-                hangup();
-                ToastUtil.showToast("对方已中断视频通话");
+//                mSingleChatClient.getToken().closeSession(userName);
+//                Log.e(TAG, "onClose  我是呼叫方");
+//                hangup();
+//                ToastUtil.showToast("对方已中断视频通话");
             }
             @Override
             public void onRemote(Stream stream) {
-                mStream = stream;
-                Log.e(TAG, "onRemote  我是呼叫方");
-                ToastUtil.showToast("视频建立成功");
-                mSingleChatClient.getChatClient().playStream(stream, new Point(0, 0, 100, 100, false));
-                mSingleChatClient.getChatClient().playStream(mLocalStream, new Point(72, 72, 25, 25, false));
+//                mStream = stream;
+//                Log.e(TAG, "onRemote  我是呼叫方");
+//                ToastUtil.showToast("视频建立成功");
+//                mSingleChatClient.getChatClient().playStream(stream, new Point(0, 0, 100, 100, false));
+//                mSingleChatClient.getChatClient().playStream(mLocalStream, new Point(72, 72, 25, 25, false));
             }
             @Override
             public void onPresence(Message message) {
@@ -196,82 +196,82 @@ public class VideoChatActivity extends AbsBaseActivity{
         }
     }
 
-    public void login(String username) {
-        try {
-            SingleChatClient.getInstance(getApplication()).setOnConnectListener(new SingleChatClient.OnConnectListener() {
-                @Override
-                public void onConnect() {
-//                    loadDevices();
-                    Log.e(TAG, "连接视频服务器成功");
-                    state.setText("登录视频服务器成功!");
-                }
-
-                @Override
-                public void onConnectFail(String reason) {
-                    Log.e(TAG, "连接视频服务器失败");
-                    state.setText("登录视频服务器失败!" + reason);
-                }
-
-                @Override
-                public void onSessionCreate(Session session) {
-                    Log.e(TAG, "来电者名称:" + session.callName);
-                    mSession = session;
-                    accept.setVisibility(View.VISIBLE);
-                    requestPermission(new String[]{Manifest.permission.CAMERA}, "请求设备权限", new GrantedResult() {
-                        @Override
-                        public void onResult(boolean granted) {
-                            if(granted){
-                                createLocalStream();
-                            }else {
-                                ToastUtil.showToast("权限拒绝");
-                            }
-                        }
-                    });
-                    mSession.setOnSessionCallback(new OnSessionCallback() {
-                        @Override
-                        public void onAccept() {
-                            ToastUtil.showToast("视频接收");
-                        }
-
-                        @Override
-                        public void onReject() {
-                            ToastUtil.showToast("拒绝通话");
-                        }
-
-                        @Override
-                        public void onConnect() {
-                            ToastUtil.showToast("视频建立成功");
-                        }
-
-                        @Override
-                        public void onClose() {
-                            Log.e(TAG, "onClose  我是被叫方");
-                            hangup();
-                        }
-
-                        @Override
-                        public void onRemote(Stream stream) {
-                            Log.e(TAG, "onRemote  我是被叫方");
-                            mRemoteStream = stream;
-                            mSingleChatClient.getChatClient().playStream(stream, new Point(0, 0, 100, 100, false));
-                            mSingleChatClient.getChatClient().playStream(mLocalStream, new Point(72, 72, 25, 25, false));
-                        }
-
-                        @Override
-                        public void onPresence(Message message) {
-
-                        }
-                    });
-                }
-            });
-//            SingleChatClient.getInstance(getApplication()).connect(UUID.randomUUID().toString(), WEB_RTC_URL);
-            Log.e("MainActicvity===",username);
-            SingleChatClient.getInstance(getApplication()).connect(username, Constants.WEB_RTC_URL);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            Log.d(TAG, "连接失败");
-        }
-    }
+//    public void login(String username) {
+//        try {
+//            SingleChatClient.getInstance(getApplication()).setOnConnectListener(new SingleChatClient.OnConnectListener() {
+//                @Override
+//                public void onConnect() {
+////                    loadDevices();
+//                    Log.e(TAG, "连接视频服务器成功");
+//                    state.setText("登录视频服务器成功!");
+//                }
+//
+//                @Override
+//                public void onConnectFail(String reason) {
+//                    Log.e(TAG, "连接视频服务器失败");
+//                    state.setText("登录视频服务器失败!" + reason);
+//                }
+//
+//                @Override
+//                public void onSessionCreate(Session session) {
+//                    Log.e(TAG, "来电者名称:" + session.callName);
+//                    mSession = session;
+//                    accept.setVisibility(View.VISIBLE);
+//                    requestPermission(new String[]{Manifest.permission.CAMERA}, "请求设备权限", new GrantedResult() {
+//                        @Override
+//                        public void onResult(boolean granted) {
+//                            if(granted){
+//                                createLocalStream();
+//                            }else {
+//                                ToastUtil.showToast("权限拒绝");
+//                            }
+//                        }
+//                    });
+//                    mSession.setOnSessionCallback(new OnSessionCallback() {
+//                        @Override
+//                        public void onAccept() {
+//                            ToastUtil.showToast("视频接收");
+//                        }
+//
+//                        @Override
+//                        public void onReject() {
+//                            ToastUtil.showToast("拒绝通话");
+//                        }
+//
+//                        @Override
+//                        public void onConnect() {
+//                            ToastUtil.showToast("视频建立成功");
+//                        }
+//
+//                        @Override
+//                        public void onClose() {
+//                            Log.e(TAG, "onClose  我是被叫方");
+//                            hangup();
+//                        }
+//
+//                        @Override
+//                        public void onRemote(Stream stream) {
+//                            Log.e(TAG, "onRemote  我是被叫方");
+//                            mRemoteStream = stream;
+//                            mSingleChatClient.getChatClient().playStream(stream, new Point(0, 0, 100, 100, false));
+//                            mSingleChatClient.getChatClient().playStream(mLocalStream, new Point(72, 72, 25, 25, false));
+//                        }
+//
+//                        @Override
+//                        public void onPresence(Message message) {
+//
+//                        }
+//                    });
+//                }
+//            });
+////            SingleChatClient.getInstance(getApplication()).connect(UUID.randomUUID().toString(), WEB_RTC_URL);
+//            Log.e("MainActicvity===",username);
+//            SingleChatClient.getInstance(getApplication()).connect(username, Constants.WEB_RTC_URL);
+//        } catch (URISyntaxException e) {
+//            e.printStackTrace();
+//            Log.d(TAG, "连接失败");
+//        }
+//    }
 
     private void createLocalStream() {
         if (mLocalStream == null) {
