@@ -1,7 +1,7 @@
 # LLApp
 android实用案例Demo
 
-###作者：Alex-Jerry
+### 作者：Alex-Jerry
 1. libs文件夹中的utils.arr为我集成的一个开发所用到的几乎所有的工具类，但必须要在application中进行初始化，即LiuleiUtils.init(this)<br>
 
 2. 本app依赖core库，该库封装了baseActivity、baseFragment、baseAdapter、以及沉浸式状态栏，6.0权限动态授权功能，网络加载框架等等<br>
