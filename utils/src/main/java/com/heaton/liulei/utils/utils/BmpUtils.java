@@ -1,6 +1,5 @@
 package com.heaton.liulei.utils.utils;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -11,13 +10,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
-import android.renderscript.Allocation;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 
 import java.io.BufferedInputStream;
@@ -100,7 +93,7 @@ public class BmpUtils {
     }
 
     public static int getwindowsWidth() {
-        WindowManager wm = (WindowManager)LiuleiUtils.getmContext().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) LLUtils.getmContext().getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
         return width;
     }

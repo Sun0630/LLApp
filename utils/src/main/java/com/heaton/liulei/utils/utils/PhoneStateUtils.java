@@ -18,7 +18,7 @@ public class PhoneStateUtils {
     public static TelephonyManager getManager(){
         //获取电话服务
         if(mManager == null){
-            mManager = (TelephonyManager) LiuleiUtils.getmContext().getSystemService(LiuleiUtils.getmContext().TELEPHONY_SERVICE);
+            mManager = (TelephonyManager) LLUtils.getmContext().getSystemService(LLUtils.getmContext().TELEPHONY_SERVICE);
         }
         return mManager;
     }
@@ -41,7 +41,7 @@ public class PhoneStateUtils {
 //                    result += " 手机空闲起来了 ";
                     break;
                 case TelephonyManager.CALL_STATE_RINGING:
-                    LiuleiUtils.getmContext().sendBroadcast(new Intent(CALL_RINGING));
+                    LLUtils.getmContext().sendBroadcast(new Intent(CALL_RINGING));
 //                    result += " 手机铃声响了，来电号码:" + incomingNumber;
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK:

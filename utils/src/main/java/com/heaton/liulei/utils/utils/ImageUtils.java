@@ -117,8 +117,8 @@ public class ImageUtils {
 	public static Bitmap toRoundBitmap(Bitmap bitmap) {
 		int width = bitmap.getWidth();
 		int height = bitmap.getHeight();
-		width = dip2px(LiuleiUtils.getmContext(),120);
-		height = dip2px(LiuleiUtils.getmContext(),120);
+		width = dip2px(LLUtils.getmContext(),120);
+		height = dip2px(LLUtils.getmContext(),120);
 		float roundPx;
 		float left, top, right, bottom, dst_left, dst_top, dst_right, dst_bottom;
 		if (width <= height) {

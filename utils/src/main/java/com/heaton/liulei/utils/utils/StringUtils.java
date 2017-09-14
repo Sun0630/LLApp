@@ -43,7 +43,7 @@ public class StringUtils {
      * @return
      */
     public static String getStrFromRes(int id) {
-        return LiuleiUtils.mContext.getResources().getString(id);
+        return LLUtils.mContext.getResources().getString(id);
     }
 
     /**

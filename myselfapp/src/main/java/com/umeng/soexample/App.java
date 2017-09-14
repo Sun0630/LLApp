@@ -6,26 +6,21 @@ import android.os.StrictMode;
 import android.widget.TextView;
 
 import com.android.core.StaticValue;
-import com.android.core.control.crash.AndroidCrash;
-import com.android.core.control.crash.HttpReportCallback;
 import com.android.core.control.logcat.*;
 import com.android.core.control.logcat.BuildConfig;
 import com.android.core.utils.ThemeUtils;
 import com.baronzhang.android.router.Router;
 import com.example.http.BaseApplication;
-import com.umeng.soexample.block.BlockError;
-import com.umeng.soexample.block.BlockLooper;
 import com.umeng.soexample.manager.ConfigManage;
 import com.umeng.soexample.music.MusicService;
 import com.umeng.soexample.music.Playlist;
-import com.heaton.liulei.utils.utils.LiuleiUtils;
+import com.heaton.liulei.utils.utils.LLUtils;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.soexample.service.RouterService;
 
 import org.litepal.LitePalApplication;
 
-import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -66,7 +61,7 @@ public class App extends BaseApplication {
         // 初始化友盟组件
         UMShareAPI.get(this);
         //初始化LiuleiUtils
-        LiuleiUtils.init(this);
+        LLUtils.init(this);
         //初始化加载文章缩略图配置
         ConfigManage.INSTANCE.initConfig(this);
         //litepal的配置

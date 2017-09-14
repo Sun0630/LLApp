@@ -17,11 +17,11 @@ public class AppUtils {
      */
     public static String getAppName() {
         try {
-            PackageManager packageManager = LiuleiUtils.getmContext().getPackageManager();
+            PackageManager packageManager = LLUtils.getmContext().getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(
-                    LiuleiUtils.getmContext().getPackageName(), 0);
+                    LLUtils.getmContext().getPackageName(), 0);
             int labelRes = packageInfo.applicationInfo.labelRes;
-            return LiuleiUtils.getmContext().getResources().getString(labelRes);
+            return LLUtils.getmContext().getResources().getString(labelRes);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -35,9 +35,9 @@ public class AppUtils {
      */
     public static String getVersionName() {
         try {
-            PackageManager packageManager = LiuleiUtils.getmContext().getPackageManager();
+            PackageManager packageManager = LLUtils.getmContext().getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(
-                    LiuleiUtils.getmContext().getPackageName(), 0);
+                    LLUtils.getmContext().getPackageName(), 0);
             return packageInfo.versionName;
 
         } catch (PackageManager.NameNotFoundException e) {

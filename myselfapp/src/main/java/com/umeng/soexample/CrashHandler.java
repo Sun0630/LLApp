@@ -3,11 +3,9 @@ package com.umeng.soexample;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Environment;
 import android.os.Looper;
 
 import com.heaton.liulei.utils.utils.FileOperateUtils;
-import com.heaton.liulei.utils.utils.LiuleiUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

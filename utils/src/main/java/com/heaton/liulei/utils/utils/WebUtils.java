@@ -15,7 +15,7 @@ public class WebUtils {
     public static boolean isConnect() {
         // 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）
         try {
-            ConnectivityManager connectivity = (ConnectivityManager) LiuleiUtils.getmContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager connectivity = (ConnectivityManager) LLUtils.getmContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null) {
                 // 获取网络连接管理的对象
                 NetworkInfo info = connectivity.getActiveNetworkInfo();
@@ -38,7 +38,7 @@ public class WebUtils {
      * @return
      */
     public static boolean isWifi() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) LiuleiUtils.getmContext()
+        ConnectivityManager connectivityManager = (ConnectivityManager) LLUtils.getmContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetInfo != null

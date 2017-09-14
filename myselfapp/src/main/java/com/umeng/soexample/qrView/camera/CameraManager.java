@@ -29,7 +29,7 @@ import android.view.SurfaceHolder;
 
 
 import com.heaton.liulei.utils.utils.ImageUtils;
-import com.heaton.liulei.utils.utils.LiuleiUtils;
+import com.heaton.liulei.utils.utils.LLUtils;
 
 import java.io.IOException;
 
@@ -46,10 +46,10 @@ public final class CameraManager {
 
 	private static final String TAG = CameraManager.class.getSimpleName();
 
-	private static final int MIN_FRAME_WIDTH = ImageUtils.dip2px(LiuleiUtils.getmContext(),180);
-	private static final int MIN_FRAME_HEIGHT = ImageUtils.dip2px(LiuleiUtils.getmContext(),180);
-	private static final int MAX_FRAME_WIDTH = ImageUtils.dip2px(LiuleiUtils.getmContext(),220);
-	private static final int MAX_FRAME_HEIGHT = ImageUtils.dip2px(LiuleiUtils.getmContext(),220);
+	private static final int MIN_FRAME_WIDTH = ImageUtils.dip2px(LLUtils.getmContext(),180);
+	private static final int MIN_FRAME_HEIGHT = ImageUtils.dip2px(LLUtils.getmContext(),180);
+	private static final int MAX_FRAME_WIDTH = ImageUtils.dip2px(LLUtils.getmContext(),220);
+	private static final int MAX_FRAME_HEIGHT = ImageUtils.dip2px(LLUtils.getmContext(),220);
 
 	private final Context context;
 	private final CameraConfigurationManager configManager;

@@ -6,7 +6,7 @@ import android.os.StrictMode;
 import com.android.core.control.logcat.BuildConfig;
 import com.android.core.control.logcat.Logcat;
 import com.android.core.utils.ThemeUtils;
-import com.heaton.liulei.utils.utils.LiuleiUtils;
+import com.heaton.liulei.utils.utils.LLUtils;
 
 /**
  * 作者： liulei
@@ -34,7 +34,7 @@ public class BaseApplication extends Application {
         //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
         BuildConfig.DEBUG = false;
         //初始化LiuleiUtils
-        LiuleiUtils.init(this);
+        LLUtils.init(this);
 //        //litepal的配置
 //        LitePalApplication.initialize(this);
         //崩溃日志

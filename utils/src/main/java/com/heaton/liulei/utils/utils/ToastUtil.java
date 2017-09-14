@@ -13,7 +13,7 @@ public final class ToastUtil {
 
     public static void showToast(String text) {
         if (mToast == null) {
-            mToast = Toast.makeText(LiuleiUtils.getmContext(), text, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(LLUtils.getmContext(), text, Toast.LENGTH_SHORT);
         } else {
             mToast.setText(text);
             mToast.setDuration(Toast.LENGTH_SHORT);
@@ -23,7 +23,7 @@ public final class ToastUtil {
 
     public static void showToast( int paramInt) {
         if (mToast == null) {
-            mToast = Toast.makeText(LiuleiUtils.getmContext(), paramInt, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(LLUtils.getmContext(), paramInt, Toast.LENGTH_SHORT);
         } else {
             mToast.setText(paramInt);
             mToast.setDuration(Toast.LENGTH_SHORT);

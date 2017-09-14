@@ -100,7 +100,7 @@ public class CacheUtils {
      */
     public static CacheUtils getInstance(String cacheName, long maxSize, int maxCount) {
         if (isSpace(cacheName)) cacheName = "cacheUtils";
-        File file = new File(LiuleiUtils.getmContext().getCacheDir(), cacheName);
+        File file = new File(LLUtils.getmContext().getCacheDir(), cacheName);
         return getInstance(file, maxSize, maxCount);
     }
 
@@ -956,7 +956,7 @@ public class CacheUtils {
         }
 
         private static Drawable Bitmap2Drawable(Bitmap Bitmap) {
-            return Bitmap == null ? null : new BitmapDrawable(LiuleiUtils.getmContext().getResources(), Bitmap);
+            return Bitmap == null ? null : new BitmapDrawable(LLUtils.getmContext().getResources(), Bitmap);
         }
     }
 

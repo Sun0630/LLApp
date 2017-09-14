@@ -30,7 +30,7 @@ public class ScreenUtils {
      * @return
      */
     public static int getScreenWidth() {
-        WindowManager wm = (WindowManager) LiuleiUtils.getmContext()
+        WindowManager wm = (WindowManager) LLUtils.getmContext()
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
@@ -43,7 +43,7 @@ public class ScreenUtils {
      * @return
      */
     public static int getScreenHeight() {
-        WindowManager wm = (WindowManager) LiuleiUtils.getmContext()
+        WindowManager wm = (WindowManager) LLUtils.getmContext()
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
@@ -63,7 +63,7 @@ public class ScreenUtils {
             Object object = clazz.newInstance();
             int height = Integer.parseInt(clazz.getField("status_bar_height")
                     .get(object).toString());
-            statusHeight = LiuleiUtils.getmContext().getResources().getDimensionPixelSize(height);
+            statusHeight = LLUtils.getmContext().getResources().getDimensionPixelSize(height);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,7 +5,6 @@ package com.heaton.liulei.utils.utils;
  * 公司：希顿科技
  */
 
-import android.content.Context;
 import android.util.TypedValue;
 
 /**
@@ -20,7 +19,7 @@ public class DensityUtils {
      */
     public static int dp2px(float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, LiuleiUtils.getmContext().getResources().getDisplayMetrics());
+                dpVal, LLUtils.getmContext().getResources().getDisplayMetrics());
     }
 
     /**
@@ -31,7 +30,7 @@ public class DensityUtils {
      */
     public static int sp2px( float spVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-                spVal, LiuleiUtils.getmContext().getResources().getDisplayMetrics());
+                spVal, LLUtils.getmContext().getResources().getDisplayMetrics());
     }
 
     /**
@@ -41,7 +40,7 @@ public class DensityUtils {
      * @return
      */
     public static float px2dp(float pxVal) {
-        final float scale = LiuleiUtils.getmContext().getResources().getDisplayMetrics().density;
+        final float scale = LLUtils.getmContext().getResources().getDisplayMetrics().density;
         return (pxVal / scale);
     }
 
@@ -52,7 +51,7 @@ public class DensityUtils {
      * @return
      */
     public static float px2sp( float pxVal) {
-        return (pxVal / LiuleiUtils.getmContext().getResources().getDisplayMetrics().scaledDensity);
+        return (pxVal / LLUtils.getmContext().getResources().getDisplayMetrics().scaledDensity);
     }
 
 }

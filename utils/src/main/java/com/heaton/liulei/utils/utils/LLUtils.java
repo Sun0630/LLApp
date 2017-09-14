@@ -10,7 +10,7 @@ import java.io.File;
  * 公司：希顿科技
  */
 
-public class LiuleiUtils {
+public class LLUtils {
     public static Context mContext;
 
 
