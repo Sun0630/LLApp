@@ -9,14 +9,25 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 import com.heaton.liulei.utils.R;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.RandomAccessFile;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,11 +46,36 @@ import java.util.Locale;
 public class FileOperateUtils {
     public final static String TAG = "FileOperateUtil";
 
+    public static String PATH_ROOT;                    //扩展存储路径
+    public static String PATH_LOGS;                   //日志文件路径
+    public static String CACHE_PATH;                  //缓存文件路径
+
+    public static final String CACHE_FILE = "cache";//缓存文件名
+    public static String PATH_NAME = "LLAPP";//扩展存储文件夹
+    public static String CACHE_DAILY = "yyyy-MM-dd";//缓存日期文件名格式
+    public static String CACHE_TIMELY = "HH:mm:ss";//缓存时间文件名格式
+    public static String LOG_FILE_NAME = "yyyy-MM-dd";//日志文件名格式
+    public static String LOG_EXT = ".log";//日志文件扩展名
+    public static String LOG_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";//日志记录时间格式
+
     public final static int ROOT = 0;//根目录
     public final static int TYPE_IMAGE = 1;//图片
     public final static int TYPE_THUMBNAIL = 2;//缩略图
     public final static int TYPE_VIDEO = 3;//视频
-    private Paint paint = new Paint();
+    public static File mRootFile;
+    public static File mCacheFile;
+    public static File mLogFile;
+
+
+    //初始化缓存、log文件夹
+    public static void init() {
+        PATH_ROOT = Environment.getExternalStorageDirectory().getPath() + File.separator + PATH_NAME + File.separator;//扩展存储路径
+        PATH_LOGS = PATH_ROOT + File.separator + "logs" + File.separator;//日志文件路径
+        CACHE_PATH = PATH_ROOT + File.separator + "cache" + File.separator;//缓存文件路径
+        mRootFile = createFile(PATH_ROOT);
+        mCacheFile = createFile(PATH_LOGS);
+        mLogFile = createFile(CACHE_PATH);
+    }
 
     /**
      * 获取文件夹路径
@@ -76,12 +112,60 @@ public class FileOperateUtils {
         return pathBuilder.toString();
     }
 
+    //获取根文件夹
+    public static File getRootFile() {
+        return mRootFile;
+    }
+
+    //获取缓存文件夹
+    public static File getCacheFile() {
+        return mCacheFile;
+    }
+
+    //获取Logs文件夹
+    public static File getLogsFile() {
+        return mLogFile;
+    }
+
+    /**
+     * 创建文件夹
+     *
+     * @param name 文件夹路径
+     * @return 是否成功
+     */
+    public static File createFile(String name) {
+        File file = new File(name);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        return file;
+    }
+
+    /**
+     * 创建文件夹
+     *
+     * @param name  文件夹路径
+     * @param child 子文件的名称   如：2017041254.jpg
+     * @return 是否成功
+     */
+    public static File createFile(String name, String child) {
+        File file = new File(name, child);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+    }
+
     /**
      * 获取目标文件夹内指定后缀名的文件数组,按照修改日期排序
      *
-     * @param file      目标文件夹路径
-     * @param format 指定后缀名
-     * @param content   包含的内容,用以查找视频缩略图
+     * @param file    目标文件夹路径
+     * @param format  指定后缀名
+     * @param content 包含的内容,用以查找视频缩略图
      * @return
      */
     public static List<File> listFiles(String file, final String format, String content) {
@@ -350,6 +434,186 @@ public class FileOperateUtils {
         canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.restore();
         return newmap;
+    }
+
+    /**
+     * 检测Sdcard是否存在
+     *
+     * @return
+     */
+    public static boolean isExitsSdcard() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
+    /**
+     * 判断SD卡是否存在
+     *
+     * @return
+     */
+    public static boolean isSDExsit() {
+        return Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED);
+    }
+
+    /**
+     * 外置存储卡的路径
+     *
+     * @return
+     */
+    public static String getExternalStorePath() {
+        if (isExistExternalStore()) {
+            return Environment.getExternalStorageDirectory().getAbsolutePath();
+        }
+        return null;
+    }
+
+    /**
+     * 是否有外存卡
+     *
+     * @return
+     */
+    public static boolean isExistExternalStore() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
+    /**
+     * 拷贝文件
+     *
+     * @param fileDir
+     * @param fileName
+     * @param buffer
+     * @return
+     */
+    public static int copyFile(String fileDir, String fileName, byte[] buffer) {
+        if (buffer == null) {
+            return -2;
+        }
+
+        try {
+            File file = new File(fileDir);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            File resultFile = new File(file, fileName);
+            if (!resultFile.exists()) {
+                resultFile.createNewFile();
+            }
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
+                    new FileOutputStream(resultFile, true));
+            bufferedOutputStream.write(buffer);
+            bufferedOutputStream.flush();
+            bufferedOutputStream.close();
+            return 0;
+
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+
+    /**
+     * @param filePath
+     * @param seek
+     * @param length
+     * @return
+     */
+    public static byte[] readFlieToByte(String filePath, int seek, int length) {
+        if (TextUtils.isEmpty(filePath)) {
+            return null;
+        }
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return null;
+        }
+        if (length == -1) {
+            length = (int) file.length();
+        }
+
+        try {
+            RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+            byte[] bs = new byte[length];
+            randomAccessFile.seek(seek);
+            randomAccessFile.readFully(bs);
+            randomAccessFile.close();
+            return bs;
+        } catch (Exception e) {
+            e.printStackTrace();
+//            LogUtil.e(LogUtil.getLogUtilsTag(FileUtils.class), "readFromFile : errMsg = " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * decode file length
+     *
+     * @param filePath
+     * @return
+     */
+    public static int decodeFileLength(String filePath) {
+        if (TextUtils.isEmpty(filePath)) {
+            return 0;
+        }
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return 0;
+        }
+        return (int) file.length();
+    }
+
+    public static void downVoice(final String downloadUrl, final String path) {
+        //创建文件夹 VideoCarVoice，在存储卡下
+        final String fileName = getVoicePath(path);
+        File file1 = new File(fileName);
+        if (file1.exists()) {
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(downloadUrl);
+                    //打开连接
+                    URLConnection conn = url.openConnection();
+                    //打开输入流
+                    InputStream is = conn.getInputStream();
+                    //获得长度
+                    int contentLength = conn.getContentLength();
+                    Log.e("Utils", "contentLength = " + contentLength);
+//                    //创建文件夹 MyDownLoad，在存储卡下
+//                    fileName = getVoicePath(path);
+//                    final File file1 = new File(fileName);
+//                    if (file1.exists()) {
+//                        return ;
+//                    }
+                    //创建字节流
+                    byte[] bs = new byte[1024];
+                    int len;
+                    OutputStream os = new FileOutputStream(fileName);
+                    //写数据
+                    while ((len = is.read(bs)) != -1) {
+                        os.write(bs, 0, len);
+                    }
+                    //完成后关闭流
+                    Log.e("Utils", "download-finish");
+                    os.close();
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    @NonNull
+    public static String getVoicePath(String path) {
+        String dirName = Environment.getExternalStorageDirectory() + "/VideoCarVoice/";
+        File file = new File(dirName);
+        //不存在创建
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        //下载后的文件名
+        String filePath = dirName + path + ".amr";
+        return filePath;
     }
 
 

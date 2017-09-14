@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/user_header"
+        android:layout_margin="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/user_header"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_toRightOf="@id/user_header"
+        android:layout_alignTop="@+id/user_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/username7"
+        android:textSize="16sp"
+        android:text="小艾"/>
+
+    <TextView
+        android:id="@+id/user_content"
+        android:layout_toRightOf="@id/user_header"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        android:text="什么也没有发表。。。"/>
+
+    <ImageView
+        android:id="@+id/user_img"
+        android:layout_below="@+id/user_content"
+        android:layout_toRightOf="@id/user_header"
+        android:scaleType="fitXY"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:src="@mipmap/b_1"
+        android:visibility="gone"/>
+
+    <com.umeng.soexample.custom.InnerGridView
+        android:id="@+id/gv_circle"
+        android:layout_below="@+id/user_content"
+        android:layout_toRightOf="@id/user_header"
+        android:layout_marginRight="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="2dp"
+        android:scrollbars="none"
+        android:numColumns="3"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_toRightOf="@id/user_header"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/gv_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_overlay"
+        android:textSize="14sp"
+        android:text="刚刚"/>
+
+    <ImageView
+        android:id="@+id/comment"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/gv_circle"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/circle_commit"/>
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/user_header"
+        android:layout_below="@+id/time"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/zan_detail"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/zan_layout"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone">
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="小艾"/>-->
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.05dp"
+            android:background="@color/line"/>
+
+        <LinearLayout
+            android:id="@+id/comment_layout"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:visibility="gone">
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

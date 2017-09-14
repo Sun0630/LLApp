@@ -13,6 +13,7 @@ import android.view.animation.LinearInterpolator;
 import com.android.core.StaticValue;
 import com.android.core.base.AbsBaseActivity;
 import com.bumptech.glide.Glide;
+import com.heaton.liulei.utils.utils.FileOperateUtils;
 import com.umeng.soexample.R;
 import com.android.core.control.MDTintUtil;
 import com.umeng.soexample.custom.PinchImageView;
@@ -70,7 +71,7 @@ public class BigPhotoActivity extends AbsBaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         try {
-                            getImageURI(URL, OtherUtils.getCacheFile(),"iverson");
+                            getImageURI(URL, FileOperateUtils.getCacheFile(),FileOperateUtils.createFileNmae(".jpg"));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -104,7 +105,7 @@ public class BigPhotoActivity extends AbsBaseActivity {
         mAnimator.setInterpolator(new LinearInterpolator());
         mAnimator.start();
         try {
-            getImageURI(URL, OtherUtils.getCacheFile(),"iverson");
+            getImageURI(URL, FileOperateUtils.getCacheFile(),FileOperateUtils.createFileNmae(".jpg"));
         } catch (Exception e) {
             e.printStackTrace();
         }

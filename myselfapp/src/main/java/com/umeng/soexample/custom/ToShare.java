@@ -1,5 +1,6 @@
 package com.umeng.soexample.custom;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.baronzhang.android.router.RouterInjector;
+import com.baronzhang.android.router.annotation.inject.InjectUriParam;
+import com.heaton.liulei.utils.utils.ToastUtil;
 import com.umeng.soexample.R;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -21,12 +25,13 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
 import com.umeng.socialize.media.UMusic;
+import com.umeng.soexample.base.RouterBaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class ToShare extends Activity {
+public class ToShare extends RouterBaseActivity {
 
     @Bind(R.id.sl_title)
     TextView slTitle;
@@ -63,17 +68,24 @@ public class ToShare extends Activity {
     UMVideo video;
     String url;
 
+    @InjectUriParam
+    String preActivity;
+
+    @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.share_layout);
         ButterKnife.bind(this);
+        RouterInjector.inject(this);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         getWindow().setGravity(Gravity.BOTTOM);
         initView();
     }
 
     public void initView() {
+
+        ToastUtil.showToast(preActivity);
         //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.info_icon_1);
         //UMImage image = new UMImage(ShareActivity.this,bitmap);
         UMusic music = new UMusic("http://music.huoxing.com/upload/20130330/1364651263157_1085.mp3");

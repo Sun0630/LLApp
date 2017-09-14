@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">MySelfApp</string>
+    <string name="app_name">LLAPP</string>
 
     <string name="abc_tab_text_home">首页</string>
     <string name="abc_tab_text_find">发现</string>
+    <string name="abc_tab_text_cirle">朋友圈</string>
     <string name="abc_tab_text_function">功能</string>
     <string name="abc_tab_text_set">设置</string>
     <string name="action_settings">Settings</string>
@@ -136,4 +137,9 @@
         \n com.squareup.okhttp3:okhttp:3.0.1
         \n com.squareup.okhttp3:logging-interceptor:3.0.1
     </string>
+    <string name="action_clear_chat">清空聊天记录</string>
+    <string name="user_header">好友头像</string>
+    <string name="circle">朋友圈</string>
+
+    <string name="quick_service_name">QuickService</string>
 </resources>

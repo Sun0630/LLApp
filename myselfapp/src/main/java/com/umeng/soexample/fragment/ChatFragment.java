@@ -25,14 +25,15 @@ import android.widget.Toast;
 
 import com.umeng.soexample.App;
 import com.umeng.soexample.Constants;
-import com.umeng.soexample.Message;
-import com.umeng.soexample.MessageAdapter;
+import com.umeng.soexample.bean.Message;
+import com.umeng.soexample.adapter.MessageAdapter;
 import com.umeng.soexample.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.socket.client.Socket;
@@ -199,8 +200,12 @@ public class ChatFragment extends Fragment {
     }
 
     private void addLog(String message) {
-        mMessages.add(new Message.Builder(Message.TYPE_LOG)
-                .message(message).build());
+//        mMessages.add(new Message.Builder(Message.TYPE_LOG)
+//                .message(message).build());
+        Message msg = new Message();
+        msg.setType(Constants.TYPE_LOG);
+        msg.setMessage(message);
+        mMessages.add(msg);
         mAdapter.notifyItemInserted(mMessages.size() - 1);
         scrollToBottom();
     }
@@ -209,16 +214,37 @@ public class ChatFragment extends Fragment {
         addLog(getResources().getQuantityString(R.plurals.message_participants, numUsers, numUsers));
     }
 
-    private void addMessage(String username, String message) {
-        mMessages.add(new Message.Builder(Message.TYPE_MESSAGE)
-                .username(username).message(message).build());
+    private void addSendMessage(String username, String message) {
+//        mMessages.add(new Message.Builder(Message.TYPE_TO_MESSAGE)
+//                .username(username).message(message).build());
+        Message msg = new Message();
+        msg.setType(Constants.TYPE_TO_MESSAGE);
+        msg.setUsername(username);
+        msg.setMessage(message);
+        mMessages.add(msg);
+        mAdapter.notifyItemInserted(mMessages.size() - 1);
+        scrollToBottom();
+    }
+
+    private void addRecMessage(String username, String message) {
+//        mMessages.add(new Message.Builder(Message.TYPE_FROM_MESSAGE)
+//                .username(username).message(message).build());
+        Message msg = new Message();
+        msg.setType(Constants.TYPE_FROM_MESSAGE);
+        msg.setUsername(username);
+        msg.setMessage(message);
+        mMessages.add(msg);
         mAdapter.notifyItemInserted(mMessages.size() - 1);
         scrollToBottom();
     }
 
     private void addTyping(String username) {
-        mMessages.add(new Message.Builder(Message.TYPE_ACTION)
-                .username(username).build());
+//        mMessages.add(new Message.Builder(Message.TYPE_ACTION)
+//                .username(username).build());
+        Message msg = new Message();
+        msg.setType(Constants.TYPE_ACTION);
+        msg.setUsername(username);
+        mMessages.add(msg);
         mAdapter.notifyItemInserted(mMessages.size() - 1);
         scrollToBottom();
     }
@@ -226,7 +252,7 @@ public class ChatFragment extends Fragment {
     private void removeTyping(String username) {
         for (int i = mMessages.size() - 1; i >= 0; i--) {
             Message message = mMessages.get(i);
-            if (message.getType() == Message.TYPE_ACTION && message.getUsername().equals(username)) {
+            if (message.getType() == Constants.TYPE_ACTION && message.getUsername().equals(username)) {
                 mMessages.remove(i);
                 mAdapter.notifyItemRemoved(i);
             }
@@ -247,7 +273,7 @@ public class ChatFragment extends Fragment {
         }
 
         mInputMessageView.setText("");
-        addMessage(Constants.user_name, message);
+        addSendMessage(Constants.user_name, message);
 
         // perform the sending message attempt.
         mSocket.emit("new message", message);
@@ -332,7 +358,7 @@ public class ChatFragment extends Fragment {
                     }
 
                     removeTyping(username);
-                    addMessage(username, message);
+                    addRecMessage(username, message);
                 }
             });
         }

@@ -26,6 +26,12 @@
             android:textColor="@color/abc_white"
             android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/right_text"
+            android:layout_gravity="right|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </android.support.v7.widget.Toolbar>
 
 </LinearLayout>

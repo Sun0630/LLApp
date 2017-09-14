@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -198,10 +199,12 @@ public class ScreenUtils {
      * @return  截图保存  并返回图片的路径
      */
     public static String shotDir(Activity pActivity){
-        String dir = "sdcard/" + System.currentTimeMillis() + ".png";
-        boolean isSave = savePic(takeScreenShot(pActivity),dir);
+//        String dir = "sdcard/" + System.currentTimeMillis() + ".png";
+        File file = FileOperateUtils.createFile(FileOperateUtils.CACHE_PATH + "/shot_creen/");
+        File shotFile = new File(file, "原图"+FileOperateUtils.createFileNmae(".png"));
+        boolean isSave = savePic(takeScreenShot(pActivity),shotFile.getAbsolutePath());
         if(isSave){
-            return dir;
+            return shotFile.getAbsolutePath();
         }else {
             ToastUtil.showToast("截图保存出错");
         }

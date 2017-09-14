@@ -15,19 +15,47 @@ import com.android.core.R;
 import com.android.core.control.ScreenUtil;
 import com.android.core.control.CustomInterface;
 
+import java.lang.ref.WeakReference;
+
 /**
  * @作者: liulei
  * @公司：希顿科技
+ *
  */
 public class CustomViewpager extends RelativeLayout implements CustomInterface {
 
     private ViewPager vpAd;
     private LinearLayout llIndexContainer;
+    private ScrollHandler mHandler;
 
-    private final int AUTO_SCORLL = 1;
+    public static final int AUTO_SCORLL = 1;
     private boolean isStart;
-    private Handler mHandler;
 
+    public static class ScrollHandler extends Handler{
+        private WeakReference<CustomViewpager>mViewPager;
+
+        private ScrollHandler(CustomViewpager viewpager){
+            mViewPager = new WeakReference<CustomViewpager>(viewpager);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            CustomViewpager viewpager = mViewPager.get();
+            if(viewpager == null){
+                return;
+            }
+            switch (msg.what) {
+                case CustomViewpager.AUTO_SCORLL:
+                    if (viewpager.isStart) {
+                        if (viewpager.vpAd.getChildCount() > 1) {
+                            viewpager.vpAd.setCurrentItem(viewpager.vpAd.getCurrentItem() + 1, true);
+                        }
+                        viewpager.mHandler.sendEmptyMessageDelayed(CustomViewpager.AUTO_SCORLL, 3000);
+                    }
+                    break;
+            }
+        }
+    }
     public CustomViewpager(Context context) {
         super(context);
         onInitView();
@@ -47,23 +75,7 @@ public class CustomViewpager extends RelativeLayout implements CustomInterface {
         View view = View.inflate(getContext(), R.layout.abc_viewpager_layout, this);
         vpAd = (ViewPager) view.findViewById(R.id.vp_ad);
         llIndexContainer = (LinearLayout) view.findViewById(R.id.ll_index_container);
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what) {
-                    case AUTO_SCORLL:
-                        if (isStart) {
-                            if (vpAd.getChildCount() > 1) {
-                                vpAd.setCurrentItem(vpAd.getCurrentItem() + 1, true);
-                            }
-                            mHandler.sendEmptyMessageDelayed(AUTO_SCORLL, 3000);
-                        }
-                        break;
-                }
-            }
-        };
-
+        mHandler = new ScrollHandler(this);
     }
 
     @Override

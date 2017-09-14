@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by admin on 2017/3/6.
+ * Created by LiuLei on 2017/3/6.
  * /**
  * 线程池管理 管理整个项目中所有的线程，所以不能有多个实例对象
  */

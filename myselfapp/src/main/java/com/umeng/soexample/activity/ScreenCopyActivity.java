@@ -1,5 +1,6 @@
 package com.umeng.soexample.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,14 +10,27 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.baronzhang.android.router.RouterInjector;
+import com.baronzhang.android.router.annotation.inject.Inject;
+import com.baronzhang.android.router.annotation.inject.InjectUriParam;
+import com.bumptech.glide.Glide;
+import com.heaton.liulei.utils.utils.FileOperateUtils;
+import com.heaton.liulei.utils.utils.ImageUtils;
+import com.heaton.liulei.utils.utils.LogUtils;
+import com.umeng.soexample.MainActivity;
 import com.umeng.soexample.R;
 import com.heaton.liulei.utils.utils.ToastUtil;
+import com.umeng.soexample.compress.Luban;
+import com.umeng.soexample.compress.OnCompressListener;
+import com.umeng.soexample.task.TaskExecutor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,6 +43,8 @@ import java.io.IOException;
  */
 
 public class ScreenCopyActivity extends Activity {
+
+    private static final String TAG = "ScreenCopyActivity";
 
     private ImageView copy;
     private Button save;
@@ -49,12 +65,13 @@ public class ScreenCopyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_copy);
+        RouterInjector.inject(this);
 
         copy = (ImageView) findViewById(R.id.copy_img);
         save = (Button) findViewById(R.id.save);
 
         String shotDir = getIntent().getStringExtra("shotDir");
-        if(!shotDir.equals("")){
+        if(shotDir != null && !TextUtils.isEmpty(shotDir)){
             bitmap = BitmapFactory.decodeFile(shotDir);
             // 创建缩放后的图片副本
             copyBitmap = Bitmap.createBitmap(bitmap.getWidth(),
@@ -95,13 +112,11 @@ public class ScreenCopyActivity extends Activity {
 //                                .openOutputStream(imageUri);
 //                        // 将alterBitmap存入图库
 //                        copyBitmap.compress(Bitmap.CompressFormat.PNG, 50, outputStream);
-                        File file = new File(Environment.getExternalStorageDirectory() + "/shot_creen/");
-                        if (!file.exists()) {
-                            file.mkdir();
-                        }
-                        File shotFile = new File(file, System.currentTimeMillis() + ".png");
+                        File file = FileOperateUtils.createFile(FileOperateUtils.CACHE_PATH + "/shot_creen/");
+                        File shotFile = new File(file, FileOperateUtils.createFileNmae(".png"));
                         FileOutputStream out = new FileOutputStream(shotFile);
                         copyBitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
+
                         if(bitmap!=null){
                             bitmap.recycle();
                             Log.d("ScreenCopyActivity", "bitmap is recycled");

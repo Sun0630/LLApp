@@ -1,15 +1,25 @@
 package com.umeng.soexample.fragment;
 
+import android.database.Cursor;
 import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -23,6 +33,8 @@ import com.android.core.base.AbsBaseFragment;
 import com.android.core.control.XRecyclerViewHelper;
 import com.android.core.listener.ThemeChangeListener;
 import com.android.core.widget.CustomViewpager;
+import com.android.core.widget.recyclerviewwithfooter.OnLoadMoreListener;
+import com.android.core.widget.recyclerviewwithfooter.RecyclerViewWithFooter;
 import com.heaton.liulei.utils.utils.ToastUtil;
 import com.umeng.soexample.MainActivity;
 import com.umeng.soexample.R;
@@ -31,6 +43,7 @@ import com.umeng.soexample.adapter.CustomViewPageAdapter;
 import com.umeng.soexample.adapter.DisCoverRecyclerAdapter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.umeng.soexample.adapter.MsRecyclerAdapter;
+import com.umeng.soexample.adapter.RecycleViewDivider;
 import com.umeng.soexample.bean.AdBean;
 import com.umeng.soexample.bean.MsBean;
 import com.umeng.soexample.custom.LimitScrollerView;
@@ -39,6 +52,7 @@ import com.umeng.soexample.custom.timer.TimerUtils;
 import com.umeng.soexample.task.TaskExecutor;
 import com.umeng.soexample.task.ThreadPoolManager;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
@@ -46,42 +60,38 @@ import butterknife.ButterKnife;
 
 
 /**
- * author meikoz on 2016/4/19.
- * email  meikoz@126.com
+ * Created by LiuLei on 2017/2/23.
+ *
  */
-public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.LoadingListener,ThemeChangeListener{
+public class DiscoveryFragment extends AbsBaseFragment implements ThemeChangeListener, OnLoadMoreListener {
+
+    private static final String TAG = "DiscoveryFragment";
 
     @Bind(R.id.listView)
-    XRecyclerView listView;
+    RecyclerViewWithFooter listView;
     @Bind(R.id.fab2)
     FloatingActionButton fab;
-//    @Bind(R.id.appbar)
-//    AppBarLayout mAppBarLayout;
-//    @Bind(R.id.collapsing_toolbar)
-//    CollapsingToolbarLayout mCollapsingToolbar;
-    @Bind(R.id.discover_tool)
-    LinearLayout discover_tool;
-    @Bind(R.id.ll_discover_search)
-    LinearLayout ll_search;
-    @Bind(R.id.study)
-    Button study;
+    @Bind(R.id.limitScroll)
     LimitScrollerView limitScroll;
-    private LinearLayout timer;
-    private RecyclerView recyclerView_ms;
+    @Bind(R.id.timer)
+    LinearLayout timer;
+    @Bind(R.id.recyclerView)
+    RecyclerView recyclerView_ms;
     private MsRecyclerAdapter msRecyclerAdapter;
     private DisCoverRecyclerAdapter recyclerAdapter;
-    private CustomViewpager mViewpage;
+    @Bind(R.id.viewpager)
+    CustomViewpager mViewpage;
+    @Bind(R.id.find_toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout mCollapsingToolbar;
     private int index = 0;// 当前第几次加载
     private int mCurrntDataSize = 20;//当前数据量   最大为100
     private List<Integer> mAdList;
     private List<MsBean>msDatas;
     private MyLimitScrollAdapter mLimitAdapter;
-    /**
-     * 广告图片
-     */
-    private List<Integer> posterImage = null;
-    private int height;
-    private float mDistanceY = 0, mLastY = 0, mLastDeltaY;
+    private SearchView mSearchView;
+    private SearchView.SearchAutoComplete mSearchAutoComplete;
 
 
     private List<String> datas = new ArrayList<>();
@@ -105,6 +115,7 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
     private void addData(int index) {//模拟加载数据，每次增加10条   直到100
         if (index > 4) {
             ToastUtil.showToast("数据加载完了，亲...");
+            listView.setEnd();
             return;
         }
         for (int i = 0; i < 10; i++) {
@@ -117,33 +128,28 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
     @Override
     protected void onInitView() {
 
+        setHasOptionsMenu(true);
+        initTool();
+
         getAdData();
-
-        fab.setColorNormal(StaticValue.color);
-        XRecyclerViewHelper.init().setLinearLayout(getActivity(), listView);
-        for (int i = 0; i < 20; i++) {
-            datas.add("测试数据" + i);
-        }
-        View headView = mInflater.inflate(R.layout.find_head_layout, listView, false);
-        limitScroll = (LimitScrollerView) headView.findViewById(R.id.limitScroll);
-//        mAppBarLayout = (AppBarLayout) headView.findViewById(R.id.appbar);
-//        mCollapsingToolbar = (CollapsingToolbarLayout) headView.findViewById(R.id.collapsing_toolbar);
-//        discover_tool = (LinearLayout) headView.findViewById(R.id.discover_tool);
-//        ll_search = (LinearLayout) headView.findViewById(R.id.ll_discover_search);
-//        study = (Button) headView.findViewById(R.id.study);
-        timer = (LinearLayout) headView.findViewById(R.id.timer);
-        recyclerView_ms = (RecyclerView) headView.findViewById(R.id.recyclerView);
-
-        mViewpage = (CustomViewpager) headView.findViewById(R.id.viewpager);
-        listView.addHeaderView(headView);
         CustomViewPageAdapter adapter = new CustomViewPageAdapter(getActivity(), mAdList);
         mViewpage.updateIndicatorView(mAdList.size(), 0);
         mViewpage.setAdapter(adapter);
         mViewpage.startScorll();
 
+//        XRecyclerViewHelper.init().setLinearLayout(getActivity(), listView);
+        listView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        listView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL));
+//        listView.setAdapter(mAdapter);
+        for (int i = 0; i < 20; i++) {
+            datas.add("测试数据" + i);
+        }
         recyclerAdapter = new DisCoverRecyclerAdapter(getActivity(), R.layout.discover_item, datas);
+        listView.setNestedScrollingEnabled(false);
         listView.setAdapter(recyclerAdapter);
+        listView.setOnLoadMoreListener(this);
 
+        fab.setColorNormal(StaticValue.color);
         fab.attachToRecyclerView(listView);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,47 +157,84 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
                 listView.smoothScrollToPosition(0);
             }
         });
-        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                //滑动的距离
-                mDistanceY += dy;
-                //toolbar的高度
-                int toolbarHeight = discover_tool.getBottom();
-
-                //当滑动的距离 <= toolbar高度的时候，改变Toolbar背景色的透明度，达到渐变的效果
-                if (mDistanceY <= toolbarHeight) {
-                    float scale = (float) mDistanceY / toolbarHeight;
-                    float alpha = scale * 255;
-                    discover_tool.setBackgroundColor(Color.argb((int) alpha, 128, 0, 0));
-                } else {
-                    //上述虽然判断了滑动距离与toolbar高度相等的情况，但是实际测试时发现，标题栏的背景色
-                    //很少能达到完全不透明的情况，所以这里又判断了滑动距离大于toolbar高度的情况，
-                    //将标题栏的颜色设置为完全不透明状态
-                    discover_tool.setBackgroundResource(R.color.colorPrimary);
-                }
-
-            }
-        });
-
-        listView.setLoadingListener(this);
 
         //API:1、设置数据适配器
         mLimitAdapter = new MyLimitScrollAdapter();
         limitScroll.setDataAdapter(mLimitAdapter);
 
-        initHeader();
         initTimer();
         initData();
         initMs();
     }
 
-    private void initHeader() {
-        discover_tool.setBackgroundColor(getResources().getColor(R.color.transparent));
-        ll_search.setAlpha(0.5f);
-        study.setAlpha(0.5f);
-//        mCollapsingToolbar.setContentScrimColor(StaticValue.color);
-//        mAppBarLayout.setBackgroundColor(StaticValue.color);
+    private void initTool() {
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
+        toolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的titl颜色
+        toolbar.setTitle("");
+        mCollapsingToolbar.setContentScrimColor(StaticValue.color);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mSearchAutoComplete.isShown()) {
+                    try {
+                        mSearchAutoComplete.setText("");
+                        Method method = mSearchView.getClass().getDeclaredMethod("onCloseClicked");
+                        method.setAccessible(true);
+                        method.invoke(mSearchView);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search_view, menu);
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        //通过MenuItem得到SearchView
+        mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSearchAutoComplete = (SearchView.SearchAutoComplete) mSearchView.findViewById(R.id.search_src_text);
+        mSearchView.setQueryHint("搜索你感兴趣的课程");
+
+        //设置输入框提示文字样式
+        mSearchAutoComplete.setHintTextColor(getResources().getColor(android.R.color.darker_gray));
+        mSearchAutoComplete.setTextColor(getResources().getColor(android.R.color.background_light));
+        mSearchAutoComplete.setTextSize(14);
+        //设置触发查询的最少字符数（默认2个字符才会触发查询）
+        mSearchAutoComplete.setThreshold(1);
+
+        //设置搜索框有字时显示叉叉，无字时隐藏叉叉
+        mSearchView.onActionViewExpanded();
+        mSearchView.setIconified(true);
+
+        //修改搜索框控件间的间隔（这样只是为了更加接近网易云音乐的搜索框）
+        LinearLayout search_edit_frame = (LinearLayout) mSearchView.findViewById(R.id.search_edit_frame);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) search_edit_frame.getLayoutParams();
+        params.leftMargin = 0;
+        params.rightMargin = 0;
+        search_edit_frame.setLayoutParams(params);
+
+        //监听SearchView的内容
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+//                Cursor cursor = TextUtils.isEmpty(s) ? null : queryData(s);
+
+//                setAdapter(cursor);
+
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void initMs() {
@@ -201,6 +244,7 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_ms.setLayoutManager(layoutManager);
+        recyclerView_ms.setNestedScrollingEnabled(false);
 
     }
 
@@ -228,8 +272,8 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
         ButterKnife.unbind(this);
     }
 
-    @Override
-    public void onRefresh() {
+//    @Override
+//    public void onRefresh() {
 //        new Thread(() -> {
 //            try {
 //                Thread.sleep(3000);
@@ -251,24 +295,25 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
 //                getActivity().runOnUiThread(() -> listView.refreshComplete());//使用lamdba表达式
 //            }
 //        });
-        ThreadPoolManager.getmInstance().execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                getActivity().runOnUiThread(() -> listView.refreshComplete());//使用lamdba表达式
-            }
-        });
-    }
+//        ThreadPoolManager.getmInstance().execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                getActivity().runOnUiThread(() -> listView.refreshComplete());//使用lamdba表达式
+//            }
+//        });
+//    }
+
 
     @Override
     public void onLoadMore() {
         new Thread(() -> {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
                 getActivity().runOnUiThread(this::loadMore);//使用lamdba表达式
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -279,7 +324,8 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
     private void loadMore() {
         index++;
         addData(index);
-        listView.loadMoreComplete();
+        recyclerAdapter.notifyDataSetChanged();
+//        listView.loadMoreComplete();
     }
 
     @Override
@@ -336,7 +382,7 @@ public class DiscoveryFragment extends AbsBaseFragment implements XRecyclerView.
 
         @Override
         public View getView(int index) {
-            View itemView = LayoutInflater.from(getContext()).inflate(R.layout.limit_scroller_item, null, false);
+            View itemView = LayoutInflater.from(getActivity()).inflate(R.layout.limit_scroller_item, null, false);//null异常   getActivity
             TextView tv_title = (TextView)itemView.findViewById(R.id.tv_title);
             TextView tv_text = (TextView)itemView.findViewById(R.id.tv_text);
 

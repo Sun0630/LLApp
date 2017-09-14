@@ -5,23 +5,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar_setting"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="bottom">
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:id="@+id/appbar_setting"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:gravity="bottom">-->
 
         <include
             android:id="@+id/set_toolbar"
             layout="@layout/toolbar_layout" />
 
-    </android.support.design.widget.AppBarLayout>
+    <!--</android.support.design.widget.AppBarLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
         android:background="@color/abc_white"
-        android:layout_below="@id/appbar_setting">
+        android:layout_below="@id/set_toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -262,6 +263,42 @@
                     android:text="清除缓存"
                     android:textColor="@color/text"
                     android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/wallPaper_rl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@mipmap/help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:text="视频桌面"
+                    android:textColor="@color/text"
+                    android:textSize="16sp" />
+
+                <com.umeng.soexample.custom.ToggleButton
+                    android:id="@+id/toggle_show_wallPaper"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </RelativeLayout>
 

@@ -7,7 +7,7 @@
            android:id="@+id/menu_search_btn"
            android:title="搜索歌曲"
            android:icon="@mipmap/actionbar_search"
-           android:actionViewClass="android.widget.SearchView"
+           android:actionViewClass="android.support.v7.widget.SearchView"
            app:showAsAction="ifRoom|collapseActionView"/>
        <item
            android:id="@+id/menu_more_scanMusic"

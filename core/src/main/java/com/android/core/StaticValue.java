@@ -13,13 +13,15 @@ import com.android.core.base.AbsBaseActivity;
  */
 public class StaticValue {
 
-	public static final String KEY_PATTERN_SHA1 = "pref_key_pattern_sha1";
-	public static final String DEFAULT_PATTERN_SHA1 = null;
+	public static final String PSW_TYPE = "psw_type";//密码锁类型   1为指纹  2为图案   0为未设置
 
-	public static final String IS_PSW_OPEN = "is_psw_open";//是否打开密码图案验证
+	public static final int SET_FINGER = 0;//设置手势
+	public static final int CHECK_FINGER = 1;//检测手势
+	public static final String FINGER = "finger";//手势
+
 
 	//主题色  白天和夜间模式
-	public static final String KEY_THEME = "pref_key_theme";
+	public static final String  KEY_NIGHT_MODE = "night_mode";
 	//主题颜色的key
 	public static final String THEME_COLOR = "theme_color";
 	public static int THEME_MODE = 0;//主题模式   默认是正常   1为夜间模式

@@ -20,6 +20,10 @@
     <color name="line">#dfdfdf</color>
     <color name="translucent01">#55000000</color>
 
+    <color name="yellow">#fd9c06</color>
+    <color name="red">#EE2C2C</color>
+    <color name="grey">#BDBDBD</color>
+
     <!--页面背景的颜色-->
     <color name="colorPageBg">#f2f4f5</color>
 
@@ -94,4 +98,12 @@
     <color name="umeng_socialize_web_bg">#F4F4F4</color>
     <color name="umeng_socialize_shareactivity">#D4E0E5</color>
     <color name="umeng_socialize_shareactivitydefault">#ffffff</color>
+
+    <!--//温度计-->
+    <!--指针左半部分颜色-->
+    <color name="leftPointer">#e1dcd6</color>
+    <!--指针右半部分颜色-->
+    <color name="rightPointer">#f4efe9</color>
+    <!--背景颜色-->
+    <color name="temperatureBackground">#FFFAFA</color>
 </resources>

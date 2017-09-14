@@ -18,6 +18,7 @@ import com.android.core.adapter.RecyclerViewHolder;
 import com.android.core.base.AbsBaseActivity;
 import com.android.core.base.AbsBaseFragment;
 import com.android.core.control.statusbar.StatusBarUtil;
+import com.baronzhang.android.router.RouterInjector;
 import com.heaton.liulei.utils.utils.StringUtils;
 import com.umeng.soexample.App;
 import com.umeng.soexample.Constants;
@@ -26,6 +27,8 @@ import com.umeng.soexample.activity.BigPhotoActivity;
 import com.umeng.soexample.activity.BloggerActivity;
 import com.umeng.soexample.activity.CameraAty;
 import com.umeng.soexample.activity.ChatActivity;
+import com.umeng.soexample.activity.ChatRobotActivity;
+import com.umeng.soexample.activity.CompressImgActivity;
 import com.umeng.soexample.activity.DanmuActivity;
 import com.umeng.soexample.activity.DownloadManagerDemo;
 import com.umeng.soexample.activity.FloatViewActivity;
@@ -36,16 +39,19 @@ import com.umeng.soexample.activity.NotifyActivity;
 import com.umeng.soexample.activity.PersonActivity;
 import com.umeng.soexample.activity.PopWindowActivity;
 import com.umeng.soexample.activity.QrViewActivity;
+import com.umeng.soexample.activity.RouterActivity;
 import com.umeng.soexample.activity.SQLActivity;
 import com.umeng.soexample.activity.ScreenCopyActivity;
 import com.umeng.soexample.activity.ShareActivity;
 import com.umeng.soexample.activity.SwipBackActivity;
+import com.umeng.soexample.activity.TemperatureActivity;
 import com.umeng.soexample.activity.VideoChatActivity;
 import com.umeng.soexample.listener.SensonListener;
 import com.umeng.soexample.manager.ConfigManage;
 import com.umeng.soexample.music.MusicModeActivity;
 import com.heaton.liulei.utils.utils.ScreenUtils;
 import com.heaton.liulei.utils.utils.ToastUtil;
+import com.umeng.soexample.run.RunActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,18 +70,10 @@ import io.socket.emitter.Emitter;
  */
 public class PersonFragment extends AbsBaseFragment{
 
-//    @Bind(R.id.jni)
-//    TextView jni;
-//    @Bind(R.id.address)
-//    TextView address;
     @Bind(R.id.listView)
     RecyclerView mRecyclerView;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-
-    @Bind(R.id.appbar_fuction)
-    AppBarLayout mAppbarFuction;
-
     private Socket mSocket;
     private SensonListener mSensor;
     private List<DemoInfo> mTargetActs;
@@ -107,13 +105,6 @@ public class PersonFragment extends AbsBaseFragment{
         App app = (App)getActivity().getApplication();
         mSocket = app.getSocket();
 
-//        //初始化重力感应
-//        mSensor = new SensonListener(getContext());
-//        mSensor.setOnSensonChangeListener(this);
-
-//        JniUtils helper = new JniUtils();
-//        jni.setText("自定义jni："+"\n"+helper.getMyName());
-
         mSocket.on("login", onLogin);
         initData();
         initActs();
@@ -142,8 +133,8 @@ public class PersonFragment extends AbsBaseFragment{
                     Constants.user_name = userName;
                     mSocket.emit("add user", userName);
                     startActivity(mTargetActs.get(position).demoClass);
-                }else if(position == 13){
-                    ((AbsBaseActivity)getActivity()).requestPermission(new String[]{Manifest.permission.CAMERA}, "请求打开相机权限", new AbsBaseActivity.GrantedResult() {
+                }else if(position == 16){
+                    ((AbsBaseActivity)getActivity()).requestPermission(new String[]{Manifest.permission.CAMERA,Manifest.permission.RECORD_AUDIO}, "请求打开相机权限", new AbsBaseActivity.GrantedResult() {
                         @Override
                         public void onResult(boolean granted) {
                             if(granted){
@@ -154,7 +145,7 @@ public class PersonFragment extends AbsBaseFragment{
                             }
                         }
                     });
-                }else if(position == 14){
+                }else if(position == 17){
                     ((AbsBaseActivity)getActivity()).requestPermission(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, "请求读写权限", new AbsBaseActivity.GrantedResult() {
                         @Override
                         public void onResult(boolean granted) {
@@ -182,14 +173,6 @@ public class PersonFragment extends AbsBaseFragment{
 
     //自己新添加的
     private void initToolBar() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            mAppbarFuction.setPadding(
-//                    mAppbarFuction.getPaddingLeft(),
-//                    mAppbarFuction.getPaddingTop() + ScreenUtils.getStatusBarHeight(getActivity()),
-//                    mAppbarFuction.getPaddingRight(),
-//                    mAppbarFuction.getPaddingBottom());
-//        }
-        mAppbarFuction.setBackgroundColor(StaticValue.color);
         toolbar.setBackgroundColor(StaticValue.color);
         if (toolbar != null) {
             ((TextView) toolbar.findViewById(com.android.core.R.id.toolbar_title)).setText("功能");
@@ -199,6 +182,9 @@ public class PersonFragment extends AbsBaseFragment{
     private void initActs() {
         mTargetActs = new ArrayList<>();
 
+        mTargetActs.add(new DemoInfo(RunActivity.class));
+        mTargetActs.add(new DemoInfo(TemperatureActivity.class));
+        mTargetActs.add(new DemoInfo(ChatRobotActivity.class));
         mTargetActs.add(new DemoInfo(LeftMenuActivity.class));
         mTargetActs.add(new DemoInfo(SwipBackActivity.class));
         mTargetActs.add(new DemoInfo(PersonActivity.class));
@@ -219,10 +205,15 @@ public class PersonFragment extends AbsBaseFragment{
         mTargetActs.add(new DemoInfo(PopWindowActivity.class));
         mTargetActs.add(new DemoInfo(DanmuActivity.class));
         mTargetActs.add(new DemoInfo(MusicActivity.class));
+        mTargetActs.add(new DemoInfo(CompressImgActivity.class));
+        mTargetActs.add(new DemoInfo(RouterActivity.class));
     }
 
     private List<String> initData(){
         mDatas = new ArrayList<>();
+        mDatas.add("计步器");
+        mDatas.add("温度测试器");
+        mDatas.add("聊天机器人小艾");
         mDatas.add("个性化侧滑界面");
         mDatas.add("仿IOS右滑关闭界面");
         mDatas.add("仿QQ个人中心界面");
@@ -243,6 +234,8 @@ public class PersonFragment extends AbsBaseFragment{
         mDatas.add("弹出窗界面");
         mDatas.add("弹幕界面");
         mDatas.add("登录界面");
+        mDatas.add("图片压缩界面");
+        mDatas.add("路由界面");
         return mDatas;
     }
 

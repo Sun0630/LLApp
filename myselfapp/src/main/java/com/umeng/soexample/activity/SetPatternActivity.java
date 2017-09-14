@@ -85,7 +85,7 @@ public class SetPatternActivity extends AbsBaseActivity {
     @OnClick(R.id.btn_reset)
     void reset() {
         lockView.resetPoints();
-        SPUtils.remove(getBaseContext(),StaticValue.IS_PSW_OPEN);
+        SPUtils.remove(getBaseContext(),"password");
     }
 
     @OnClick(R.id.btn_save)
@@ -96,7 +96,7 @@ public class SetPatternActivity extends AbsBaseActivity {
                 sb.append(i);
             }
             SPUtils.put(getBaseContext(), "password", sb.toString());
-            SPUtils.put(getBaseContext(), StaticValue.IS_PSW_OPEN, true);
+            SPUtils.put(getBaseContext(), StaticValue.PSW_TYPE, 2);
             ToastUtil.showToast("保存完成");
             finish();
         }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.umeng.soexample.R;
+import com.umeng.soexample.custom.indicator.CirclePageIndicator;
 import com.umeng.soexample.fragment.VideoItemFragment;
 //import com.umeng.soexample.indicator.CirclePageIndicator;
 import com.umeng.soexample.indicator.ExtendedViewPager;
@@ -25,7 +26,7 @@ public class GuideActivity extends FragmentActivity implements ViewPager.OnPageC
 
     private ExtendedViewPager mVpVideo;
     private TextView mTvEnter;
-//    private CirclePageIndicator mViewPagerIndicator;
+    private CirclePageIndicator mViewPagerIndicator;
     private boolean mVisible;
     private ViewPagerAdapter mVpAdapter;
 
@@ -45,8 +46,8 @@ public class GuideActivity extends FragmentActivity implements ViewPager.OnPageC
         mTvEnter = (TextView) findViewById(R.id.tv_enter);
         mTvEnter.setOnClickListener(this);
 
-//        mViewPagerIndicator = (CirclePageIndicator) findViewById(R.id.view_pager_indicator);
-//        mViewPagerIndicator.setViewPager(mVpVideo);
+        mViewPagerIndicator = (CirclePageIndicator) findViewById(R.id.view_pager_indicator);
+        mViewPagerIndicator.setViewPager(mVpVideo);
 
     }
 

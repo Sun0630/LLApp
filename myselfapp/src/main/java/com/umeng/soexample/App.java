@@ -1,6 +1,8 @@
 package com.umeng.soexample;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.StrictMode;
 import android.widget.TextView;
 
 import com.android.core.StaticValue;
@@ -9,13 +11,18 @@ import com.android.core.control.crash.HttpReportCallback;
 import com.android.core.control.logcat.*;
 import com.android.core.control.logcat.BuildConfig;
 import com.android.core.utils.ThemeUtils;
+import com.baronzhang.android.router.Router;
 import com.example.http.BaseApplication;
+import com.umeng.soexample.block.BlockError;
+import com.umeng.soexample.block.BlockLooper;
 import com.umeng.soexample.manager.ConfigManage;
 import com.umeng.soexample.music.MusicService;
 import com.umeng.soexample.music.Playlist;
 import com.heaton.liulei.utils.utils.LiuleiUtils;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
+import com.umeng.soexample.service.RouterService;
+
 import org.litepal.LitePalApplication;
 
 import java.io.File;
@@ -38,12 +45,21 @@ public class App extends BaseApplication {
     public MusicService mMusicServer;
     public ArrayList<Playlist> musicList;
     public int batteryValue;
+    public RouterService routerService;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        //解决7.0  FileUriExposedException
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
+
         instance = this;
+        //创建全局的路由
+        routerService = new Router(this).create(RouterService.class);
         StaticValue.color = ThemeUtils.getThemeColor(this);
         //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
         BuildConfig.DEBUG = false;
@@ -70,6 +86,19 @@ public class App extends BaseApplication {
         if (BuildConfig.DEBUG) {
             Logcat.init("com.android.racofix").hideThreadInfo().methodCount(3);
         }
+        //检查程序哪里出现ANR异常
+//        BlockLooper.initialize(new BlockLooper.Builder(this)
+//        .setIgnoreDebugger(true)
+//        .setReportAllThreadInfo(true)
+//        .setSaveLog(true)
+//        .setOnBlockListener(new BlockLooper.OnBlockListener() {
+//            @Override
+//            public void onBlock(BlockError blockError) {
+//                blockError.printStackTrace();
+//            }
+//        })
+//        .build());
+//        BlockLooper.getBlockLooper().start();//启动检测
     }
 
     //各个平台的配置，建议放在全局Application或者程序入口

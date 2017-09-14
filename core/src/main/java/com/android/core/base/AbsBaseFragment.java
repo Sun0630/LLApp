@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.android.core.control.logcat.BuildConfig;
 import com.android.core.control.logcat.Logcat;
-import com.android.core.model.LogicProxy;
 import com.android.core.widget.dialog.DialogManager;
 import com.heaton.liulei.utils.utils.ToastUtil;
 
@@ -25,7 +24,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public abstract class AbsBaseFragment extends Fragment implements BaseView {
 
-    protected BasePresenter mPresenter;
     protected Context mContext;
     protected LayoutInflater mInflater;
     public String TAG;
@@ -66,8 +64,6 @@ public abstract class AbsBaseFragment extends Fragment implements BaseView {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        if (mPresenter != null)
-            mPresenter.detachView();
     }
 
     @Override

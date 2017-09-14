@@ -30,6 +30,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.core.Help;
+import com.android.core.base.AbsBaseActivity;
 import com.example.http.ProgressSubscriber;
 import com.example.http.listenser.SubscriberOnNextListener;
 import com.heaton.liulei.utils.utils.SPUtils;
@@ -58,7 +59,7 @@ import butterknife.OnClick;
  * 公司：希顿科技
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnTouchListener {
+public class LoginActivity extends AbsBaseActivity implements View.OnTouchListener {
 
     @Bind(R.id.main_bg)
     FrameLayout main_bg;
@@ -87,13 +88,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnTouchList
     private String pass;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_login);
-        ButterKnife.bind(this);
-        onInitView();
-        getData();
-        initHeaderBg();
+    protected int getLayoutResource() {
+        isShowTool(false);
+        return R.layout.activity_user_login;
     }
 
     private void getData() {
@@ -132,7 +129,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnTouchList
         }
     }
 
+    @Override
     protected void onInitView() {
+        init();
+        getData();
+        initHeaderBg();
+    }
+
+    private void init() {
         setTitle("登录");
         mTipsAnimation = AnimationUtils.loadAnimation(this, R.anim.connection);
         Help.initSystemBar(this, R.color.transparent);//这个对所有的都适合
@@ -145,6 +149,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnTouchList
         EditTextClearTools.addclerListener(psw, del_psw);
         number.setOnTouchListener(this);
         psw.setOnTouchListener(this);
+
     }
 
     @OnClick(R.id.rl_bg)
@@ -157,8 +162,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnTouchList
     void login() {
         num = number.getText().toString().trim();
         pass = psw.getText().toString().trim();
-        if (TextUtils.isEmpty(num) || TextUtils.isEmpty(pass)) {
-            ToastUtil.showToast("用户名或密码不可为空");
+//        if (TextUtils.isEmpty(num) || TextUtils.isEmpty(pass)) {
+//            ToastUtil.showToast("用户名或密码不可为空");
+//            return;
+//        }
+        if(TextUtils.isEmpty(num)){
+            number.setError("请输入手机号");
+            return;
+        }
+        if (TextUtils.isEmpty(pass)){
+            psw.setError("请输入密码");
             return;
         }
         if (!num.equals("18682176281") || !pass.equals("123")) {
@@ -244,38 +257,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnTouchList
         new Handler().postDelayed(
                 () -> portrait.setVisibility(View.GONE)
                 , 500);
-    }
-
-    /**
-     * hide inputMethod
-     */
-    public void hideSoftKeyboard() {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (inputMethodManager != null) {
-            View localView = getCurrentFocus();
-            if (localView != null && localView.getWindowToken() != null) {
-                IBinder windowToken = localView.getWindowToken();
-                inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
-            }
-        }
-    }
-
-    /**
-     * show inputMethod
-     */
-    public void showSoftKeyboard(final EditText editText) {
-        editText.setFocusable(true);
-        editText.setFocusableInTouchMode(true);
-        editText.requestFocus();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-                           public void run() {
-                               InputMethodManager inputManager =
-                                       (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                               inputManager.showSoftInput(editText, 0);
-                           }
-                       },
-                400);
     }
 
 }

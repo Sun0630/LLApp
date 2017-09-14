@@ -24,6 +24,7 @@ import com.umeng.soexample.R;
 import java.lang.ref.WeakReference;
 
 /**
+ *
  * Created by admin on 2016/11/16.
  */
 

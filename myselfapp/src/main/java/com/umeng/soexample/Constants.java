@@ -18,6 +18,12 @@ public class Constants {
     public static final String REFRESH_TOKEN = "refresh_token";
     public static final String WXOPENID = "wxopenid";
 
+    //聊天消息类型
+    public static final int TYPE_FROM_MESSAGE = 0;
+    public static final int TYPE_LOG = 1;
+    public static final int TYPE_ACTION = 2;
+    public static final int TYPE_TO_MESSAGE = 3;
+
 
 
 }

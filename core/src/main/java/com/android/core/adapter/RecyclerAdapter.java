@@ -24,6 +24,12 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         this.mOnItemClickListener = onItemClickListener;
     }
 
+    public RecyclerAdapter(Context context,List<T> datas) {
+        mContext = context;
+        mInflater = LayoutInflater.from(context);
+        mDatas = datas;
+    }
+
     public RecyclerAdapter(Context context, int layoutId, List<T> datas) {
         mContext = context;
         mInflater = LayoutInflater.from(context);

@@ -78,14 +78,10 @@ public class HomeFragment extends AbsBaseFragment{
 
     @Override
     protected void onInitView() {
-//        setHasOptionsMenu(true);
         initView();
         MDTintUtil.setTint(mFloatingActionButton, StaticValue.color);
         mCollapsingToolbar.setContentScrimColor(StaticValue.color);
         mAppBarLayout.setBackgroundColor(StaticValue.color);
-
-//        mTlHomeCategory.setTabTextColors(R.color.abc_white,StaticValue.color);
-//        mTlHomeCategory.setSelectedTabIndicatorColor(StaticValue.color);
 
         if(!WebUtils.isConnect()){
             getMeizi();

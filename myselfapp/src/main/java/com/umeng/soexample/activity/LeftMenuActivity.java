@@ -23,6 +23,8 @@ import com.android.core.control.MDTintUtil;
 import com.android.core.control.statusbar.StatusBarUtil;
 import com.android.core.widget.glide.ImageLoader;
 import com.android.core.widget.glide.ImageLoaderUtil;
+import com.baronzhang.android.router.RouterInjector;
+import com.umeng.soexample.App;
 import com.umeng.soexample.R;
 import com.umeng.soexample.custom.ToShare;
 import com.umeng.soexample.custom.ToggleButton;

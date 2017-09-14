@@ -120,4 +120,13 @@
     <!--<dimen name="default_title_indicator_text_size">15sp</dimen>-->
     <!--<dimen name="default_title_indicator_title_padding">5dp</dimen>-->
     <!--<dimen name="default_title_indicator_top_padding">7dp</dimen>-->
+    <!--//启动页面广告-->
+    <declare-styleable name="AdCountView">
+        <attr name="adTextColor" format="color" />
+        <attr name="adText" format="string" />
+        <attr name="adTextSize" format="dimension" />
+        <attr name="adBackgroundColor" format="color" />
+        <attr name="adOutRingColor" format="color" />
+        <attr name="adDuration" format="integer" />
+    </declare-styleable>
 </resources>

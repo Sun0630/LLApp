@@ -6,10 +6,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
+import java.lang.ref.WeakReference;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,13 +33,26 @@ public class ToggleButton extends View implements View.OnClickListener{
     private Resources r;
     private TimerTask task;
     private Timer timer;
-    private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            if (msg.what == 1111) {
-                invalidate();
+    private ToggleHandler mHandler;
+
+    public static class ToggleHandler extends Handler{
+        private WeakReference<ToggleButton>mToggle;
+
+        private ToggleHandler(ToggleButton toggle){
+            mToggle = new WeakReference<ToggleButton>(toggle);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            ToggleButton toggle = mToggle.get();
+            if(toggle == null){
+                return;
             }
-        };
-    };
+            if(msg.what == 1111){
+                toggle.invalidate();
+            }
+        }
+    }
 
     public ToggleButton(Context context) {
         this(context, null, 0);
@@ -82,6 +97,7 @@ public class ToggleButton extends View implements View.OnClickListener{
         r = Resources.getSystem();
         setOnClickListener(this);
         circleX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, BTN_WIDTH - CIRCLE_RADIUS, r.getDisplayMetrics());
+        mHandler = new ToggleHandler(this);
     }
 
     @Override
@@ -144,7 +160,7 @@ public class ToggleButton extends View implements View.OnClickListener{
                     }else {
                         circleX--;
                     }
-                    handler.sendEmptyMessage(1111);
+                    mHandler.sendEmptyMessage(1111);
                     if (circleX == TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, BTN_WIDTH - CIRCLE_RADIUS, r.getDisplayMetrics()) || circleX ==TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, CIRCLE_RADIUS, r.getDisplayMetrics())) {
                         changeCompelete = true;
                         timer.cancel();

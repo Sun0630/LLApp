@@ -4,14 +4,14 @@
     package="com.umeng.soexample">
 
     <!-- 网络权限 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!--往sdcard中写入数据的权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!--在sdcard中创建/删除文件的权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 往sdcard中写入数据的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 在sdcard中创建/删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -19,36 +19,54 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.hardware.sensor.accelerometer"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.hardware.sensor.accelerometer" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!-- 悬浮窗(FloatingService) permission -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- renren sso Permission for Unit Test -->
-    <!-- QQ、QQ空间所需权限 START-->
+    <!-- QQ、QQ空间所需权限 START -->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <!-- QQ、QQ空间所需权限 END-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- 计歩 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.stepcounter"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.sensor.stepdetector"
+        android:required="true" />
+
+    <!-- 计歩  end -->
+    <!-- QQ、QQ空间所需权限 END -->
     <application
-        android:name="com.umeng.soexample.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        tools:replace="android:icon"
-        android:theme="@style/Theme.DesignDemo">
-
-        <activity android:name="com.umeng.soexample.activity.SplashActivity"
+        android:theme="@style/Theme.DesignDemo"
+        tools:replace="android:icon">
+        <activity
+            android:name=".activity.SplashActivity"
             android:theme="@style/Theme.DesignDemo.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,106 +74,125 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.GuideActivity"
-            android:theme="@style/FullscreenTheme"/>
-
-        <activity android:name="com.umeng.soexample.MainActivity"/>
-        <activity android:name="com.umeng.soexample.activity.LoginActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name="com.umeng.soexample.activity.MusicActivity" />
-        <activity android:name="com.umeng.soexample.activity.ChatActivity"/>
-        <activity android:name="com.umeng.soexample.activity.MediaPlayerActivtiy"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        <activity
+            android:name=".activity.GuideActivity"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.MusicActivity" />
+        <activity android:name=".activity.ChatActivity" />
+        <activity
+            android:name=".activity.MediaPlayerActivtiy"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
-        <activity android:name="com.umeng.soexample.activity.VideoChatActivity"/>
-        <activity android:name="com.umeng.soexample.activity.QrViewActivity"/>
-        <activity android:name="com.umeng.soexample.activity.BigPhotoActivity"/>
-        <activity android:name="com.umeng.soexample.activity.DownloadManagerDemo"/>
-        <activity android:name="com.umeng.soexample.activity.SwipBackActivity"
-            android:theme="@style/Transparent"/>
-        <activity android:name="com.umeng.soexample.activity.PersonActivity" />
-        <activity android:name="com.umeng.soexample.activity.BloggerActivity"/>
-        <activity android:name="com.umeng.soexample.music.MusicListActivity"
-            android:theme="@style/TransparentTheme"/>
-        <activity android:name="com.umeng.soexample.music.MusicModeActivity"/>
-        <activity android:name="com.umeng.soexample.activity.FloatViewActivity"/>
-        <activity android:name="com.umeng.soexample.activity.ShareActivity"/>
-        <activity android:name="com.umeng.soexample.activity.SetPatternActivity"/>
-        <activity android:name="com.umeng.soexample.activity.AlbumAty"/>
-        <activity android:name="com.umeng.soexample.activity.AlbumItemAty"/>
-        <activity android:name="com.umeng.soexample.activity.CameraAty"
-            android:theme="@style/AppTheme"/>
-        <activity android:name="com.umeng.soexample.activity.ScreenCopyActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity android:name=".activity.VideoChatActivity" />
+        <activity android:name=".activity.QrViewActivity" />
+        <activity android:name=".activity.BigPhotoActivity" />
+        <activity android:name=".activity.DownloadManagerDemo" />
+        <activity
+            android:name=".activity.SwipBackActivity"
+            android:theme="@style/Transparent" />
+        <activity android:name=".activity.PersonActivity" />
+        <activity android:name=".activity.BloggerActivity" />
+        <activity
+            android:name=".music.MusicListActivity"
+            android:theme="@style/TransparentTheme" />
+        <activity android:name=".music.MusicModeActivity" />
+        <activity android:name=".activity.FloatViewActivity" />
+        <activity android:name=".activity.ShareActivity" />
+        <activity android:name=".activity.SetPatternActivity" />
+        <activity android:name=".activity.AlbumAty" />
+        <activity android:name=".activity.AlbumItemAty" />
+        <activity
+            android:name=".activity.CameraAty"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.ScreenCopyActivity"
             android:theme="@style/translate_dialog" />
-        <activity android:name="com.umeng.soexample.activity.SQLActivity"/>
-        <activity android:name="com.umeng.soexample.activity.NotifyActivity"/>
-        <activity android:name="com.umeng.soexample.activity.PopWindowActivity"/>
-        <activity android:name="com.umeng.soexample.activity.SuggestActivity"/>
-        <activity android:name=".activity.EnterActivity"/>
-        <activity android:name=".activity.DanmuActivity"/>
-        <activity android:name=".activity.SetActivity"/>
-        <activity android:name=".activity.LeftMenuActivity"/>
-        <activity android:name=".activity.NavHomePageActivity"/>
+        <activity android:name=".activity.SQLActivity" />
+        <activity android:name=".activity.NotifyActivity" />
+        <activity android:name=".activity.PopWindowActivity" />
+        <activity android:name=".activity.SuggestActivity" />
+        <activity android:name=".activity.EnterActivity" />
+        <activity android:name=".activity.DanmuActivity" />
+        <activity android:name=".activity.SetActivity" />
+        <activity android:name=".activity.LeftMenuActivity" />
+        <activity android:name=".activity.NavHomePageActivity" />
+        <activity
+            android:name=".activity.FingerDialog"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <!-- 分享 -->
         <activity
-            android:name="com.umeng.soexample.custom.ToShare"
+            android:name=".custom.ToShare"
             android:screenOrientation="portrait"
-            android:theme="@style/translate_dialog" />
+            android:theme="@style/translate_dialog">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-        <!-- above activity that demo required,has nothing to with umeng sdk  -->
+                <action android:name="android.intent.action.VIEW" />
+
+                <data
+                    android:host="com.umeng.soexample.custom.ToShare"
+                    android:scheme="router" />
+            </intent-filter>
+        </activity>
+
+        <!-- above activity that demo required,has nothing to with umeng sdk -->
         <!-- *************************    related to Share START **************************** -->
-        <!-- 微博-->
+        <!-- 微博 -->
         <activity
             android:name=".WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" >
-        </activity>
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
-        <!--友盟分享-->
+        <!-- 友盟分享 -->
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
             android:excludeFromRecents="true"
             android:theme="@style/Theme.UMDefault" />
 
-        <!--微信平台-->
+        <!-- 微信平台 -->
         <activity
-            android:name="com.umeng.soexample.apshare.WXEntryActivity"
+            android:name=".apshare.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!--微信登录-->
+        <!-- 微信登录 -->
         <activity
-            android:name="com.umeng.soexample.wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!--没安装客户端下登录-->
-        <activity android:name="jp.line.android.sdk.activity.WebLoginActivity"
-            android:exported="false"
+        <!-- 没安装客户端下登录 -->
+        <activity
+            android:name="jp.line.android.sdk.activity.WebLoginActivity"
             android:configChanges="keyboard|orientation"
-            android:screenOrientation="sensor">
-        </activity>
+            android:exported="false"
+            android:screenOrientation="sensor" />
         <!-- tencent -->
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -167,35 +204,119 @@
         </activity>
         <activity
             android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- *************************     related to Share END **************************** -->
         <!-- umengAppKey，replace to yours -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5126ff896c738f2bfa000438" >
-        </meta-data>
+            android:value="5126ff896c738f2bfa000438" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Umeng" >
-        </meta-data>
+            android:value="Umeng" />
+
         <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false"></service>
-        <!--友盟分享-->
+            android:exported="false" />
+        <!-- 友盟分享 -->
 
-        <service android:name="com.umeng.soexample.music.MusicService" />
-        <service android:name="com.umeng.soexample.floatView.FloatViewService"/>
-
-        <service android:name="com.umeng.soexample.service.AidlService"
+        <service android:name=".music.MusicService" />
+        <service android:name=".floatView.FloatViewService" />
+        <service
+            android:name=".service.AidlService"
             android:exported="true">
-            <intent-filter >
-                <action android:name="com.example.myselfapp.service.AidlService"/>
+            <intent-filter>
+                <action android:name="com.example.myselfapp.service.AidlService" />
             </intent-filter>
+        </service>
+        <service
+            android:name=".run.step.service.StepService"
+            android:priority="1000">
+            <intent-filter>
 
+                <!-- 系统启动完成后会调用 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_TIME_TICK" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".run.pedometer.StepsDetectService"
+            android:priority="1000"
+            android:process="cn.bluemobi.dylan.step..pedometer.StepsDetectService">
+            <intent-filter>
+
+                <!-- 系统启动完成后会调用 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_TIME_TICK" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
         </service>
 
+        <service
+            android:name=".service.QuickService"
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_quick_setting"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!-- 配置实时壁纸Service -->
+        <service
+            android:name=".custom.VideoLiveWallpaper"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_WALLPAPER"
+            android:process=":wallpaper">
+
+            <!-- 为实时壁纸配置intent-filter -->
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <!-- 为实时壁纸配置meta-data -->
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/livewallpaper" />
+        </service>
+
+        <activity
+            android:name=".activity.ChatRobotActivity"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
+        <activity android:name=".activity.TemperatureActivity" />
+        <activity android:name=".run.RunActivity" />
+        <activity android:name=".run.HistoryActivity" />
+        <activity android:name=".run.SetPlanActivity" />
+
+        <!-- <provider -->
+        <!-- android:name="android.support.v4.content.FileProvider" -->
+        <!-- android:authorities="com.umeng.soexample.fileProvider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true" -->
+        <!-- tools:replace="android:authorities"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/file_paths" /> -->
+        <!-- </provider> -->
+
+        <activity android:name=".activity.CompressImgActivity" />
+        <activity
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".activity.RouterActivity" />
+        <activity android:name=".activity.CircleEditActivity"></activity>
     </application>
 
 </manifest>

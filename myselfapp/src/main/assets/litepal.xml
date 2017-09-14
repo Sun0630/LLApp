@@ -12,4 +12,8 @@
         <mapping class="com.umeng.soexample.bean.UserVO"></mapping>
     </list>
 
+    <list>
+        <mapping class="com.umeng.soexample.bean.Message"></mapping>
+    </list>
+
   </litepal>

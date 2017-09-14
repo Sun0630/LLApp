@@ -6,6 +6,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
 import android.os.Looper;
 
+import com.heaton.liulei.utils.utils.FileOperateUtils;
+import com.heaton.liulei.utils.utils.LiuleiUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -133,7 +136,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 Looper.prepare();
 //                Toast.makeText(mContext, "程序出错啦:" + message, Toast.LENGTH_LONG).show();
 //                可以只创建一个文件，以后全部往里面append然后发送，这样就会有重复的信息，个人不推荐
-                File f = Environment.getExternalStorageDirectory();
+//                File f = Environment.getExternalStorageDirectory();
+                File f = new File(FileOperateUtils.PATH_LOGS);
                 for (File item : f.listFiles()) {
                     String name = item.getName();
                     if (name.startsWith("crash-LLAPP-") && name.endsWith(".log")) {
@@ -141,7 +145,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
                     }
                 }
                 String fileName = "crash-LLAPP-" + System.currentTimeMillis() + ".log";
-                File file = new File(Environment.getExternalStorageDirectory(), fileName);
+                File file = new File(FileOperateUtils.PATH_LOGS, fileName);
 
                 try {
                     FileOutputStream fos = new FileOutputStream(file, true);

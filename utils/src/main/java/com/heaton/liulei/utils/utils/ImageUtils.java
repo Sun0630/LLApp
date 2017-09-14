@@ -53,6 +53,20 @@ public class ImageUtils {
 	public ImageUtils() {
 	}
 
+	public static int[] computeSize(File srcImg) {
+		int[] size = new int[2];
+
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		options.inSampleSize = 1;
+
+		BitmapFactory.decodeFile(srcImg.getAbsolutePath(), options);
+		size[0] = options.outWidth;
+		size[1] = options.outHeight;
+
+		return size;
+	}
+
 	/**
 	 * @param urlpath
 	 * @return Bitmap

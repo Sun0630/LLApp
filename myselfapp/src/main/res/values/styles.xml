@@ -13,16 +13,26 @@
     <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo" />
 
     <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#00000000</item>
-        <item name="colorPrimaryDark">#00000000</item>
-        <item name="android:textColorPrimary">@color/text_color</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/text</item>
         <item name="colorAccent">@color/main_color</item>
         <item name="actionMenuTextColor">@color/abc_white</item>
         <item name="actionMenuTextAppearance">@style/MenuTextStyle</item>
         <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
+        <!--activity动画-->
+        <item name="android:windowAnimationStyle">@style/transformer</item>
         <!--<item name="android:windowBackground">@color/transparent</item>-->
         <!--<item name="android:windowIsTranslucent">true</item>-->
         <!--<item name="android:windowNoTitle">true</item>-->
+    </style>
+
+    <style name="transformer" parent="@android:style/Animation.Activity">
+        <!--<item name="android:activityOpenEnterAnimation">@anim/enter_scale</item>-->
+        <!--<item name="android:activityOpenExitAnimation">@anim/exit_scale</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/enter_left</item>-->
+        <!--activity退出时缩放动画-->
+        <item name="android:activityCloseExitAnimation">@anim/exit_scale</item>
     </style>
 
 
