@@ -1,0 +1,21 @@
+<resources>
+    <string name="update_title">应用更新</string>
+    <string name="update_sure">立即更新</string>
+    <string name="update_after">稍后提醒</string>
+    <string name="update_cancel">取消</string>
+    <string name="not_mount">未插入sd卡</string>
+    <string name="no_permission">没有权限</string>
+    <string name="download_url_invalid">下载地址不正确</string>
+    <string name="download_error">安装包下载失败，请检查网络</string>
+    <string name="update_retry">重试</string>
+    <string name="downloading">请稍后，正在下载。。。</string>
+    <string name="updating">请稍后，正在更新。。。</string>
+    <string name="total_size">文件大小：%1$.2fMB</string>
+    <string name="need_write_permission">更新需要写入权限</string>
+    <string name="btn_sure">确定</string>
+    <string name="btn_cancel">取消</string>
+
+
+    <string name="ota_title">硬件更新</string>
+    <string name="ota_error">更新设备%1$s失败，请检查蓝牙连接</string>
+</resources>
