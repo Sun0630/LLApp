@@ -71,18 +71,21 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    setStatus();
-                    break;
-                case 1:
-                    musicPlays.setImageResource(R.mipmap.play);
-                    break;
-                case 2:
                     if (mApp.mMusicServer != null && mApp.mMusicServer.isPlaying()) {
                         tv_time.setText(formatTime(mApp.mMusicServer.getCurrentTime()));
                         cb_progress.setMax(mApp.mMusicServer.getDuration());
                         cb_progress.setProgress(mApp.mMusicServer.getCurrentTime());
                     }
-                    handler.sendEmptyMessageDelayed(2, 500);
+                    handler.sendEmptyMessageDelayed(0, 500);
+                    break;
+                case MusicService.PAUSE_FLAG://暂停或者播放
+                    playOrPause();
+                    break;
+                case MusicService.NEXT_FLAG://下一首
+                    next();
+                    break;
+                case MusicService.PRE_FLAG://上一首
+                    previous();
                     break;
                 default:
                     break;
@@ -148,7 +151,6 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
     }
 
     private void init() {
-        AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         iv_album = (CircleImageView) findViewById(R.id.iv_album);
 //        iv_album.setBorderColor(Color.rgb(108, 62, 62));
         ImageView previous_img = (ImageView) findViewById(R.id.previous_img);
@@ -182,7 +184,7 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
         mApp.updateBatteryAndIcon(mApp.batteryValue, battery_tv);
         if (mApp.mMusicServer != null) {
             mApp.mMusicServer.setHandler(handler);
-            handler.sendEmptyMessage(2);
+            handler.sendEmptyMessage(0);
             mApp.mMusicServer.setMusicContext(this);
         }
     }
@@ -199,14 +201,8 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
             tv_time.setText(formatTime(mApp.mMusicServer.getCurrentTime()));
             cb_progress.setMax(mApp.mMusicServer.getDuration());
             cb_progress.setProgress(mApp.mMusicServer.getCurrentTime());
-//            bmp = MusicUtil.getArtwork(MusicModeActivity.this, mApp.mMusicServer.getCurrentPlay().get_mid(), mApp.mMusicServer.getCurrentPlay().getAlbum_id(), true);
-//            iv_album.setImageBitmap(bmp);
-//            Log.e("new music", "broadcast");
-           /* if (MusicModeActivity.this != null) {
-                bmp = MusicUtil.getArtwork(MusicModeActivity.this, mApp.mMusicServer.getCurrentPlay().get_mid(), mApp.mMusicServer.getCurrentPlay().getAlbum_id(), true);
-                iv_album.setImageBitmap(bmp);
-                Log.e("new music", "broadcast");
-            }*/
+            bmp = MusicUtil.getArtwork(MusicModeActivity.this, mApp.mMusicServer.getCurrentPlay().get_mid(), mApp.mMusicServer.getCurrentPlay().getAlbum_id(), true);
+            iv_album.setImageBitmap(bmp);
         }
     }
 
@@ -300,53 +296,56 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.previous_img:
-                if (mApp.mMusicServer != null) {
-                    Log.e("modle", mApp.mMusicServer.isRandom() + "isRandom");
-                    Log.e("modle", mApp.mMusicServer.isLoop() + "isLoop");
-                    mApp.mMusicServer.last();
-                    setStatus();
-                    mApp.mMusicServer.updateNotification(bmp);
-                }
-                initView();
+                previous();
                 break;
             case R.id.next_img:
-                Log.e("modle", mApp.mMusicServer.isRandom() + "isRandom");
-                Log.e("modle", mApp.mMusicServer.isLoop() + "isLoop");
-                if (mApp.mMusicServer != null) {
-                    mApp.mMusicServer.next();
-                    setStatus();
-                    mApp.mMusicServer.updateNotification(bmp);
-                }
-                initView();
+                next();
                 break;
             case R.id.play_pause_img:
-                if (mApp.mMusicServer.isPlaying()) {
-                    musicPlays.setImageResource(R.mipmap.play);
-                    mApp.mMusicServer.pause();
-                    mApp.mMusicServer.cancelNotification();
-                } else {
-                    if (mApp.mMusicServer.getPlayList() == null) {//没有播放列表
-//                    if (mApp.mMusicServer.getPlayList() == null) {//没有播放列表
-//                        List<Playlist> list = MusicUtil.getMp3List(this, MyApplication.getInstance().getDbUtils());
-//                        if (list == null || list.size() <= 0) {
-//                            Toast.makeText(mApp, getResources().getString(R.string.music_no_one), Toast.LENGTH_SHORT).show();
-//                            return;
-//                        }
-//                        mApp.mMusicServer.setCurrentPlayList(list);
-//                        mApp.mMusicServer.setCurrentPlayMusic(list.get(0));
-                        Toast.makeText(mApp, getResources().getString(R.string.music_no_one), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    musicPlays.setImageResource(R.mipmap.pause);
-                    mApp.mMusicServer.play();
-                    setStatus();
-                    mApp.mMusicServer.updateNotification(bmp);
-                }
-                // initView();
+                playOrPause();
                 break;
             default:
                 break;
         }
+    }
+
+    private void playOrPause() {
+        if (mApp.mMusicServer.isPlaying()) {
+            musicPlays.setImageResource(R.mipmap.play);
+            mApp.mMusicServer.pause();
+        } else {
+            if (mApp.mMusicServer.getPlayList() == null) {//没有播放列表
+                Toast.makeText(mApp, getResources().getString(R.string.music_no_one), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            musicPlays.setImageResource(R.mipmap.pause);
+            mApp.mMusicServer.play();
+        }
+        setStatus();
+        mApp.mMusicServer.updateNotification(bmp);
+        initView();
+    }
+
+    private void next() {
+        Log.e("modle", mApp.mMusicServer.isRandom() + "isRandom");
+        Log.e("modle", mApp.mMusicServer.isLoop() + "isLoop");
+        if (mApp.mMusicServer != null) {
+            mApp.mMusicServer.next();
+            setStatus();
+            mApp.mMusicServer.updateNotification(bmp);
+        }
+        initView();
+    }
+
+    private void previous() {
+        if (mApp.mMusicServer != null) {
+            Log.e("modle", mApp.mMusicServer.isRandom() + "isRandom");
+            Log.e("modle", mApp.mMusicServer.isLoop() + "isLoop");
+            mApp.mMusicServer.last();
+            setStatus();
+            mApp.mMusicServer.updateNotification(bmp);
+        }
+        initView();
     }
 
     private void startMusicService() {
@@ -377,7 +376,7 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
                 }
             });
             mApp.mMusicServer.setHandler(handler);
-            handler.sendEmptyMessage(2);
+            handler.sendEmptyMessage(0);
             mApp.mMusicServer.setMusicContext(MusicModeActivity.this);
         }
     };
@@ -386,25 +385,12 @@ public class MusicModeActivity extends AbsBaseActivity implements OnClickListene
     private List<Playlist> musicMap;
 
     private void initMusic() {
-        TaskExecutor.executeTask(new Runnable() {
-            @Override
-            public void run() {
-                musicMap = MusicUtil.getMp3List(MusicModeActivity.this);
-                mApp.musicList = (ArrayList<Playlist>) musicMap;
-                mApp.mMusicServer.setCurrentPlayList(mApp.musicList);
-                mApp.mMusicServer.setCurrentPlayMusic(mApp.musicList.get(0));
-            }
+        TaskExecutor.executeTask(() -> {
+            musicMap = MusicUtil.getMp3List(MusicModeActivity.this);
+            mApp.musicList = (ArrayList<Playlist>) musicMap;
+            mApp.mMusicServer.setCurrentPlayList(mApp.musicList);
+            mApp.mMusicServer.setCurrentPlayMusic(mApp.musicList.get(0));
         });
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                musicMap = MusicUtil.getMp3List(MusicModeActivity.this);
-//                mApp.musicList = (ArrayList<Playlist>) musicMap;
-//                mApp.mMusicServer.setCurrentPlayList(mApp.musicList);
-//                mApp.mMusicServer.setCurrentPlayMusic(mApp.musicList.get(0));
-//                super.run();
-//            }
-//        }.start();
     }
 
     /**

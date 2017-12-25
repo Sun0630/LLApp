@@ -111,22 +111,18 @@ public class LoginActivity extends AbsBaseActivity implements View.OnTouchListen
 ////                runOnUiThread(() ->Glide.with(this).load(R.mipmap.b_1).bitmapTransform(new BlurTransformation(this,25)).crossFade(1000).into(target));
 //            }
 //        }).start();
-        TaskExecutor.executeTask(new Runnable() {
-            @Override
-            public void run() {
-                if (bitmap != null) {
-                    //高斯模糊
-                    final Drawable drawable = BlurUtils.BoxBlurFilter(bitmap, 2);
-                    runOnUiThread(() -> setBg(drawable));//使用lamdba表达式
-                }
+        TaskExecutor.executeTask(() -> {
+            if (bitmap != null) {
+                //高斯模糊
+                final Drawable drawable = BlurUtils.BoxBlurFilter(bitmap, 2);
+                runOnUiThread(() -> setBg(drawable));//使用lamdba表达式
             }
         });
     }
 
     private void setBg(Drawable drawable) {
-        if (drawable != null) {
+        if (drawable != null)
             main_bg.setBackground(drawable);//崩溃
-        }
     }
 
     @Override
@@ -152,38 +148,35 @@ public class LoginActivity extends AbsBaseActivity implements View.OnTouchListen
 
     }
 
-    @OnClick(R.id.rl_bg)
-    void rl_bg() {
-        Log.e("lOGIN", "点击全屏背景");
-        hideSoftKeyboard();
-    }
-
-    @OnClick(R.id.loginButton)
-    void login() {
-        num = number.getText().toString().trim();
-        pass = psw.getText().toString().trim();
-//        if (TextUtils.isEmpty(num) || TextUtils.isEmpty(pass)) {
-//            ToastUtil.showToast("用户名或密码不可为空");
-//            return;
-//        }
-        if(TextUtils.isEmpty(num)){
-            number.setError("请输入手机号");
-            return;
+    @OnClick({R.id.rl_bg, R.id.loginButton})
+    void loginOnClick(View view) {
+        switch (view.getId()){
+            case R.id.rl_bg:
+                hideSoftKeyboard();
+                break;
+            case R.id.loginButton:
+                num = number.getText().toString().trim();
+                pass = psw.getText().toString().trim();
+                if (TextUtils.isEmpty(num)) {
+                    number.setError("请输入手机号");
+                    return;
+                }
+                if (TextUtils.isEmpty(pass)) {
+                    psw.setError("请输入密码");
+                    return;
+                }
+                if (!num.equals("18682176281") || !pass.equals("123")) {
+                    ToastUtil.showToast("用户名或密码错误");
+                    return;
+                }
+                final ProgressDialog dialog = new ProgressDialog(this);
+                dialog.setMessage("登录中,请稍后...");
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                hideSoftKeyboard();
+                mHandler.postDelayed(() -> startAct(dialog), 2000);
+                break;
         }
-        if (TextUtils.isEmpty(pass)){
-            psw.setError("请输入密码");
-            return;
-        }
-        if (!num.equals("18682176281") || !pass.equals("123")) {
-            ToastUtil.showToast("用户名或密码错误");
-            return;
-        }
-        final ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setMessage("登录中,请稍后...");
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-        hideSoftKeyboard();
-        mHandler.postDelayed(() -> startAct(dialog), 2000);
     }
 
     private void startAct(ProgressDialog dialog) {
@@ -191,13 +184,15 @@ public class LoginActivity extends AbsBaseActivity implements View.OnTouchListen
         //保存账号密码到内存中   下次直接登录
         SPUtils.put(getBaseContext(), Constants.APP_COUNT, num);
         SPUtils.put(getBaseContext(), Constants.APP_PSW, pass);
-        startActivity(new Intent(LoginActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        startActivity(new Intent(LoginActivity.this, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
     }
 
     @OnClick(R.id.other)
     void other() {
-        startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        startActivity(new Intent(this, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
     }
 
@@ -231,7 +226,6 @@ public class LoginActivity extends AbsBaseActivity implements View.OnTouchListen
                 changeScrollView();
                 break;
         }
-//        start();
         return false;
     }
 

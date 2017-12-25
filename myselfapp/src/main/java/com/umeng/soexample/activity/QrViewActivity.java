@@ -63,12 +63,7 @@ public class QrViewActivity extends AbsBaseActivity implements Callback {
     protected void onInitView() {
         setTitle("扫描界面");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         hasSurface = false;
 

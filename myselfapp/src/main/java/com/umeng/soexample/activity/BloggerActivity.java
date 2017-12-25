@@ -37,8 +37,9 @@ public class BloggerActivity extends AbsBaseActivity {
 
     public static final String GANK_URL = "me.bakumon.gank.module.webview.WebViewActivity.gank_url";
     public static final String GANK_TITLE = "me.bakumon.gank.module.webview.WebViewActivity.gank_title";
-
     public static final String csdn_URL = "http://blog.csdn.net/liulei823581722";
+    private String url = "http://blog.csdn.net/liulei823581722";
+    private String title = "博客";
 
     @Bind(R.id.webView)
     WebView mWebView;
@@ -48,9 +49,6 @@ public class BloggerActivity extends AbsBaseActivity {
     AppBarLayout mAppbar;
 
     private ProgressDialog dialog;
-
-    private String url = "http://blog.csdn.net/liulei823581722";
-    private String title = "博客";
 
     @Override
     protected int getLayoutResource() {
@@ -67,14 +65,9 @@ public class BloggerActivity extends AbsBaseActivity {
         }
 //        initPressDialog();
         setTitle(title);
-        toolbar.setNavigationIcon(R.drawable.ic_webview_finish);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         initWebView();
+        toolbar.setNavigationIcon(R.drawable.ic_webview_finish);
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void initWebView() {

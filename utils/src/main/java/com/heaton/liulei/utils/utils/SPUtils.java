@@ -39,7 +39,8 @@ public class SPUtils {
         } else {
             editor.putString(key, object == null ? null : String.valueOf(object));
         }
-        SharedPreferencesCompat.apply(editor);
+        editor.apply();
+//        SharedPreferencesCompat.apply(editor);
     }
 
     public static final String LOGIN_ID = "currentId";
@@ -60,20 +61,20 @@ public class SPUtils {
      * @return
      */
     public static <T> T get(Context context, String key, T defaultObject) {
-	    SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
-	    if (defaultObject instanceof String) {
-		    return (T) sp.getString(key, (String) defaultObject);
-	    } else if (defaultObject instanceof Integer) {
-		    return (T) Integer.valueOf(sp.getInt(key, (Integer) defaultObject));
-	    } else if (defaultObject instanceof Boolean) {
-		    return (T) Boolean.valueOf(sp.getBoolean(key, (Boolean) defaultObject));
-	    } else if (defaultObject instanceof Float) {
-		    return (T) Float.valueOf(sp.getFloat(key, (Float) defaultObject));
-	    } else if (defaultObject instanceof Long) {
-		    return (T) Long.valueOf(sp.getLong(key, (Long) defaultObject));
-	    } else {
-		    return (T) sp.getString(key, (String) defaultObject);
-	    }
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        if (defaultObject instanceof String) {
+            return (T) sp.getString(key, (String) defaultObject);
+        } else if (defaultObject instanceof Integer) {
+            return (T) Integer.valueOf(sp.getInt(key, (Integer) defaultObject));
+        } else if (defaultObject instanceof Boolean) {
+            return (T) Boolean.valueOf(sp.getBoolean(key, (Boolean) defaultObject));
+        } else if (defaultObject instanceof Float) {
+            return (T) Float.valueOf(sp.getFloat(key, (Float) defaultObject));
+        } else if (defaultObject instanceof Long) {
+            return (T) Long.valueOf(sp.getLong(key, (Long) defaultObject));
+        } else {
+            return (T) sp.getString(key, (String) defaultObject);
+        }
     }
 
     /**
@@ -86,7 +87,8 @@ public class SPUtils {
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key);
-        SharedPreferencesCompat.apply(editor);
+//        SharedPreferencesCompat.apply(editor);
+        editor.apply();
     }
 
     /**
@@ -98,7 +100,8 @@ public class SPUtils {
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
-        SharedPreferencesCompat.apply(editor);
+//        SharedPreferencesCompat.apply(editor);
+        editor.apply();
     }
 
     /**

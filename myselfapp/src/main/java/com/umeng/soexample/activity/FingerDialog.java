@@ -63,42 +63,37 @@ public class FingerDialog extends Activity {
 
         type = getIntent().getIntExtra(StaticValue.FINGER,0);
 
-        fingerPrinterView.setOnStateChangedListener(new FingerPrinterView.OnStateChangedListener() {
-            @Override public void onChange(int state) {
-                if (state == FingerPrinterView.STATE_CORRECT_PWD) {
-                    if(type == 1){
-                        fingerErrorNum = 0;
-                        cv.setVisibility(View.GONE);
-                        finger_result.setImageResource(R.mipmap.finger_sucess);
-                        finger_result.setVisibility(View.VISIBLE);
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                startActivity(new Intent(FingerDialog.this,MainActivity.class));
-                                finish();
-                            }
-                        },1500);
-                    }
-                }
-                if (state == FingerPrinterView.STATE_WRONG_PWD) {
-                    if(fingerErrorNum >= 3){
+        fingerPrinterView.setOnStateChangedListener(state -> {
+            if (state == FingerPrinterView.STATE_CORRECT_PWD) {
+                if(type == 1){
+                    fingerErrorNum = 0;
+                    cv.setVisibility(View.GONE);
+                    finger_result.setImageResource(R.mipmap.finger_sucess);
+                    finger_result.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(() -> {
+                        startActivity(new Intent(FingerDialog.this,MainActivity.class));
                         finish();
-                    }
-                    if(type == 1){
-                        ToastUtil.showToast("指纹识别失败，还剩"+(3 - fingerErrorNum) + "次机会");
-                        cv.setVisibility(View.GONE);
-                        finger_result.setImageResource(R.mipmap.finger_error);
-                        finger_result.setVisibility(View.VISIBLE);
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                cv.setVisibility(View.VISIBLE);
-                                finger_result.setVisibility(View.GONE);
-                            }
-                        },2000);
-                    }
-                    fingerPrinterView.setState(FingerPrinterView.STATE_NO_SCANING);
+                    },1500);
                 }
+            }
+            if (state == FingerPrinterView.STATE_WRONG_PWD) {
+                if(fingerErrorNum >= 3){
+                    finish();
+                }
+                if(type == 1){
+                    ToastUtil.showToast("指纹识别失败，还剩"+(3 - fingerErrorNum) + "次机会");
+                    cv.setVisibility(View.GONE);
+                    finger_result.setImageResource(R.mipmap.finger_error);
+                    finger_result.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            cv.setVisibility(View.VISIBLE);
+                            finger_result.setVisibility(View.GONE);
+                        }
+                    },2000);
+                }
+                fingerPrinterView.setState(FingerPrinterView.STATE_NO_SCANING);
             }
         });
         rxfingerPrinter = new RxFingerPrinter(this);

@@ -56,6 +56,7 @@
             android:fadingEdge="horizontal"
             android:fadingEdgeLength="8.0dip"
             android:singleLine="true"
+            android:textColor="@color/text"
             android:text="" />
 
         <TextView
@@ -68,6 +69,7 @@
             android:fadingEdge="horizontal"
             android:fadingEdgeLength="8.0dip"
             android:singleLine="true"
+            android:textColor="@color/text"
             android:text="" />
     </RelativeLayout>
 

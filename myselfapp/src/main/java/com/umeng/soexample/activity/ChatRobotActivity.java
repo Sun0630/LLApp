@@ -46,6 +46,11 @@ import butterknife.Bind;
 
 public class ChatRobotActivity extends AbsBaseActivity {
 
+    //我们刚才的获取的API地址:
+    private static final String URL="http://www.tuling123.com/openapi/api";
+    //我们刚才的获取的APIKey:
+    private static final String APP_KAY="9d7aa2da2c3b4cfc9df31ea4a728ab7a";
+
     @Bind(R.id.robot_listView)
     RecyclerView mListView;
     @Bind(R.id.send)
@@ -56,15 +61,9 @@ public class ChatRobotActivity extends AbsBaseActivity {
     private TuringApiManager m;
     private RobotAdapter mAdapter;
     private List<Message> mMsgs =  new ArrayList<>();
-    //我们刚才的获取的API地址:
-    private static final String URL="http://www.tuling123.com/openapi/api";
-    //我们刚才的获取的APIKey:
-    private static final String APP_KAY="9d7aa2da2c3b4cfc9df31ea4a728ab7a";
     @SuppressLint("SimpleDateFormat")
     private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 //    private MessageHandler mHandler;
-
     private WebView web;
 
     @Override
@@ -100,13 +99,10 @@ public class ChatRobotActivity extends AbsBaseActivity {
 //    }
 //};
 
-    private WeakHandler mHandler = new WeakHandler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(android.os.Message msg) {
-            Message message = (Message) msg.obj;
-            addMessage(message);
-            return false;
-        }
+    private WeakHandler mHandler = new WeakHandler(msg -> {
+        Message message = (Message) msg.obj;
+        addMessage(message);
+        return false;
     });
 
 //    private Handler mHandler = new Handler(){
@@ -134,44 +130,38 @@ public class ChatRobotActivity extends AbsBaseActivity {
         setTitle("小艾");
         findDB();//查找数据库
 //        init();
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String msg = editText.getText().toString().trim();
-                if(msg.length()>0){
+        send.setOnClickListener(v -> {
+            String msg = editText.getText().toString().trim();
+            if(msg.length()>0){
 //                    m.requestTuringAPI(msg);
 //                    Message message = new Message.Builder(Message.TYPE_TO_MESSAGE).message(msg).username("LiuLei").date(new Date()).build();
-                    Message message = new Message();
-                    message.setType(Constants.TYPE_TO_MESSAGE);
+                Message message = new Message();
+                message.setType(Constants.TYPE_TO_MESSAGE);
 //                    message.setData(df.format(new Date()));
-                    message.setMessage(msg);
-                    message.setUsername("LiuLei");
-                    addMessage(message);
-                    editText.setText("");
-                    hideSoftKeyboard();
-                    TaskExecutor.executeTask(new Runnable() {
-                        @Override
-                        public void run() {
-                            Message fromMessage = sendMessage(msg);
-                            android.os.Message m = android.os.Message.obtain();
-                            m.obj = fromMessage;
-                            mHandler.sendMessage(m);
-                        }
-                    });
-                }else {
-                    ToastUtil.showToast("请输入文字");
-                }
+                message.setMessage(msg);
+                message.setUsername("LiuLei");
+                addMessage(message);
+                editText.setText("");
+                hideSoftKeyboard();
+                TaskExecutor.executeTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        Message fromMessage = sendMessage(msg);
+                        android.os.Message m1 = android.os.Message.obtain();
+                        m1.obj = fromMessage;
+                        mHandler.sendMessage(m1);
+                    }
+                });
+            }else {
+                ToastUtil.showToast("请输入文字");
             }
         });
         mAdapter = new RobotAdapter(this,mMsgs);
         mListView.setLayoutManager(new LinearLayoutManager(this));
         mListView.setAdapter(mAdapter);
-        mListView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                hideSoftKeyboard();
-                return false;
-            }
+        mListView.setOnTouchListener((v, event) -> {
+            hideSoftKeyboard();
+            return false;
         });
 
         initDatas();

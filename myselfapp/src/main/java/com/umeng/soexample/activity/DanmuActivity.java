@@ -69,31 +69,25 @@ public class DanmuActivity extends AbsBaseActivity {
         mDanMuContainerRoom.prepare();
         mDanMuHelper.add(mDanMuContainerRoom);
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DanmakuEntity danmakuEntity = new DanmakuEntity();
-                danmakuEntity.setType(DanmakuEntity.DANMAKU_TYPE_USERCHAT);
-                danmakuEntity.setName("小A");
-                danmakuEntity.setAvatar("http://q.qlogo.cn/qqapp/100229475/E573B01150734A02F25D8E9C76AFD138/100");
-                danmakuEntity.setLevel(23);
-                danmakuEntity.setText("滚滚长江东逝水，浪花淘尽英雄~~");
+        findViewById(R.id.button).setOnClickListener(view -> {
+            DanmakuEntity danmakuEntity = new DanmakuEntity();
+            danmakuEntity.setType(DanmakuEntity.DANMAKU_TYPE_USERCHAT);
+            danmakuEntity.setName("小A");
+            danmakuEntity.setAvatar("http://q.qlogo.cn/qqapp/100229475/E573B01150734A02F25D8E9C76AFD138/100");
+            danmakuEntity.setLevel(23);
+            danmakuEntity.setText("滚滚长江东逝水，浪花淘尽英雄~~");
 
-                addRoomDanmaku(danmakuEntity);
-            }
+            addRoomDanmaku(danmakuEntity);
         });
 
-        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String jsonStr = "{\"type\":306,\"name\":\"\",\"text\":\"恭喜小A在小马过河的房间12200031赠送幸运礼物-300棒棒糖，中奖500倍，获得5000钻石。\",\"richText\":[{\"type\":\"text\",\"content\":\"恭喜\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":\"小A\"},{\"type\":\"text\",\"content\":\"在\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":\"小马过河\"},{\"type\":\"text\",\"content\":\"的房间\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":12200031},{\"type\":\"text\",\"content\":\"赠送\",\"color\":\"89F9DF\"},{\"type\":\"icon_gift\",\"extend\":\"text\",\"gift_id\":3816,\"content\":\"300棒棒糖\"},{\"type\":\"text\",\"content\":\"，中奖\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":\"500倍\",\"color\":\"FFED0A\"},{\"type\":\"text\",\"content\":\"，获得\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":\"5000钻石。\",\"color\":\"FFED0A\"}],\"live_id\":\"1220003114804106040\"}";
+        findViewById(R.id.button2).setOnClickListener(view -> {
+            String jsonStr = "{\"type\":306,\"name\":\"\",\"text\":\"恭喜小A在小马过河的房间12200031赠送幸运礼物-300棒棒糖，中奖500倍，获得5000钻石。\",\"richText\":[{\"type\":\"text\",\"content\":\"恭喜\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":\"小A\"},{\"type\":\"text\",\"content\":\"在\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":\"小马过河\"},{\"type\":\"text\",\"content\":\"的房间\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":12200031},{\"type\":\"text\",\"content\":\"赠送\",\"color\":\"89F9DF\"},{\"type\":\"icon_gift\",\"extend\":\"text\",\"gift_id\":3816,\"content\":\"300棒棒糖\"},{\"type\":\"text\",\"content\":\"，中奖\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":\"500倍\",\"color\":\"FFED0A\"},{\"type\":\"text\",\"content\":\"，获得\",\"color\":\"89F9DF\"},{\"type\":\"text\",\"content\":\"5000钻石。\",\"color\":\"FFED0A\"}],\"live_id\":\"1220003114804106040\"}";
 
-                Gson json = new Gson();
-                DanmakuEntity danmakuEntity = json.fromJson(jsonStr, DanmakuEntity.class);
-                danmakuEntity.setType(DanmakuEntity.DANMAKU_TYPE_SYSTEM);
+            Gson json = new Gson();
+            DanmakuEntity danmakuEntity = json.fromJson(jsonStr, DanmakuEntity.class);
+            danmakuEntity.setType(DanmakuEntity.DANMAKU_TYPE_SYSTEM);
 
-                addDanmaku(danmakuEntity);
-            }
+            addDanmaku(danmakuEntity);
         });
     }
 

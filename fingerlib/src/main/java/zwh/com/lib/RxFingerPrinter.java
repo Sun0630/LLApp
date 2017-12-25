@@ -64,14 +64,14 @@ public class RxFingerPrinter {
         }else {
             initManager();
             confirmFinger();
-//            try {
-//                CryptoObjectHelper helper = new CryptoObjectHelper();
-//                FingerprintManager.CryptoObject cryptoObject = helper.buildCryptoObject();
-//                startListening(cryptoObject);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-            startListening(null);
+            try {
+                CryptoObjectHelper helper = new CryptoObjectHelper();
+                FingerprintManager.CryptoObject cryptoObject = helper.buildCryptoObject();
+                startListening(cryptoObject);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+//            startListening(null);
         }
         return publishSubject;
 

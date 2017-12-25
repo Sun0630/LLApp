@@ -23,45 +23,35 @@ public class NotifyActivity extends AbsBaseActivity {
     protected void onInitView() {
         setTitle("通知栏");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
-    @OnClick(R.id.simple_notify)
-    void simple(){
-        flag = 0;
-        NotifyManager.showSimpleNotify(getApplication(),flag);
-    }
-
-    @OnClick(R.id.progress_notify)
-    void progress(){
-        flag = 1;
-        NotifyManager.showNotifyProgress(getApplication(),flag);
-    }
-
-    @OnClick(R.id.full_notify)
-    void full(){
-        flag = 2;
-        NotifyManager.showFullScreen(getApplication(),flag);
-    }
-
-    @OnClick(R.id.custom_notify)
-    void custom(){
-        flag = 3;
-        NotifyManager.shwoNotify(getApplication(),flag);
-    }
-
-    @OnClick(R.id.hide_notify)
-    void hide(){
-        NotifyManager.hideNotify(getApplication(),flag);
-    }
-
-    @OnClick(R.id.hide_all)
-    void hide_all(){
-        NotifyManager.hideAllNotify(getApplication());
+    @OnClick({R.id.simple_notify, R.id.progress_notify, R.id.full_notify,
+            R.id.custom_notify, R.id.hide_notify, R.id.hide_all})
+    void notifyOnClick(View view){
+        switch (view.getId()){
+            case R.id.simple_notify:
+                flag = 0;
+                NotifyManager.showSimpleNotify(getApplication(),flag);
+                break;
+            case R.id.progress_notify:
+                flag = 1;
+                NotifyManager.showNotifyProgress(getApplication(),flag);
+                break;
+            case R.id.full_notify:
+                flag = 2;
+                NotifyManager.showFullScreen(getApplication(),flag);
+                break;
+            case R.id.custom_notify:
+                flag = 3;
+                NotifyManager.shwoNotify(getApplication(),flag);
+                break;
+            case R.id.hide_notify:
+                NotifyManager.hideNotify(getApplication(),flag);
+                break;
+            case R.id.hide_all:
+                NotifyManager.hideAllNotify(getApplication());
+                break;
+        }
     }
 }

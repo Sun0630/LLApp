@@ -77,12 +77,8 @@ public class ThreadTask {
         /**
          * 提交runnable则没有返回值, future没有数据
          */
-        Future<?> result = mExecutor.submit(new Runnable() {
-
-            @Override
-            public void run() {
-                //TODO
-            }
+        Future<?> result = mExecutor.submit(() -> {
+            //TODO
         });
         try {
             System.out.println("future result from runnable : " + result.get());
@@ -93,12 +89,7 @@ public class ThreadTask {
         /**
          * 提交Callable, 有返回值, future中能够获取返回值
          */
-        Future<Integer> result2 = mExecutor.submit(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return 11111;
-            }
-        });
+        Future<Integer> result2 = mExecutor.submit(() -> 11111);
         try {
             System.out.println("future result from callable : " + result2.get());
         } catch (InterruptedException | ExecutionException e) {

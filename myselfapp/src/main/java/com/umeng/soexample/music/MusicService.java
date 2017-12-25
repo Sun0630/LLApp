@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -38,12 +39,12 @@ public class MusicService extends Service {
 
     private Playlist currentMusic;
     private Playlist lastMusic;
-    private static final String PAUSE_BROADCAST_NAME = "com.dlkj.music.pause.broadcast";
-    private static final String NEXT_BROADCAST_NAME = "com.dlkj.music.next.broadcast";
-    private static final String PRE_BROADCAST_NAME = "com.dlkj.music.pre.broadcast";
-    private static final int PAUSE_FLAG = 0x1;
-    private static final int NEXT_FLAG = 0x2;
-    private static final int PRE_FLAG = 0x3;
+    public static final String PAUSE_BROADCAST_NAME = "com.dlkj.music.pause.broadcast";
+    public static final String NEXT_BROADCAST_NAME = "com.dlkj.music.next.broadcast";
+    public static final String PRE_BROADCAST_NAME = "com.dlkj.music.pre.broadcast";
+    public static final int PAUSE_FLAG = 0x1;
+    public static final int NEXT_FLAG = 0x2;
+    public static final int PRE_FLAG = 0x3;
     public boolean isLoop = false;
     public boolean isRandom = false;
 
@@ -59,12 +60,9 @@ public class MusicService extends Service {
         super.onCreate();
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mMediaPlayer = new MediaPlayer();
-        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                if (musicModeActivity != null) {
-                    musicModeActivity.next_img.performClick();
-                }
+        mMediaPlayer.setOnCompletionListener(mp -> {
+            if (musicModeActivity != null) {
+                musicModeActivity.next_img.performClick();
             }
         });
         myApplication = (App) getApplication();
@@ -74,7 +72,7 @@ public class MusicService extends Service {
         filter.addAction(PAUSE_BROADCAST_NAME);
         filter.addAction(NEXT_BROADCAST_NAME);
         filter.addAction(PRE_BROADCAST_NAME);
-//        registerReceiver(mConrolBroadcast, filter);
+        registerReceiver(mConrolBroadcast, filter);
     }
 
     @Override
@@ -319,6 +317,9 @@ public class MusicService extends Service {
             mMediaPlayer.release();
             mMediaPlayer = null;
         }
+        if (mConrolBroadcast != null) {
+            unregisterReceiver(mConrolBroadcast);
+        }
     }
 
     private Handler mHandler;
@@ -341,13 +342,16 @@ public class MusicService extends Service {
             return;
         }
         Intent intent = new Intent(getApplicationContext(), MusicModeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         RemoteViews remoteViews = new RemoteViews(this.getPackageName(), R.layout.notification);
-        Notification notification = new Notification();
-        notification.icon = R.mipmap.ic_launcher;
-        notification.tickerText = currentMusic.getTitle();
-        notification.contentIntent = pi;
+        Notification notification = new Notification.Builder(this)
+                .setLargeIcon(bitmap)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setTicker(currentMusic.getTitle())
+                .setContentIntent(pi)
+                .setPriority(Notification.PRIORITY_MAX)
+                .build();
+
         notification.contentView = remoteViews;
         notification.flags |= Notification.FLAG_ONGOING_EVENT;
 
@@ -358,6 +362,11 @@ public class MusicService extends Service {
         }
         remoteViews.setTextViewText(R.id.bbs_type_Title, currentMusic.getTitle());
         remoteViews.setTextViewText(R.id.text, currentMusic.getArtist());
+        if(isPlaying()){
+            remoteViews.setImageViewResource(R.id.iv_pause, R.drawable.nc_pause);
+        }else {
+            remoteViews.setImageViewResource(R.id.iv_pause, R.mipmap.play);
+        }
         // mNotificationManager.notify(NOTIFICATION_ID, mNotification);
 
         // 此处action不能是一样的 如果一样的 接受的flag参数只是第一个设置的值
@@ -369,19 +378,37 @@ public class MusicService extends Service {
         Intent nextIntent = new Intent(NEXT_BROADCAST_NAME);
         nextIntent.putExtra("FLAG", NEXT_FLAG);
         PendingIntent nextPIntent = PendingIntent.getBroadcast(this, 0, nextIntent, 0);
-        remoteViews.setOnClickPendingIntent(R.id.next_img, nextPIntent);
+        remoteViews.setOnClickPendingIntent(R.id.iv_next, nextPIntent);
 
         Intent preIntent = new Intent(PRE_BROADCAST_NAME);
         preIntent.putExtra("FLAG", PRE_FLAG);
         PendingIntent prePIntent = PendingIntent.getBroadcast(this, 0, preIntent, 0);
         remoteViews.setOnClickPendingIntent(R.id.iv_previous, prePIntent);
 
-        startForeground(NOTIFICATION_ID, notification);
+//        startForeground(NOTIFICATION_ID, notification);
+        mNotificationManager.notify(NOTIFICATION_ID, notification);
     }
 
     public void cancelNotification() {
-        stopForeground(true);
+//        stopForeground(true);
         mNotificationManager.cancel(NOTIFICATION_ID);
     }
+
+    private BroadcastReceiver mConrolBroadcast = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()){
+                case PAUSE_BROADCAST_NAME:
+                    mHandler.sendEmptyMessage(PAUSE_FLAG);
+                    break;
+                case NEXT_BROADCAST_NAME:
+                    mHandler.sendEmptyMessage(NEXT_FLAG);
+                    break;
+                case PRE_BROADCAST_NAME:
+                    mHandler.sendEmptyMessage(PRE_FLAG);
+                    break;
+            }
+        }
+    };
 
 }

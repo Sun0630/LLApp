@@ -87,7 +87,9 @@ public class SQLActivity extends AbsBaseActivity implements SearchView.SearchVie
 //        insertDb();
         boolean isFirst = SPUtils.get(getBaseContext(),"db_",true);//判断是第一次进入，默认是   如果第一次进入则把本地联系人插入到数据库UserVO
         if(isFirst){
-            requestPermission(new String[]{Manifest.permission.READ_CONTACTS}, "请求访问联系人权限", new GrantedResult() {
+            requestPermission(new String[]{Manifest.permission.READ_CONTACTS},
+                    "请求访问联系人权限",
+                    new GrantedResult() {
                 @Override
                 public void onResult(boolean granted) {
                     if(granted){
@@ -97,7 +99,6 @@ public class SQLActivity extends AbsBaseActivity implements SearchView.SearchVie
                         SPUtils.put(getBaseContext(),"db_",false);
                     }else {
                         ToastUtil.showToast("权限拒绝");
-                        return;
                     }
                 }
             });

@@ -56,7 +56,7 @@ public class MusicActivity extends AppCompatActivity{
 
 
     protected void onInitView() {
-        setTitle("登录");
+        setTitle("西西音乐");
         Help.initSystemBar(this, StaticValue.color);//这个对所有的都适合
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar1);
         toolbar.setBackgroundColor(StaticValue.color);
@@ -64,21 +64,18 @@ public class MusicActivity extends AppCompatActivity{
         toolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的titl颜色
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);//必须放在setSupportActionBar后才有用，否则没有，设置返回图标
 //        toolbar.setNavigationOnClickListener(back_btn);//添加按键监听
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mSearchAutoComplete.isShown()) {
-                    try {
-                        mSearchAutoComplete.setText("");
-                        Method method = mSearchView.getClass().getDeclaredMethod("onCloseClicked");
-                        method.setAccessible(true);
-                        method.invoke(mSearchView);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    finish();
+        toolbar.setNavigationOnClickListener(v -> {
+            if (mSearchAutoComplete.isShown()) {
+                try {
+                    mSearchAutoComplete.setText("");
+                    Method method = mSearchView.getClass().getDeclaredMethod("onCloseClicked");
+                    method.setAccessible(true);
+                    method.invoke(mSearchView);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            } else {
+                finish();
             }
         });
 

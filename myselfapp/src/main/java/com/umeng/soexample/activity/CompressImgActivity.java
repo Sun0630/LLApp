@@ -47,17 +47,12 @@ public class CompressImgActivity extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.image);
 
         Button fab = (Button) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PhotoPicker.builder()
-                        .setPhotoCount(5)
-                        .setShowCamera(true)
-                        .setShowGif(true)
-                        .setPreviewEnabled(false)
-                        .start(CompressImgActivity.this, PhotoPicker.REQUEST_CODE);
-            }
-        });
+        fab.setOnClickListener(view -> PhotoPicker.builder()
+                .setPhotoCount(5)
+                .setShowCamera(true)
+                .setShowGif(true)
+                .setPreviewEnabled(false)
+                .start(CompressImgActivity.this, PhotoPicker.REQUEST_CODE));
     }
 
     @Override

@@ -57,12 +57,7 @@ public class VideoChatActivity extends AbsBaseActivity{
     protected void onInitView() {
         setTitle("视频聊天");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 //        initEvent();
 
         showMessage("视频聊天功能暂时屏蔽，敬请期待");
@@ -77,21 +72,15 @@ public class VideoChatActivity extends AbsBaseActivity{
         // 创建令牌
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setMessage("作为控制端还是被控端")
-                .setPositiveButton("控制端", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        userName = "receiver";
+                .setPositiveButton("控制端", (dialog, which) -> {
+                    userName = "receiver";
 //                        login("sender");
-                        dialog.dismiss();
-                    }
+                    dialog.dismiss();
                 })
-                .setNegativeButton("被控端", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        userName = "sender";
+                .setNegativeButton("被控端", (dialog, which) -> {
+                    userName = "sender";
 //                        login("receiver");
-                        dialog.dismiss();
-                    }
+                    dialog.dismiss();
                 }).create();
         alertDialog.setCancelable(false);
         alertDialog.show();

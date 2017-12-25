@@ -58,21 +58,13 @@ public class CircleEditActivity extends AbsBaseActivity {
         setTitle("");
         TextView send = (TextView) toolbar.findViewById(R.id.right_text);
         send.setText("发表");
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CircleVO.Images images = new CircleVO.Images(mList);
-                CircleVO circleVO = new CircleVO(editText.getText().toString().trim(),"小艾","",images);
-                EventBus.getDefault().post(new SendEvent(circleVO));
-                finish();
-            }
+        send.setOnClickListener(v -> {
+            CircleVO.Images images = new CircleVO.Images(mList);
+            CircleVO circleVO = new CircleVO(editText.getText().toString().trim(),"小艾","",images);
+            EventBus.getDefault().post(new SendEvent(circleVO));
+            finish();
         });
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 }

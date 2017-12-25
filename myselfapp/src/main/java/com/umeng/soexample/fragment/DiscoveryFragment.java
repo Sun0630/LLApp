@@ -151,12 +151,7 @@ public class DiscoveryFragment extends AbsBaseFragment implements ThemeChangeLis
 
         fab.setColorNormal(StaticValue.color);
         fab.attachToRecyclerView(listView);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listView.smoothScrollToPosition(0);
-            }
-        });
+        fab.setOnClickListener(view -> listView.smoothScrollToPosition(0));
 
         //API:1、设置数据适配器
         mLimitAdapter = new MyLimitScrollAdapter();
@@ -173,18 +168,15 @@ public class DiscoveryFragment extends AbsBaseFragment implements ThemeChangeLis
         toolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的titl颜色
         toolbar.setTitle("");
         mCollapsingToolbar.setContentScrimColor(StaticValue.color);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mSearchAutoComplete.isShown()) {
-                    try {
-                        mSearchAutoComplete.setText("");
-                        Method method = mSearchView.getClass().getDeclaredMethod("onCloseClicked");
-                        method.setAccessible(true);
-                        method.invoke(mSearchView);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        toolbar.setNavigationOnClickListener(v -> {
+            if (mSearchAutoComplete.isShown()) {
+                try {
+                    mSearchAutoComplete.setText("");
+                    Method method = mSearchView.getClass().getDeclaredMethod("onCloseClicked");
+                    method.setAccessible(true);
+                    method.invoke(mSearchView);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -338,20 +330,17 @@ public class DiscoveryFragment extends AbsBaseFragment implements ThemeChangeLis
     private void initData(){
 
         //TODO 模拟获取服务器数据操作，此处需要修改
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<AdBean> datas = new ArrayList<>();
-                datas.add(new AdBean("标题一", "1.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
-                datas.add(new AdBean("标题二", "2.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
-                datas.add(new AdBean("标题三", "3.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
-                datas.add(new AdBean("标题四", "4.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
-                datas.add(new AdBean("标题五", "5.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
-                datas.add(new AdBean("标题六", "6.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
+        new Thread(() -> {
+            List<AdBean> datas1 = new ArrayList<>();
+            datas1.add(new AdBean("标题一", "1.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
+            datas1.add(new AdBean("标题二", "2.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
+            datas1.add(new AdBean("标题三", "3.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
+            datas1.add(new AdBean("标题四", "4.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
+            datas1.add(new AdBean("标题五", "5.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
+            datas1.add(new AdBean("标题六", "6.劲爆促销中，凡在此商场消费满888的顾客，请拿着小票到前台咨询处免费领取美女一枚"));
 
-                mLimitAdapter.setDatas(datas);
+            mLimitAdapter.setDatas(datas1);
 
-            }
         }).start();
 
     }

@@ -27,11 +27,6 @@ public class SwipBackActivity extends AbsBaseSwipeBackActivity {
         setDragEdge(SwipeBackLayout.DragEdge.LEFT);
         setTitle("右滑返回");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 }

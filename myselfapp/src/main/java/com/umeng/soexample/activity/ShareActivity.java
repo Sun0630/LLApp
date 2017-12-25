@@ -22,12 +22,7 @@ public class ShareActivity extends AbsBaseActivity {
     protected void onInitView() {
         setTitle("分享");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     @OnClick(R.id.share)

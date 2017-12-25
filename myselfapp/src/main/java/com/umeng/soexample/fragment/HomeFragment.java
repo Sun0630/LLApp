@@ -144,30 +144,27 @@ public class HomeFragment extends AbsBaseFragment{
      * 根据 CollapsingToolbarLayout 的折叠状态，设置 FloatingActionButton 的隐藏和显示
      */
     private void setFabDynamicState() {
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        mAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
 
-                if (verticalOffset == 0) {
-                    if (state != CollapsingToolbarLayoutState.EXPANDED) {
-                        state = CollapsingToolbarLayoutState.EXPANDED; // 修改状态标记为展开
-                    }
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                    if (state != CollapsingToolbarLayoutState.COLLAPSED) {
-                        mFloatingActionButton.hide();
-                        state = CollapsingToolbarLayoutState.COLLAPSED; // 修改状态标记为折叠
-                        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
-                        layoutParams.height = DensityUtils.dp2px(240);
-                        mAppBarLayout.setLayoutParams(layoutParams);
+            if (verticalOffset == 0) {
+                if (state != CollapsingToolbarLayoutState.EXPANDED) {
+                    state = CollapsingToolbarLayoutState.EXPANDED; // 修改状态标记为展开
+                }
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                if (state != CollapsingToolbarLayoutState.COLLAPSED) {
+                    mFloatingActionButton.hide();
+                    state = CollapsingToolbarLayoutState.COLLAPSED; // 修改状态标记为折叠
+                    CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
+                    layoutParams.height = DensityUtils.dp2px(240);
+                    mAppBarLayout.setLayoutParams(layoutParams);
 //                        isBannerBig = false;
+                }
+            } else {
+                if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
+                    if (state == CollapsingToolbarLayoutState.COLLAPSED) {
+                        mFloatingActionButton.show();
                     }
-                } else {
-                    if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
-                        if (state == CollapsingToolbarLayoutState.COLLAPSED) {
-                            mFloatingActionButton.show();
-                        }
-                        state = CollapsingToolbarLayoutState.INTERNEDIATE; // 修改状态标记为中间
-                    }
+                    state = CollapsingToolbarLayoutState.INTERNEDIATE; // 修改状态标记为中间
                 }
             }
         });

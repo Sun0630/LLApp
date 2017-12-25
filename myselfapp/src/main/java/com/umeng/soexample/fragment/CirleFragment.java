@@ -185,12 +185,7 @@ public class CirleFragment extends AbsBaseFragment implements OnLoadMoreListener
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        },1500);
+        new Handler().postDelayed(() -> mSwipeRefreshLayout.setRefreshing(false),1500);
     }
 
     @Override
@@ -260,12 +255,9 @@ public class CirleFragment extends AbsBaseFragment implements OnLoadMoreListener
             animator = ValueAnimator.ofInt(DensityUtils.dp2px(240), ScreenUtils.getScreenHeight());
         }
         animator.setDuration(1000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                layoutParams.height = (int) valueAnimator.getAnimatedValue();
-                mAppBarLayout.setLayoutParams(layoutParams);
-            }
+        animator.addUpdateListener(valueAnimator -> {
+            layoutParams.height = (int) valueAnimator.getAnimatedValue();
+            mAppBarLayout.setLayoutParams(layoutParams);
         });
         animator.addListener(new AnimatorListenerAdapter() {
             @Override

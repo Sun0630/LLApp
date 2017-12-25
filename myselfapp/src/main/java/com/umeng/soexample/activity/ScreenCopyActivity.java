@@ -92,17 +92,15 @@ public class ScreenCopyActivity extends Activity {
         // 设置imageview监听
         copy.setOnTouchListener(new MyTouchListener());
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(copyBitmap!=null){
-                    try {
-                        //图片的名称跟系统时间有关
-                        // getContentResolver().insert();源码中提到
-                        //long startTime = SystemClock.uptimeMillis();
-                        //Uri createdRow = provider.insert(mPackageName, url, values);
-                        //long durationMillis = SystemClock.uptimeMillis() - startTime;
-                        //maybeLogUpdateToEventLog(durationMillis, url, "insert", null /* where */);
+        save.setOnClickListener(v -> {
+            if(copyBitmap!=null){
+                try {
+                    //图片的名称跟系统时间有关
+                    // getContentResolver().insert();源码中提到
+                    //long startTime = SystemClock.uptimeMillis();
+                    //Uri createdRow = provider.insert(mPackageName, url, values);
+                    //long durationMillis = SystemClock.uptimeMillis() - startTime;
+                    //maybeLogUpdateToEventLog(durationMillis, url, "insert", null /* where */);
 
 //                        // 获取图库Uri路径
 //                        Uri imageUri = getContentResolver().insert(
@@ -112,27 +110,26 @@ public class ScreenCopyActivity extends Activity {
 //                                .openOutputStream(imageUri);
 //                        // 将alterBitmap存入图库
 //                        copyBitmap.compress(Bitmap.CompressFormat.PNG, 50, outputStream);
-                        File file = FileOperateUtils.createFile(FileOperateUtils.CACHE_PATH + "/shot_creen/");
-                        File shotFile = new File(file, FileOperateUtils.createFileNmae(".png"));
-                        FileOutputStream out = new FileOutputStream(shotFile);
-                        copyBitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
+                    File file = FileOperateUtils.createFile(FileOperateUtils.CACHE_PATH + "/shot_creen/");
+                    File shotFile = new File(file, FileOperateUtils.createFileNmae(".png"));
+                    FileOutputStream out = new FileOutputStream(shotFile);
+                    copyBitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
 
-                        if(bitmap!=null){
-                            bitmap.recycle();
-                            Log.d("ScreenCopyActivity", "bitmap is recycled");
-                            System.gc();  //提醒系统及时回收
-                        }
-                        try {
-                            out.flush();
-                            out.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        ToastUtil.showToast("保存截图成功");
-                        finish();
-                    } catch (FileNotFoundException e) {
+                    if(bitmap!=null){
+                        bitmap.recycle();
+                        Log.d("ScreenCopyActivity", "bitmap is recycled");
+                        System.gc();  //提醒系统及时回收
+                    }
+                    try {
+                        out.flush();
+                        out.close();
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    ToastUtil.showToast("保存截图成功");
+                    finish();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         });

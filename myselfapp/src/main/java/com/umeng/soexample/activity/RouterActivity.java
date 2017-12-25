@@ -18,19 +18,11 @@ public class RouterActivity extends RouterBaseActivity {
         setContentView(R.layout.activity_router);
         RouterInjector.inject(this);
 
-        findViewById(R.id.share).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //路由
-                routerService.startShareActivity("RouterActivity","哈哈哈哈");
-            }
+        findViewById(R.id.share).setOnClickListener(v -> {
+            //路由
+            routerService.startShareActivity("RouterActivity","哈哈哈哈");
         });
 
-        findViewById(R.id.execute).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ThreadTask.executeTask();
-            }
-        });
+        findViewById(R.id.execute).setOnClickListener(v -> ThreadTask.executeTask());
     }
 }

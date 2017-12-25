@@ -31,6 +31,7 @@ import com.umeng.soexample.custom.ToggleButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 作者：刘磊 on 2016/10/26 14:04
@@ -124,14 +125,11 @@ public class LeftMenuActivity extends AbsBaseActivity implements View.OnClickLis
         llNavShare.setOnClickListener(this);
         llNavMode.setOnClickListener(this);
         llNavSet.setOnClickListener(this);
-        toggleButton.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
-            @Override
-            public void onToggle(boolean on) {
-                if(on){
-                    showMessage("切换到夜间模式");
-                }else {
-                    showMessage("切换到正常模式");
-                }
+        toggleButton.setOnToggleChanged(on -> {
+            if(on){
+                showMessage("切换到夜间模式");
+            }else {
+                showMessage("切换到正常模式");
             }
         });
 
@@ -140,12 +138,9 @@ public class LeftMenuActivity extends AbsBaseActivity implements View.OnClickLis
 //        headImg = (ImageView) header.findViewById(R.id.nav_header);
 //        navBgView.setBackgroundResource(R.mipmap.b_1);
 //        Glides.getInstance().loadCircle(this,R.mipmap.ai1,headImg);
-        ivAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(PersonActivity.class);
-                drawer.closeDrawer(GravityCompat.START);
-            }
+        ivAvatar.setOnClickListener(view -> {
+            startActivity(PersonActivity.class);
+            drawer.closeDrawer(GravityCompat.START);
         });
 
 

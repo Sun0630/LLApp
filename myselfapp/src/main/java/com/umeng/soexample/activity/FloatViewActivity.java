@@ -30,12 +30,7 @@ public class FloatViewActivity extends AbsBaseActivity {
     protected void onInitView() {
         setTitle("悬浮窗");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     @OnClick(R.id.start)

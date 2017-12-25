@@ -124,15 +124,12 @@ public class ChatFragment extends Fragment {
         mMessagesView.setAdapter(mAdapter);
 
         mInputMessageView = (EditText) view.findViewById(R.id.message_input);
-        mInputMessageView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int id, KeyEvent event) {
-                if (id == R.id.send || id == EditorInfo.IME_NULL) {
-                    attemptSend();
-                    return true;
-                }
-                return false;
+        mInputMessageView.setOnEditorActionListener((v, id, event) -> {
+            if (id == R.id.send || id == EditorInfo.IME_NULL) {
+                attemptSend();
+                return true;
             }
+            return false;
         });
         mInputMessageView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -299,155 +296,94 @@ public class ChatFragment extends Fragment {
     private Emitter.Listener onConnect = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if(!isConnected) {
-                        if(null!=mUsername)
-                            mSocket.emit("add user", mUsername);
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                R.string.connect, Toast.LENGTH_LONG).show();
-                        isConnected = true;
-                    }
-                }
-            });
-        }
-    };
-
-    private Emitter.Listener onDisconnect = new Emitter.Listener() {
-        @Override
-        public void call(Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    isConnected = false;
+            getActivity().runOnUiThread(() -> {
+                if(!isConnected) {
+                    if(null!=mUsername)
+                        mSocket.emit("add user", mUsername);
                     Toast.makeText(getActivity().getApplicationContext(),
-                            R.string.disconnect, Toast.LENGTH_LONG).show();
+                            R.string.connect, Toast.LENGTH_LONG).show();
+                    isConnected = true;
                 }
             });
         }
     };
 
-    private Emitter.Listener onConnectError = new Emitter.Listener() {
-        @Override
-        public void call(Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            R.string.error_connect, Toast.LENGTH_LONG).show();
-                }
-            });
+    private Emitter.Listener onDisconnect = args -> getActivity().runOnUiThread(() -> {
+        isConnected = false;
+        Toast.makeText(getActivity().getApplicationContext(),
+                R.string.disconnect, Toast.LENGTH_LONG).show();
+    });
+
+    private Emitter.Listener onConnectError = args -> getActivity().runOnUiThread(() -> Toast.makeText(getActivity().getApplicationContext(),
+            R.string.error_connect, Toast.LENGTH_LONG).show());
+
+    private Emitter.Listener onNewMessage = args -> getActivity().runOnUiThread(() -> {
+        JSONObject data = (JSONObject) args[0];
+        String username;
+        String message;
+        try {
+            username = data.getString("username");
+            message = data.getString("message");
+        } catch (JSONException e) {
+            return;
         }
-    };
 
-    private Emitter.Listener onNewMessage = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    String username;
-                    String message;
-                    try {
-                        username = data.getString("username");
-                        message = data.getString("message");
-                    } catch (JSONException e) {
-                        return;
-                    }
+        removeTyping(username);
+        addRecMessage(username, message);
+    });
 
-                    removeTyping(username);
-                    addRecMessage(username, message);
-                }
-            });
+    private Emitter.Listener onUserJoined = args -> getActivity().runOnUiThread(() -> {
+        JSONObject data = (JSONObject) args[0];
+        String username;
+        int numUsers;
+        try {
+            username = data.getString("username");
+            numUsers = data.getInt("numUsers");
+        } catch (JSONException e) {
+            return;
         }
-    };
 
-    private Emitter.Listener onUserJoined = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    String username;
-                    int numUsers;
-                    try {
-                        username = data.getString("username");
-                        numUsers = data.getInt("numUsers");
-                    } catch (JSONException e) {
-                        return;
-                    }
+        addLog(getResources().getString(R.string.message_user_joined, username));
+        addParticipantsLog(numUsers);
+    });
 
-                    addLog(getResources().getString(R.string.message_user_joined, username));
-                    addParticipantsLog(numUsers);
-                }
-            });
+    private Emitter.Listener onUserLeft = args -> getActivity().runOnUiThread(() -> {
+        JSONObject data = (JSONObject) args[0];
+        String username;
+        int numUsers;
+        try {
+            username = data.getString("username");
+            numUsers = data.getInt("numUsers");
+        } catch (JSONException e) {
+            return;
         }
-    };
 
-    private Emitter.Listener onUserLeft = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    String username;
-                    int numUsers;
-                    try {
-                        username = data.getString("username");
-                        numUsers = data.getInt("numUsers");
-                    } catch (JSONException e) {
-                        return;
-                    }
+        addLog(getResources().getString(R.string.message_user_left, username));
+        addParticipantsLog(numUsers);
+        removeTyping(username);
+    });
 
-                    addLog(getResources().getString(R.string.message_user_left, username));
-                    addParticipantsLog(numUsers);
-                    removeTyping(username);
-                }
-            });
+    private Emitter.Listener onTyping = args -> getActivity().runOnUiThread(() -> {
+        JSONObject data = (JSONObject) args[0];
+        String username;
+        try {
+            username = data.getString("username");
+        } catch (JSONException e) {
+            return;
         }
-    };
+        addTyping(username);
+    });
 
-    private Emitter.Listener onTyping = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    String username;
-                    try {
-                        username = data.getString("username");
-                    } catch (JSONException e) {
-                        return;
-                    }
-                    addTyping(username);
-                }
-            });
+    private Emitter.Listener onStopTyping = args -> getActivity().runOnUiThread(() -> {
+        JSONObject data = (JSONObject) args[0];
+        String username;
+        try {
+            username = data.getString("username");
+        } catch (JSONException e) {
+            return;
         }
-    };
-
-    private Emitter.Listener onStopTyping = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject data = (JSONObject) args[0];
-                    String username;
-                    try {
-                        username = data.getString("username");
-                    } catch (JSONException e) {
-                        return;
-                    }
-                    removeTyping(username);
-                }
-            });
-        }
-    };
+        removeTyping(username);
+    });
 
     private Runnable onTypingTimeout = new Runnable() {
         @Override

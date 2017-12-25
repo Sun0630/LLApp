@@ -59,12 +59,7 @@ public class MediaPlayerActivtiy extends Activity implements UniversalVideoView.
 //            }
 //        });
 
-        mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                Log.d(TAG, "onCompletion ");
-            }
-        });
+        mVideoView.setOnCompletionListener(mp -> Log.d(TAG, "onCompletion "));
 
         startPlay();
 
@@ -92,20 +87,17 @@ public class MediaPlayerActivtiy extends Activity implements UniversalVideoView.
      * 置视频区域大小
      */
     private void setVideoAreaSize() {
-        mVideoLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                int width = mVideoLayout.getWidth();
-                cachedHeight = (int) (width * 405f / 720f);
+        mVideoLayout.post(() -> {
+            int width = mVideoLayout.getWidth();
+            cachedHeight = (int) (width * 405f / 720f);
 //                cachedHeight = (int) (width * 3f / 4f);
 //                cachedHeight = (int) (width * 9f / 16f);
-                ViewGroup.LayoutParams videoLayoutParams = mVideoLayout.getLayoutParams();
-                videoLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                videoLayoutParams.height = cachedHeight;
-                mVideoLayout.setLayoutParams(videoLayoutParams);
-                mVideoView.setVideoPath(VIDEO_URL);
-                mVideoView.requestFocus();
-            }
+            ViewGroup.LayoutParams videoLayoutParams = mVideoLayout.getLayoutParams();
+            videoLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            videoLayoutParams.height = cachedHeight;
+            mVideoLayout.setLayoutParams(videoLayoutParams);
+            mVideoView.setVideoPath(VIDEO_URL);
+            mVideoView.requestFocus();
         });
     }
 

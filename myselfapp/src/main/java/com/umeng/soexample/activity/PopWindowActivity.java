@@ -38,12 +38,7 @@ public class PopWindowActivity extends AbsBaseActivity implements View.OnClickLi
     protected void onInitView() {
         setTitle("弹出框界面");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 
 
         mButton1 = (TextView) findViewById(R.id.button1);
@@ -148,32 +143,29 @@ public class PopWindowActivity extends AbsBaseActivity implements View.OnClickLi
      * @param contentView
      */
     private void handleLogic(View contentView){
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mCustomPopWindow!=null){
-                    mCustomPopWindow.dissmiss();
-                }
-                String showContent = "";
-                switch (v.getId()){
-                    case R.id.menu1:
-                        showContent = "点击 Item菜单1";
-                        break;
-                    case R.id.menu2:
-                        showContent = "点击 Item菜单2";
-                        break;
-                    case R.id.menu3:
-                        showContent = "点击 Item菜单3";
-                        break;
-                    case R.id.menu4:
-                        showContent = "点击 Item菜单4";
-                        break;
-                    case R.id.menu5:
-                        showContent = "点击 Item菜单5" ;
-                        break;
-                }
-                Toast.makeText(PopWindowActivity.this,showContent,Toast.LENGTH_SHORT).show();
+        View.OnClickListener listener = v -> {
+            if(mCustomPopWindow!=null){
+                mCustomPopWindow.dissmiss();
             }
+            String showContent = "";
+            switch (v.getId()){
+                case R.id.menu1:
+                    showContent = "点击 Item菜单1";
+                    break;
+                case R.id.menu2:
+                    showContent = "点击 Item菜单2";
+                    break;
+                case R.id.menu3:
+                    showContent = "点击 Item菜单3";
+                    break;
+                case R.id.menu4:
+                    showContent = "点击 Item菜单4";
+                    break;
+                case R.id.menu5:
+                    showContent = "点击 Item菜单5" ;
+                    break;
+            }
+            Toast.makeText(PopWindowActivity.this,showContent,Toast.LENGTH_SHORT).show();
         };
         contentView.findViewById(R.id.menu1).setOnClickListener(listener);
         contentView.findViewById(R.id.menu2).setOnClickListener(listener);

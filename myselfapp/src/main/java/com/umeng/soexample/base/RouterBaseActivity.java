@@ -12,7 +12,7 @@ import com.umeng.soexample.service.RouterService;
  * Created by LiuLei on 2017/7/18.
  */
 
-public class RouterBaseActivity extends Activity {
+public class RouterBaseActivity extends AppCompatActivity {
 
     public RouterService routerService;
 

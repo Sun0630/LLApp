@@ -68,12 +68,7 @@ public class DownloadManagerDemo extends AbsBaseActivity {
 	protected void onInitView() {
 		setTitle("下载界面");
 		toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-		toolbar.setNavigationOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> finish());
 		handler = new MyHandler();
 		downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
 		downloadManagerPro = new DownloadManagerPro(downloadManager);
@@ -147,44 +142,36 @@ public class DownloadManagerDemo extends AbsBaseActivity {
 		 */
 		downloadId = SPUtils.get(getApplicationContext(), KEY_NAME_DOWNLOAD_ID,downloadId);
 		updateView();
-		downloadButton.setOnClickListener(new OnClickListener() {
+		downloadButton.setOnClickListener(v -> {
+            File folder = new File(DOWNLOAD_FOLDER_NAME);
+            if (!folder.exists() || !folder.isDirectory()) {
+                folder.mkdirs();
+            }
 
-			@Override
-			public void onClick(View v) {
-				File folder = new File(DOWNLOAD_FOLDER_NAME);
-				if (!folder.exists() || !folder.isDirectory()) {
-					folder.mkdirs();
-				}
+            DownloadManager.Request request = new DownloadManager.Request(
+                    Uri.parse(APK_URL));
+            request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME,
+                    DOWNLOAD_FILE_NAME);
+            request.setTitle(getString(R.string.download_notification_title));
+            request.setDescription("meilishuo desc");
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setVisibleInDownloadsUi(false);
+            // request.allowScanningByMediaScanner();
+            // request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+            // request.setShowRunningNotification(false);
+            // request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
+            request.setMimeType("application/cn.trinea.download.file");
 
-				DownloadManager.Request request = new DownloadManager.Request(
-						Uri.parse(APK_URL));
-				request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME,
-						DOWNLOAD_FILE_NAME);
-				request.setTitle(getString(R.string.download_notification_title));
-				request.setDescription("meilishuo desc");
-				request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-				request.setVisibleInDownloadsUi(false);
-				// request.allowScanningByMediaScanner();
-				// request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-				// request.setShowRunningNotification(false);
-				// request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
-				request.setMimeType("application/cn.trinea.download.file");
-				
-				downloadId = downloadManager.enqueue(request);
-				/** save download id to preferences **/
-				SPUtils.put(getApplicationContext(), KEY_NAME_DOWNLOAD_ID,
-						downloadId);
-				updateView();
-			}
-		});
-		downloadCancel.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				downloadManager.remove(downloadId);
-				updateView();
-			}
-		});
+            downloadId = downloadManager.enqueue(request);
+            /** save download id to preferences **/
+            SPUtils.put(getApplicationContext(), KEY_NAME_DOWNLOAD_ID,
+                    downloadId);
+            updateView();
+        });
+		downloadCancel.setOnClickListener(v -> {
+            downloadManager.remove(downloadId);
+            updateView();
+        });
 	}
 
 	/**

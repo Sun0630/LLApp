@@ -41,42 +41,34 @@ public class SetPatternActivity extends AbsBaseActivity {
     protected void onInitView() {
         setTitle("锁屏界面");
         toolbar.setNavigationIcon(R.mipmap.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
         final String password = SPUtils.get(getBaseContext(), "password", "");
         flag = getIntent().getIntExtra("flag", 0);
         if (flag == 1) {
             reset.setVisibility(View.GONE);
             save.setVisibility(View.GONE);
         }
-        lockView.setOnDrawFinishedListener(new LockView.OnDrawFinishedListener() {
-            @Override
-            public boolean OnDrawFinished(List<Integer> passList) {
-                if (flag == 1) {
-                    StringBuilder sb = new StringBuilder();
-                    for (Integer i : passList) {
-                        sb.append(i);
-                    }
-                    if (sb.toString().equals(password)) {
-                        startActivity(MainActivity.class);
-                        finish();
-                        return true;
-                    } else {
-                        ToastUtil.showToast("密码验证错误");
-                        return false;
-                    }
+        lockView.setOnDrawFinishedListener(passList1 -> {
+            if (flag == 1) {
+                StringBuilder sb = new StringBuilder();
+                for (Integer i : passList1) {
+                    sb.append(i);
+                }
+                if (sb.toString().equals(password)) {
+                    startActivity(MainActivity.class);
+                    finish();
+                    return true;
                 } else {
-                    if (passList.size() < 3) {
-                        ToastUtil.showToast("密码不能少于3个点");
-                        return false;
-                    } else {
-                        SetPatternActivity.this.passList = passList;
-                        return true;
-                    }
+                    ToastUtil.showToast("密码验证错误");
+                    return false;
+                }
+            } else {
+                if (passList1.size() < 3) {
+                    ToastUtil.showToast("密码不能少于3个点");
+                    return false;
+                } else {
+                    SetPatternActivity.this.passList = passList1;
+                    return true;
                 }
             }
         });

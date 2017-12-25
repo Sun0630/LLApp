@@ -21,7 +21,6 @@ public class LoginFragment extends AbsBaseFragment {
     RecyclerView localMusicListViews;
     private ArrayList<String> datas = new ArrayList<>();
 
-
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_login;
